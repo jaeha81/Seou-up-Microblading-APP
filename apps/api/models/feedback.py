@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, DateTime
+from sqlalchemy.orm import relationship
 
 from core.database import Base
 
@@ -20,7 +21,5 @@ class Feedback(Base):
     created_at = Column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
     )
-
-    from sqlalchemy.orm import relationship
 
     user = relationship("User", back_populates="feedbacks")
