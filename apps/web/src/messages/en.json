@@ -1,0 +1,58 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "continue": "Continue",
+    "submit": "Submit",
+    "disclaimer": "Seou-up Microblading is an information and visualization support platform only. Not a licensed medical or procedure provider."
+  },
+  "nav": {
+    "home": "Home",
+    "simulate": "Brow Simulator",
+    "guide": "Startup Guide",
+    "providers": "Find Providers",
+    "feedback": "Feedback",
+    "login": "Sign In",
+    "register": "Create Account",
+    "profile": "Profile",
+    "admin": "Admin"
+  },
+  "landing": {
+    "hero_title": "Seou-up Microblading",
+    "hero_subtitle": "Preview your perfect brows before any procedure.",
+    "cta_simulate": "Try Brow Simulator",
+    "cta_guide": "Startup Guide",
+    "disclaimer": "For visualization and information purposes only. Not a licensed medical or procedure provider."
+  },
+  "simulate": {
+    "title": "Brow Simulator",
+    "subtitle": "Choose a style, upload your photo, and preview your new brows.",
+    "choose_style": "1. Choose a Style",
+    "upload_photo": "2. Upload Your Photo",
+    "run_simulation": "Run Simulation",
+    "running": "Simulating...",
+    "result_title": "Simulation complete",
+    "disclaimer": "Visualization Only — Results are not a guarantee of actual procedure outcomes."
+  },
+  "auth": {
+    "login_title": "Sign In",
+    "register_title": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "full_name": "Full Name",
+    "sign_in": "Sign In",
+    "create_account": "Create Account",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?",
+    "role_consumer": "Consumer",
+    "role_pro": "Pro Artist",
+    "role_founder": "Entrepreneur"
+  },
+  "compliance": {
+    "banner": "⚠️ Seou-up is an information and visualization support platform only. Not a licensed medical or procedure provider.",
+    "learn_more": "Learn more"
+  }
+}

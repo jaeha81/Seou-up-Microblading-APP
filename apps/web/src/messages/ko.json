@@ -1,0 +1,58 @@
+{
+  "common": {
+    "loading": "로딩 중...",
+    "error": "오류가 발생했습니다",
+    "save": "저장",
+    "cancel": "취소",
+    "back": "뒤로",
+    "continue": "계속",
+    "submit": "제출",
+    "disclaimer": "Seou-up Microblading은 정보 및 시각화 지원 플랫폼입니다. 면허가 있는 의료 또는 시술 서비스 제공자가 아닙니다."
+  },
+  "nav": {
+    "home": "홈",
+    "simulate": "눈썹 시뮬레이터",
+    "guide": "창업 가이드",
+    "providers": "시술소 찾기",
+    "feedback": "피드백",
+    "login": "로그인",
+    "register": "계정 만들기",
+    "profile": "프로필",
+    "admin": "관리자"
+  },
+  "landing": {
+    "hero_title": "Seou-up Microblading",
+    "hero_subtitle": "시술 전에 완벽한 눈썹을 미리 확인하세요.",
+    "cta_simulate": "눈썹 시뮬레이터 체험",
+    "cta_guide": "창업 가이드",
+    "disclaimer": "시각화 및 정보 제공 목적으로만 사용됩니다. 면허가 있는 의료 또는 시술 서비스 제공자가 아닙니다."
+  },
+  "simulate": {
+    "title": "눈썹 시뮬레이터",
+    "subtitle": "스타일을 선택하고, 사진을 업로드하여 새 눈썹을 미리 보세요.",
+    "choose_style": "1. 스타일 선택",
+    "upload_photo": "2. 사진 업로드",
+    "run_simulation": "시뮬레이션 실행",
+    "running": "시뮬레이션 중...",
+    "result_title": "시뮬레이션 완료",
+    "disclaimer": "시각화 전용 — 결과는 실제 시술 결과를 보장하지 않습니다."
+  },
+  "auth": {
+    "login_title": "로그인",
+    "register_title": "계정 만들기",
+    "email": "이메일",
+    "password": "비밀번호",
+    "full_name": "이름",
+    "sign_in": "로그인",
+    "create_account": "계정 만들기",
+    "no_account": "계정이 없으신가요?",
+    "have_account": "이미 계정이 있으신가요?",
+    "role_consumer": "소비자",
+    "role_pro": "전문 아티스트",
+    "role_founder": "창업가"
+  },
+  "compliance": {
+    "banner": "⚠️ Seou-up은 정보 및 시각화 지원 플랫폼입니다. 면허가 있는 의료 또는 시술 서비스 제공자가 아닙니다.",
+    "learn_more": "자세히 알아보기"
+  }
+}

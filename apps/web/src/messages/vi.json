@@ -1,0 +1,27 @@
+{
+  "common": {
+    "loading": "Đang tải...",
+    "error": "Đã xảy ra lỗi",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "back": "Quay lại",
+    "continue": "Tiếp tục",
+    "submit": "Gửi",
+    "disclaimer": "Seou-up Microblading chỉ là nền tảng hỗ trợ thông tin và trực quan hóa. Không phải nhà cung cấp dịch vụ y tế hoặc thủ thuật có giấy phép."
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "simulate": "Mô phỏng lông mày",
+    "guide": "Hướng dẫn khởi nghiệp",
+    "providers": "Tìm nhà cung cấp",
+    "feedback": "Phản hồi",
+    "login": "Đăng nhập",
+    "register": "Tạo tài khoản",
+    "profile": "Hồ sơ",
+    "admin": "Quản trị viên"
+  },
+  "compliance": {
+    "banner": "⚠️ Seou-up chỉ là nền tảng hỗ trợ thông tin và trực quan hóa. Không phải nhà cung cấp dịch vụ y tế hoặc thủ thuật có giấy phép.",
+    "learn_more": "Tìm hiểu thêm"
+  }
+}
