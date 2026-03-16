@@ -84,7 +84,7 @@ function renderMarkdown(text: string): string {
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/^- (.+)$/gm, '<li class="ml-4 list-disc text-stone-700">$1</li>')
     .replace(/^(\d+)\. (.+)$/gm, '<li class="ml-4 list-decimal text-stone-700"><strong>$2</strong></li>')
-    .replace(/⚠️ \*\*(.+?)\*\*:/g, '<p class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-amber-800 mt-4"><strong>⚠️ $1</strong>:')
+    .replace(/⚠️ \*\*(.+?)\*\*: (.+)/g, '<p class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-amber-800 mt-4"><strong>⚠️ $1</strong>: $2</p>')
     .replace(/⚠️ (.+)/g, '<p class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-amber-800 mt-4">⚠️ $1</p>')
     .replace(/\n\n/g, '</p><p class="text-stone-700 leading-relaxed mb-4">')
     .replace(/^(?!<)(.+)$/gm, '<p class="text-stone-700 leading-relaxed mb-4">$1</p>');

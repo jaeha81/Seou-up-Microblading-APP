@@ -14,14 +14,16 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(0);
   const [consented, setConsented] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState(locale);
 
   const handleComplete = async () => {
     setLoading(true);
     try {
       await api.post("/api/auth/consent", { accepted: true });
-      router.push(`/${locale}`);
+      await api.patch("/api/auth/me", { language: selectedLanguage }).catch(() => {});
+      router.push(`/${selectedLanguage}`);
     } catch {
-      router.push(`/${locale}`);
+      router.push(`/${selectedLanguage}`);
     } finally {
       setLoading(false);
     }
@@ -130,9 +132,9 @@ export default function OnboardingPage() {
                 ].map((lang) => (
                   <button
                     key={lang.code}
-                    onClick={() => {}}
+                    onClick={() => setSelectedLanguage(lang.code)}
                     className={`p-4 rounded-xl border-2 text-left transition-all ${
-                      lang.code === locale
+                      lang.code === selectedLanguage
                         ? "border-brand-500 bg-brand-50"
                         : "border-stone-200 hover:border-stone-300"
                     }`}

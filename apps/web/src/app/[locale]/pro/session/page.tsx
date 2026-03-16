@@ -21,8 +21,9 @@ export default function ProSessionPage() {
       const { data: sim } = await api.post("/api/simulations", {
         eyebrow_style_id: selectedStyleId,
       });
-      if (note) {
-        await api.patch(`/api/simulations/${sim.id}/note`, { session_note: note });
+      const fullNote = [clientName && `Client: ${clientName}`, note].filter(Boolean).join("\n");
+      if (fullNote) {
+        await api.patch(`/api/simulations/${sim.id}/note`, { session_note: fullNote });
       }
       setSessionId(sim.id);
       setStatus("done");

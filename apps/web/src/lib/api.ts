@@ -16,16 +16,18 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle 401 globally — redirect to login
+const SUPPORTED_LOCALES = ["en", "ko", "th", "vi"];
+
 api.interceptors.response.use(
   (res) => res,
   (error) => {
     if (error.response?.status === 401 && typeof window !== "undefined") {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      // Don't redirect if already on auth pages
       if (!window.location.pathname.includes("/auth/")) {
-        window.location.href = "/en/auth/login";
+        const segments = window.location.pathname.split("/");
+        const locale = SUPPORTED_LOCALES.includes(segments[1]) ? segments[1] : "en";
+        window.location.href = `/${locale}/auth/login`;
       }
     }
     return Promise.reject(error);

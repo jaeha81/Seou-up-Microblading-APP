@@ -1,4 +1,3 @@
-import { use } from "react";
 import Link from "next/link";
 
 interface GuideArticle {
