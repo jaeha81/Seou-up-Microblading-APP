@@ -28,6 +28,7 @@ out/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+tsconfig.tsbuildinfo
 
 # ── Storage / Uploads ──────────────────────────────────────────────────────────
 apps/api/storage/uploads/*
