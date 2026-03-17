@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000",
+  // Use empty baseURL to go through Next.js proxy (rewrites in next.config.js)
+  // Set NEXT_PUBLIC_API_URL only when calling the API directly (e.g., production)
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "",
   timeout: 30000,
 });
 

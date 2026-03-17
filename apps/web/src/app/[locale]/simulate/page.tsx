@@ -104,19 +104,24 @@ export default function SimulatePage() {
           {/* Right: Upload & Result */}
           <div>
             <h2 className="font-semibold text-stone-800 mb-4">2. Upload Your Photo</h2>
+            {/* 9:16 portrait ratio container */}
             <div
-              className="border-2 border-dashed border-stone-300 rounded-xl h-48 flex items-center justify-center cursor-pointer hover:border-brand-400 transition-colors mb-4 overflow-hidden"
+              className="relative w-full cursor-pointer mb-4"
+              style={{ paddingBottom: "177.78%" }}
               onClick={() => fileRef.current?.click()}
             >
-              {preview ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={preview} alt="preview" className="w-full h-full object-cover rounded-xl" />
-              ) : (
-                <div className="text-center text-stone-400">
-                  <div className="text-4xl mb-2">📷</div>
-                  <div className="text-sm">Click to upload front-facing photo</div>
-                </div>
-              )}
+              <div className="absolute inset-0 border-2 border-dashed border-stone-300 rounded-xl overflow-hidden hover:border-brand-400 transition-colors flex items-center justify-center">
+                {preview ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={preview} alt="preview" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="text-center text-stone-400">
+                    <div className="text-4xl mb-2">📷</div>
+                    <div className="text-sm">Click to upload front-facing photo</div>
+                    <div className="text-xs mt-1 text-stone-300">Portrait (9:16)</div>
+                  </div>
+                )}
+              </div>
             </div>
             <input
               ref={fileRef}
@@ -139,10 +144,20 @@ export default function SimulatePage() {
                 <div className="bg-green-50 px-4 py-2 text-sm text-green-700 font-medium">
                   ✓ Simulation complete — {selectedStyle?.name}
                 </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={result} alt="result" className="w-full" onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }} />
+                {/* 9:16 portrait result container */}
+                <div className="relative w-full" style={{ paddingBottom: "177.78%" }}>
+                  <div className="absolute inset-0 bg-stone-100">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={result}
+                      alt="result"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                      }}
+                    />
+                  </div>
+                </div>
                 <div className="p-3 text-xs text-stone-500">
                   Mock simulation result. For visualization purposes only.
                 </div>

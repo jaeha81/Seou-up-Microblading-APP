@@ -32,9 +32,12 @@ app = FastAPI(
 )
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
+# In development, allow all localhost origins (any port) via regex
+_dev_origin_regex = r"http://(localhost|127\.0\.0\.1)(:\d+)?"
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origins=settings.ALLOWED_ORIGINS if settings.APP_ENV == "production" else [],
+    allow_origin_regex=_dev_origin_regex if settings.APP_ENV != "production" else None,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
