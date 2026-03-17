@@ -87,7 +87,7 @@ export default function ProDashboardPage() {
                       {new Date(sim.created_at).toLocaleString()} · Style ID: {sim.eyebrow_style_id ?? "—"}
                     </div>
                     {sim.session_note && (
-                      <div className="text-xs text-stone-500 mt-1 italic">"{sim.session_note}"</div>
+                       <div className="text-xs text-stone-500 mt-1 italic">&quot;{sim.session_note}&quot;</div>
                     )}
                   </div>
                   <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${
