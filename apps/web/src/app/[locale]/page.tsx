@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { getLocale } from "next-intl/server";
 
-export default async function LandingPage() {
-  const locale = await getLocale();
+export default async function LandingPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white">

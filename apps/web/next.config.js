@@ -6,6 +6,15 @@ const nextConfig = {
   images: {
     domains: ["localhost", "127.0.0.1"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/en",
+        permanent: false,
+      },
+    ];
+  },
   async rewrites() {
     return [
       {
