@@ -1,24 +1,48 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import api from "@/lib/api";
 
-const STYLES = [
-  { id: 1, slug: "natural-feather", name: "Natural Feather", emoji: "🪶" },
-  { id: 2, slug: "ombre-powder", name: "Ombre Powder", emoji: "🌅" },
-  { id: 3, slug: "combination-brow", name: "Combination Brow", emoji: "✨" },
-  { id: 4, slug: "bold-arch", name: "Bold Arch", emoji: "🔥" },
-  { id: 5, slug: "straight-korean", name: "Straight Korean", emoji: "🇰🇷" },
-  { id: 6, slug: "micro-shading", name: "Micro-shading", emoji: "🎨" },
-  { id: 7, slug: "3d-hair-stroke", name: "3D Hair Stroke", emoji: "💎" },
-  { id: 8, slug: "soft-classic", name: "Soft Classic", emoji: "🌸" },
-  { id: 9, slug: "nano-brow", name: "Nano Brow", emoji: "🔬" },
-  { id: 10, slug: "fluffy-brow", name: "Fluffy Brow", emoji: "☁️" },
-  { id: 11, slug: "angular-power-brow", name: "Angular Power", emoji: "⚡" },
-  { id: 12, slug: "feather-touch", name: "Feather Touch", emoji: "🕊️" },
+interface EyebrowStyle {
+  id: number;
+  slug: string;
+  name_en: string;
+  name_ko?: string | null;
+  name_th?: string | null;
+  name_vi?: string | null;
+}
+
+const FALLBACK_STYLES: EyebrowStyle[] = [
+  { id: 1, slug: "natural-feather", name_en: "Natural Feather", name_ko: "내추럴 페더" },
+  { id: 2, slug: "ombre-powder", name_en: "Ombre Powder", name_ko: "옴브레 파우더" },
+  { id: 3, slug: "combination-brow", name_en: "Combination Brow", name_ko: "콤비네이션 브로우" },
+  { id: 4, slug: "bold-arch", name_en: "Bold Arch", name_ko: "볼드 아치" },
+  { id: 5, slug: "straight-korean", name_en: "Straight Korean", name_ko: "스트레이트 한국형" },
+  { id: 6, slug: "micro-shading", name_en: "Micro-shading", name_ko: "마이크로 쉐이딩" },
+  { id: 7, slug: "3d-hair-stroke", name_en: "3D Hair Stroke", name_ko: "3D 헤어 스트로크" },
+  { id: 8, slug: "soft-classic", name_en: "Soft Classic", name_ko: "소프트 클래식" },
+  { id: 9, slug: "nano-brow", name_en: "Nano Brow", name_ko: "나노 브로우" },
+  { id: 10, slug: "fluffy-brow", name_en: "Fluffy Brow", name_ko: "플러피 브로우" },
+  { id: 11, slug: "angular-power-brow", name_en: "Angular Power", name_ko: "앵귤러 파워 브로우" },
+  { id: 12, slug: "feather-touch", name_en: "Feather Touch", name_ko: "페더 터치" },
 ];
+
+const STYLE_EMOJIS: Record<string, string> = {
+  "natural-feather": "🪶",
+  "ombre-powder": "🌅",
+  "combination-brow": "✨",
+  "bold-arch": "🔥",
+  "straight-korean": "🇰🇷",
+  "micro-shading": "🎨",
+  "3d-hair-stroke": "💎",
+  "soft-classic": "🌸",
+  "nano-brow": "🔬",
+  "fluffy-brow": "☁️",
+  "angular-power-brow": "⚡",
+  "feather-touch": "🕊️",
+};
 
 type SimStatus = "idle" | "selecting" | "uploading" | "processing" | "done" | "error";
 
@@ -27,11 +51,25 @@ export default function SimulatePage() {
   const locale = params.locale as string;
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const [selectedStyle, setSelectedStyle] = useState<(typeof STYLES)[0] | null>(null);
+  const [styles, setStyles] = useState<EyebrowStyle[]>(FALLBACK_STYLES);
+  const [selectedStyle, setSelectedStyle] = useState<EyebrowStyle | null>(null);
   const [status, setStatus] = useState<SimStatus>("idle");
   const [preview, setPreview] = useState<string | null>(null);
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    api.get("/api/eyebrow-styles").then(({ data }) => {
+      if (Array.isArray(data) && data.length > 0) setStyles(data);
+    }).catch(() => {});
+  }, []);
+
+  const getStyleName = (style: EyebrowStyle) => {
+    if (locale === "ko" && style.name_ko) return style.name_ko;
+    if (locale === "th" && style.name_th) return style.name_th;
+    if (locale === "vi" && style.name_vi) return style.name_vi;
+    return style.name_en;
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -46,11 +84,9 @@ export default function SimulatePage() {
     setStatus("processing");
     setError(null);
     try {
-      // Create simulation
       const { data: sim } = await api.post("/api/simulations", {
         eyebrow_style_id: selectedStyle.id,
       });
-      // Upload image
       const formData = new FormData();
       formData.append("file", fileRef.current.files[0]);
       const { data: processed } = await api.post(
@@ -69,7 +105,6 @@ export default function SimulatePage() {
   return (
     <div className="min-h-screen bg-stone-50 px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        {/* Disclaimer */}
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8 text-sm text-amber-800">
           ⚠️ <strong>Visualization Only</strong> — This simulation is for informational and
           visualization purposes only. Results are not a guarantee of actual procedure outcomes.
@@ -80,11 +115,10 @@ export default function SimulatePage() {
         <p className="text-stone-600 mb-8">Choose a style, upload your photo, and preview your new brows.</p>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Left: Style Selector */}
           <div>
             <h2 className="font-semibold text-stone-800 mb-4">1. Choose a Style</h2>
             <div className="grid grid-cols-3 gap-2">
-              {STYLES.map((s) => (
+              {styles.map((s) => (
                 <button
                   key={s.id}
                   onClick={() => setSelectedStyle(s)}
@@ -94,14 +128,13 @@ export default function SimulatePage() {
                       : "border-stone-200 hover:border-stone-300 text-stone-700"
                   }`}
                 >
-                  <div className="text-2xl mb-1">{s.emoji}</div>
-                  <div className="text-xs font-medium leading-tight">{s.name}</div>
+                  <div className="text-2xl mb-1">{STYLE_EMOJIS[s.slug] ?? "✨"}</div>
+                  <div className="text-xs font-medium leading-tight">{getStyleName(s)}</div>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Right: Upload & Result */}
           <div>
             <h2 className="font-semibold text-stone-800 mb-4">2. Upload Your Photo</h2>
             {/* 9:16 portrait ratio container */}
@@ -142,7 +175,7 @@ export default function SimulatePage() {
             {status === "done" && result && (
               <div className="rounded-xl overflow-hidden border border-stone-200">
                 <div className="bg-green-50 px-4 py-2 text-sm text-green-700 font-medium">
-                  ✓ Simulation complete — {selectedStyle?.name}
+                  ✓ Simulation complete — {selectedStyle && getStyleName(selectedStyle)}
                 </div>
                 {/* 9:16 portrait result container */}
                 <div className="relative w-full" style={{ paddingBottom: "177.78%" }}>
