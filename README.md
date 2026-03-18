@@ -99,3 +99,14 @@ npm run dev
 ---
 
 *Seou-up Microblading is an information and visualization support platform only. Not a licensed medical or procedure provider.*
+
+---
+
+## 📊 개발 현황 <!-- jh-progress -->
+
+| 항목 | 내용 |
+|------|------|
+| **진행률** | `███████░░░░░░░░░░░░░` **35%** |
+| **레포** | [Seou-up-Microblading-](https://github.com/jaeha81/Seou-up-Microblading-) |
+
+> 진행률: 35%
