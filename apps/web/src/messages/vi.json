@@ -20,6 +20,37 @@
     "profile": "Hồ sơ",
     "admin": "Quản trị viên"
   },
+  "landing": {
+    "hero_title": "Seou-up Microblading",
+    "hero_subtitle": "Xem trước lông mày hoàn hảo của bạn trước khi thực hiện thủ thuật.",
+    "cta_simulate": "Thử mô phỏng lông mày",
+    "cta_guide": "Hướng dẫn khởi nghiệp",
+    "disclaimer": "Chỉ dành cho mục đích trực quan hóa và thông tin. Không phải nhà cung cấp dịch vụ y tế hoặc thủ thuật có giấy phép."
+  },
+  "simulate": {
+    "title": "Phần mềm mô phỏng lông mày",
+    "subtitle": "Chọn kiểu, tải ảnh lên và xem trước lông mày mới của bạn.",
+    "choose_style": "1. Chọn kiểu dáng",
+    "upload_photo": "2. Tải ảnh lên",
+    "run_simulation": "Chạy mô phỏng",
+    "running": "Đang mô phỏng...",
+    "result_title": "Mô phỏng hoàn tất",
+    "disclaimer": "Chỉ để trực quan hóa — Kết quả không đảm bảo kết quả thủ thuật thực tế."
+  },
+  "auth": {
+    "login_title": "Đăng nhập",
+    "register_title": "Tạo tài khoản",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "full_name": "Họ và tên",
+    "sign_in": "Đăng nhập",
+    "create_account": "Tạo tài khoản",
+    "no_account": "Chưa có tài khoản?",
+    "have_account": "Đã có tài khoản?",
+    "role_consumer": "Người tiêu dùng",
+    "role_pro": "Nghệ sĩ chuyên nghiệp",
+    "role_founder": "Doanh nhân"
+  },
   "compliance": {
     "banner": "⚠️ Seou-up chỉ là nền tảng hỗ trợ thông tin và trực quan hóa. Không phải nhà cung cấp dịch vụ y tế hoặc thủ thuật có giấy phép.",
     "learn_more": "Tìm hiểu thêm"
