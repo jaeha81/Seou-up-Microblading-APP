@@ -17,6 +17,16 @@ class Settings(BaseSettings):
     # AI Simulation adapter: "mock" | "mediapipe"
     SIMULATION_ADAPTER: str = "mock"
 
+    # Queue
+    REDIS_URL: str = "redis://localhost:6379/0"
+
+    # OAuth
+    GOOGLE_CLIENT_ID: str = ""
+    GOOGLE_CLIENT_SECRET: str = ""
+    KAKAO_CLIENT_ID: str = ""
+    KAKAO_REDIRECT_URI: str = "http://localhost:8000/api/auth/google/callback"
+    KAKAO_REDIRECT_URI_KAKAO: str = "http://localhost:8000/api/auth/kakao/callback"
+
     # CORS
     ALLOWED_ORIGINS: List[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
 

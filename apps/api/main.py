@@ -13,6 +13,7 @@ from core.config import settings
 from routers import (
     auth,
     simulations,
+    export,
     eyebrow_styles,
     guides,
     providers,
@@ -52,6 +53,7 @@ app.mount("/uploads", StaticFiles(directory="storage/uploads"), name="uploads")
 # ── Routers ────────────────────────────────────────────────────────────────────
 app.include_router(auth.router, prefix="/api/auth", tags=["Auth"])
 app.include_router(simulations.router, prefix="/api/simulations", tags=["Simulations"])
+app.include_router(export.router, prefix="/api/export", tags=["Export"])
 app.include_router(
     eyebrow_styles.router, prefix="/api/eyebrow-styles", tags=["Eyebrow Styles"]
 )

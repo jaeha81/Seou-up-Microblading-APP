@@ -46,5 +46,25 @@ services:
     depends_on:
       - api
 
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  celery_worker:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: ./apps/api/.env
+    environment:
+      DATABASE_URL: postgresql://postgres:${DATABASE_PASSWORD:-password}@db:5432/seou_up_db
+      REDIS_URL: redis://redis:6379/0
+    command: celery -A tasks.celery_app worker --loglevel=info
+    depends_on:
+      - db
+      - redis
+
 volumes:
   pgdata:
