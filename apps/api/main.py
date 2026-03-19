@@ -1,3 +1,5 @@
+# pyright: reportImplicitRelativeImport=false
+
 """
 Seou-up Microblading — FastAPI Entry Point
 =========================================
@@ -65,12 +67,12 @@ app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
 
 # ── Health ─────────────────────────────────────────────────────────────────────
 @app.get("/health", tags=["Health"])
-async def health() -> dict:
+async def health() -> dict[str, str]:
     return {"status": "ok", "version": "1.0.0"}
 
 
 @app.get("/", tags=["Root"])
-async def root() -> dict:
+async def root() -> dict[str, str]:
     return {
         "message": "Seou-up Microblading API",
         "docs": "/docs",

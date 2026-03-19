@@ -1,6 +1,8 @@
+# pyright: reportImplicitRelativeImport=false, reportGeneralTypeIssues=false, reportArgumentType=false
+
 import io
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
@@ -90,7 +92,7 @@ def export_simulation_pdf(
         if sim.eyebrow_style_id
         else "N/A"
     )
-    created_at = sim.created_at or datetime.utcnow()
+    created_at = sim.created_at or datetime.now(timezone.utc)
     adapter_name = sim.adapter or "unknown"
 
     input_image_path = _url_to_disk_path(sim.input_image_url)

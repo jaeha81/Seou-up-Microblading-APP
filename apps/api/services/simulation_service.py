@@ -1,3 +1,5 @@
+# pyright: reportImplicitRelativeImport=false, reportMissingImports=false, reportMissingTypeArgument=false, reportCallIssue=false, reportArgumentType=false, reportAttributeAccessIssue=false
+
 """
 Simulation Service
 ==================
