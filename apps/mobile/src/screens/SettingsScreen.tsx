@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../core/auth/AuthContext';
+import { usePluginRegistry } from '../core/plugins/PluginRegistry';
 import { apiClient } from '../core/api/client';
 import { CacheService } from '../core/cache/CacheService';
 import { Colors, Typography, Spacing, BorderRadius } from '../theme/colors';
@@ -16,8 +17,10 @@ const LANGUAGES: { code: Language; label: string; native: string }[] = [
 
 export default function SettingsScreen() {
   const { user, logout, refreshUser } = useAuth();
+  const { enabledPlugins } = usePluginRegistry();
   const [loggingOut, setLoggingOut] = useState(false);
   const [savingLang, setSavingLang] = useState(false);
+  const [clearingCache, setClearingCache] = useState(false);
 
   const handleLanguageChange = async (lang: Language) => {
     if (savingLang || lang === user?.language) return;
@@ -28,6 +31,16 @@ export default function SettingsScreen() {
       await refreshUser();
     } finally {
       setSavingLang(false);
+    }
+  };
+
+  const handleClearCache = async () => {
+    setClearingCache(true);
+    try {
+      CacheService.clearMemory();
+      await CacheService.invalidatePrefix('');
+    } finally {
+      setClearingCache(false);
     }
   };
 
@@ -53,6 +66,28 @@ export default function SettingsScreen() {
         </View>
       </View>
 
+      {/* Active Plugins */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Active Plugins</Text>
+        {enabledPlugins.length > 0 ? (
+          enabledPlugins.map((p) => (
+            <View key={p.manifest.id} style={styles.pluginRow}>
+              <Ionicons
+                name={p.manifest.iconName as keyof typeof Ionicons.glyphMap}
+                size={16}
+                color={Colors.primary}
+              />
+              <Text style={styles.pluginName}>{p.manifest.displayName}</Text>
+              <Text style={styles.pluginVersion}>v{p.manifest.version}</Text>
+              {p.manifest.size && <Text style={styles.pluginSize}>{p.manifest.size}</Text>}
+            </View>
+          ))
+        ) : (
+          <Text style={styles.noPlugins}>No plugins enabled</Text>
+        )}
+      </View>
+
+      {/* Language */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Language</Text>
         <View style={styles.langGrid}>
@@ -75,6 +110,7 @@ export default function SettingsScreen() {
         {savingLang && <ActivityIndicator size="small" color={Colors.primary} style={styles.savingIndicator} />}
       </View>
 
+      {/* Account */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Account</Text>
         <View style={styles.infoRow}>
@@ -92,6 +128,20 @@ export default function SettingsScreen() {
         </View>
       </View>
 
+      {/* Storage */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Storage</Text>
+        <Pressable
+          style={styles.actionRow}
+          onPress={handleClearCache}
+          disabled={clearingCache}
+        >
+          <Ionicons name="trash-outline" size={18} color={Colors.textSecondary} />
+          <Text style={styles.actionLabel}>Clear Cache</Text>
+          {clearingCache && <ActivityIndicator size="small" color={Colors.primary} />}
+        </Pressable>
+      </View>
+
       <Pressable
         style={[styles.logoutBtn, loggingOut && styles.logoutBtnDisabled]}
         onPress={handleLogout}
@@ -107,7 +157,8 @@ export default function SettingsScreen() {
         )}
       </Pressable>
 
-      <Text style={styles.version}>Seou-up Microblading v1.0.0</Text>
+      <Text style={styles.version}>Seou-up Microblading v1.1.0</Text>
+      <Text style={styles.buildInfo}>Lightweight APK / Plugin Architecture</Text>
     </ScrollView>
   );
 }
@@ -149,6 +200,18 @@ const styles = StyleSheet.create({
   rolePillText: { ...Typography.caption, color: Colors.primaryDark, fontWeight: '700', textTransform: 'capitalize' },
   section: { marginBottom: Spacing.xl },
   sectionTitle: { ...Typography.h3, color: Colors.textPrimary, marginBottom: Spacing.md },
+  pluginRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    paddingVertical: Spacing.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.borderLight,
+  },
+  pluginName: { ...Typography.body, color: Colors.textPrimary, flex: 1 },
+  pluginVersion: { ...Typography.caption, color: Colors.textMuted },
+  pluginSize: { ...Typography.caption, color: Colors.textMuted },
+  noPlugins: { ...Typography.bodySmall, color: Colors.textMuted, fontStyle: 'italic' },
   langGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.sm },
   langCard: {
     flex: 1,
@@ -176,6 +239,15 @@ const styles = StyleSheet.create({
   infoLabel: { ...Typography.body, color: Colors.textSecondary },
   infoValue: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   infoText: { ...Typography.bodySmall, fontWeight: '600' },
+  actionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    paddingVertical: Spacing.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.borderLight,
+  },
+  actionLabel: { ...Typography.body, color: Colors.textSecondary, flex: 1 },
   logoutBtn: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -190,4 +262,5 @@ const styles = StyleSheet.create({
   logoutBtnDisabled: { opacity: 0.5 },
   logoutText: { ...Typography.button, color: Colors.error },
   version: { ...Typography.caption, color: Colors.textMuted, textAlign: 'center' },
+  buildInfo: { ...Typography.caption, color: Colors.textMuted, textAlign: 'center', marginTop: 2 },
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, Pressable, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Typography, Spacing, BorderRadius } from '../../../../apps/mobile/src/theme/colors';
@@ -24,6 +24,28 @@ export default function ProvidersScreen({ navigation }: PluginScreenProps) {
 
   useEffect(() => { load(); }, []);
 
+  const renderProviderItem = useCallback(({ item }: { item: Provider }) => (
+    <Pressable
+      style={styles.card}
+      onPress={() => navigation.navigate('ProviderDetail', { providerId: item.id })}
+    >
+      <View style={styles.cardIcon}>
+        <Ionicons name="storefront-outline" size={20} color={Colors.primary} />
+      </View>
+      <View style={styles.cardInfo}>
+        <Text style={styles.cardName}>{item.business_name}</Text>
+        <View style={styles.locationRow}>
+          <Ionicons name="location-outline" size={13} color={Colors.textMuted} />
+          <Text style={styles.locationText}>{item.city}, {item.country}</Text>
+        </View>
+        {item.description && (
+          <Text style={styles.cardDesc} numberOfLines={2}>{item.description}</Text>
+        )}
+      </View>
+      <Ionicons name="chevron-forward" size={16} color={Colors.textMuted} />
+    </Pressable>
+  ), [navigation]);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -48,30 +70,12 @@ export default function ProvidersScreen({ navigation }: PluginScreenProps) {
           keyExtractor={(item) => String(item.id)}
           contentContainerStyle={styles.list}
           showsVerticalScrollIndicator={false}
+          removeClippedSubviews
+          maxToRenderPerBatch={10}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={() => load(true)} tintColor={Colors.primary} />
           }
-          renderItem={({ item }) => (
-            <Pressable
-              style={styles.card}
-              onPress={() => navigation.navigate('ProviderDetail', { providerId: item.id })}
-            >
-              <View style={styles.cardIcon}>
-                <Ionicons name="storefront-outline" size={20} color={Colors.primary} />
-              </View>
-              <View style={styles.cardInfo}>
-                <Text style={styles.cardName}>{item.business_name}</Text>
-                <View style={styles.locationRow}>
-                  <Ionicons name="location-outline" size={13} color={Colors.textMuted} />
-                  <Text style={styles.locationText}>{item.city}, {item.country}</Text>
-                </View>
-                {item.description && (
-                  <Text style={styles.cardDesc} numberOfLines={2}>{item.description}</Text>
-                )}
-              </View>
-              <Ionicons name="chevron-forward" size={16} color={Colors.textMuted} />
-            </Pressable>
-          )}
+          renderItem={renderProviderItem}
           ListEmptyComponent={
             <View style={styles.empty}>
               <Ionicons name="storefront-outline" size={40} color={Colors.textMuted} />

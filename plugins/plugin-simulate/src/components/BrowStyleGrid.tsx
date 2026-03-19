@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors, Typography, BorderRadius } from '../../../../apps/mobile/src/theme/colors';
 import type { EyebrowStyle } from '../api/simulationApi';
@@ -15,41 +15,61 @@ const STYLE_COLORS = [
   '#6b5a8a', '#8a7a5a', '#5a8a7a', '#7a5a6b',
 ];
 
-export function BrowStyleGrid({ styles: browStyles, selectedId, onSelect }: Props) {
+type StyleCellProps = {
+  item: EyebrowStyle;
+  index: number;
+  isSelected: boolean;
+  onSelect: (id: number) => void;
+};
+
+const StyleCell = memo(({ item, index, isSelected, onSelect }: StyleCellProps) => {
+  const bgColor = STYLE_COLORS[index % STYLE_COLORS.length];
+  return (
+    <Pressable
+      style={[
+        gridStyles.cell,
+        isSelected && gridStyles.cellSelected,
+        isSelected && { borderColor: bgColor },
+      ]}
+      onPress={() => onSelect(item.id)}
+    >
+      <View style={[gridStyles.preview, { backgroundColor: bgColor + (isSelected ? 'ff' : '55') }]}>
+        <View style={gridStyles.browLine} />
+      </View>
+      <Text
+        style={[gridStyles.label, isSelected && { color: bgColor, fontWeight: '700' }]}
+        numberOfLines={2}
+      >
+        {item.name_en}
+      </Text>
+    </Pressable>
+  );
+});
+
+function BrowStyleGridInner({ styles: browStyles, selectedId, onSelect }: Props) {
+  const renderItem = useCallback(({ item, index }: { item: EyebrowStyle; index: number }) => (
+    <StyleCell
+      item={item}
+      index={index}
+      isSelected={item.id === selectedId}
+      onSelect={onSelect}
+    />
+  ), [selectedId, onSelect]);
+
   return (
     <FlatList
       data={browStyles}
       keyExtractor={(item) => String(item.id)}
       numColumns={3}
       scrollEnabled={false}
-      renderItem={({ item, index }) => {
-        const isSelected = item.id === selectedId;
-        const bgColor = STYLE_COLORS[index % STYLE_COLORS.length];
-        return (
-          <Pressable
-            style={[
-              gridStyles.cell,
-              isSelected && gridStyles.cellSelected,
-              isSelected && { borderColor: bgColor },
-            ]}
-            onPress={() => onSelect(item.id)}
-          >
-            <View style={[gridStyles.preview, { backgroundColor: bgColor + (isSelected ? 'ff' : '55') }]}>
-              <View style={gridStyles.browLine} />
-            </View>
-            <Text
-              style={[gridStyles.label, isSelected && { color: bgColor, fontWeight: '700' }]}
-              numberOfLines={2}
-            >
-              {item.name_en}
-            </Text>
-          </Pressable>
-        );
-      }}
+      renderItem={renderItem}
       columnWrapperStyle={gridStyles.row}
+      removeClippedSubviews
     />
   );
 }
+
+export const BrowStyleGrid = memo(BrowStyleGridInner);
 
 const gridStyles = StyleSheet.create({
   row: { gap: 8, marginBottom: 8 },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FlatList, Pressable, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Typography, Spacing, BorderRadius } from '../../../../apps/mobile/src/theme/colors';
@@ -40,7 +40,32 @@ export default function GuideListScreen({ navigation }: PluginScreenProps) {
 
   useEffect(() => { load(); }, []);
 
-  const filtered = filter === 'all' ? articles : articles.filter((a) => a.category === filter);
+  const filtered = useMemo(
+    () => filter === 'all' ? articles : articles.filter((a) => a.category === filter),
+    [articles, filter],
+  );
+
+  const renderGuideItem = useCallback(({ item }: { item: GuideArticle }) => (
+    <Pressable style={styles.card} onPress={() => navigation.navigate('GuideDetail', { slug: item.slug })}>
+      <View style={styles.cardIcon}>
+        <Ionicons
+          name={CATEGORY_ICONS[item.category] ?? 'document-outline'}
+          size={20}
+          color={Colors.primary}
+        />
+      </View>
+      <View style={styles.cardContent}>
+        <View style={styles.cardBadge}>
+          <Text style={styles.cardBadgeText}>{item.category}</Text>
+        </View>
+        <Text style={styles.cardTitle}>{item.title_en}</Text>
+        <Text style={styles.cardPreview} numberOfLines={2}>
+          {item.body_en.slice(0, 120)}...
+        </Text>
+      </View>
+      <Ionicons name="chevron-forward" size={16} color={Colors.textMuted} />
+    </Pressable>
+  ), [navigation]);
 
   return (
     <View style={styles.container}>
@@ -73,28 +98,10 @@ export default function GuideListScreen({ navigation }: PluginScreenProps) {
           keyExtractor={(item) => String(item.id)}
           contentContainerStyle={styles.list}
           showsVerticalScrollIndicator={false}
+          removeClippedSubviews
+          maxToRenderPerBatch={10}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => load(true)} tintColor={Colors.primary} />}
-          renderItem={({ item }) => (
-            <Pressable style={styles.card} onPress={() => navigation.navigate('GuideDetail', { slug: item.slug })}>
-              <View style={styles.cardIcon}>
-                <Ionicons
-                  name={CATEGORY_ICONS[item.category] ?? 'document-outline'}
-                  size={20}
-                  color={Colors.primary}
-                />
-              </View>
-              <View style={styles.cardContent}>
-                <View style={styles.cardBadge}>
-                  <Text style={styles.cardBadgeText}>{item.category}</Text>
-                </View>
-                <Text style={styles.cardTitle}>{item.title_en}</Text>
-                <Text style={styles.cardPreview} numberOfLines={2}>
-                  {item.body_en.slice(0, 120)}...
-                </Text>
-              </View>
-              <Ionicons name="chevron-forward" size={16} color={Colors.textMuted} />
-            </Pressable>
-          )}
+          renderItem={renderGuideItem}
           ListEmptyComponent={
             <View style={styles.empty}>
               <Text style={styles.emptyText}>No articles in this category</Text>
