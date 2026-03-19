@@ -106,7 +106,27 @@ npm run dev
 
 | 항목 | 내용 |
 |------|------|
-| **진행률** | `███████░░░░░░░░░░░░░` **35%** |
+| **진행률** | `████████████████░░░░` **85%** |
 | **레포** | [Seou-up-Microblading-](https://github.com/jaeha81/Seou-up-Microblading-) |
 
-> 진행률: 35%
+> 진행률: 85%
+
+### ✅ 완료된 기능
+
+| 레이어 | 항목 | 상태 |
+|--------|------|------|
+| Backend | FastAPI 8 라우터 · DB 9 테이블 · JWT 인증 | ✅ |
+| Backend | **Real AI (MediaPipe FaceMesh)** eyebrow overlay | ✅ Phase 4 |
+| Backend | **Social Login** Google + Kakao OAuth2 | ✅ Phase 4 |
+| Backend | **PDF Export** `/api/export/simulation/{id}/pdf` | ✅ Phase 5 |
+| Backend | **Celery + Redis** 비동기 시뮬레이션 큐 | ✅ Phase 5 |
+| Frontend | 18개 라우트 전체 UI/UX 완성 | ✅ |
+| Frontend | Google/Kakao OAuth 콜백 페이지 | ✅ |
+| Mobile | React Native/Expo + 6개 플러그인 스크린 | ✅ |
+| Infra | Docker Compose: db + api + web + redis + celery_worker | ✅ |
+
+### 🔜 잔여 (15%)
+- Phase 6: 지도 연동 (Google Maps / Kakao Maps)
+- Phase 6: 파트너 광고 시스템
+- OAuth 클라이언트 키 환경변수 실제 설정
+- E2E 테스트
