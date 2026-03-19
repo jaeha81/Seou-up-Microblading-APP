@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import api from "@/lib/api";
 
@@ -30,17 +31,32 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-lg">
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <Link href={`/${locale}`} className="inline-flex items-center gap-2">
+            <span className="text-2xl">💄</span>
+            <span className="font-bold text-xl text-stone-900">Seou-up</span>
+          </Link>
+        </div>
+
         {/* Progress */}
-        <div className="flex gap-2 mb-8">
+        <div className="flex gap-2 mb-3">
           {STEPS.map((s, i) => (
             <div
               key={s}
-              className={`flex-1 h-1.5 rounded-full transition-colors ${
+              className={`flex-1 h-1.5 rounded-full transition-all duration-500 ${
                 i <= step ? "bg-brand-500" : "bg-stone-200"
               }`}
             />
+          ))}
+        </div>
+        <div className="flex justify-between mb-8">
+          {STEPS.map((s, i) => (
+            <span key={s} className={`text-xs transition-colors ${i === step ? "text-brand-600 font-semibold" : i < step ? "text-green-600" : "text-stone-400"}`}>
+              {i < step ? "✓" : s}
+            </span>
           ))}
         </div>
 
