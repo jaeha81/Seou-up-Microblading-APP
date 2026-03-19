@@ -17,6 +17,7 @@ from seeds.seed_eyebrow_styles import seed_eyebrow_styles
 from seeds.seed_guides import seed_guides
 from seeds.seed_compliance import seed_compliance
 from seeds.seed_users import seed_admin_user
+from seeds.seed_providers import seed_providers
 
 
 def main():
@@ -33,6 +34,12 @@ def main():
         n = seed_compliance(db)
         print(f"  ✓ Seeded {n} compliance notices (total: 5)")
 
+        n = seed_providers(db)
+        if n:
+            print(f"  ✓ Seeded {n} provider listings")
+        else:
+            print("  ℹ Provider listings already exist")
+
         n = seed_admin_user(db)
         if n:
             print("  ✓ Seeded admin user (admin@seouup.dev)")
@@ -41,7 +48,7 @@ def main():
 
         print("\n✅ Seeding complete!")
         print(
-            "   Seeded 12 eyebrow styles · Seeded 5 guide articles · Seeded 5 compliance notices"
+            "   12 eyebrow styles · 5 guide articles · 5 compliance notices · 5 providers"
         )
     except Exception as exc:
         print(f"❌ Seeding failed: {exc}")

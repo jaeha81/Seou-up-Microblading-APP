@@ -64,7 +64,7 @@ def login(body: UserLoginRequest, db: Session = Depends(get_db)):
 def get_google_auth_url():
     params = {
         "client_id": settings.GOOGLE_CLIENT_ID,
-        "redirect_uri": settings.KAKAO_REDIRECT_URI,
+        "redirect_uri": settings.GOOGLE_REDIRECT_URI,
         "response_type": "code",
         "scope": "openid email profile",
     }
@@ -84,7 +84,7 @@ async def google_callback(body: OAuthCodeRequest, db: Session = Depends(get_db))
                 "code": body.code,
                 "client_id": settings.GOOGLE_CLIENT_ID,
                 "client_secret": settings.GOOGLE_CLIENT_SECRET,
-                "redirect_uri": settings.KAKAO_REDIRECT_URI,
+                "redirect_uri": settings.GOOGLE_REDIRECT_URI,
                 "grant_type": "authorization_code",
             },
         )

@@ -23,9 +23,9 @@ class Settings(BaseSettings):
     # OAuth
     GOOGLE_CLIENT_ID: str = ""
     GOOGLE_CLIENT_SECRET: str = ""
+    GOOGLE_REDIRECT_URI: str = "http://localhost:8000/api/auth/google/callback"
     KAKAO_CLIENT_ID: str = ""
-    KAKAO_REDIRECT_URI: str = "http://localhost:8000/api/auth/google/callback"
-    KAKAO_REDIRECT_URI_KAKAO: str = "http://localhost:8000/api/auth/kakao/callback"
+    KAKAO_REDIRECT_URI: str = "http://localhost:8000/api/auth/kakao/callback"
 
     # CORS
     ALLOWED_ORIGINS: List[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
