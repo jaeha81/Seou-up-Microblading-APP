@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Typography, BorderRadius, Spacing } from '../theme/colors';
-import { PluginRegistryEntry } from '../core/plugins/PluginInterface';
+import type { PluginRegistryEntry } from '../core/plugins/PluginInterface';
 
 type PluginCardProps = {
   entry: PluginRegistryEntry;
@@ -10,7 +10,7 @@ type PluginCardProps = {
   onToggle: (id: string, enabled: boolean) => void;
 };
 
-export function PluginCard({ entry, enabled, onToggle }: PluginCardProps) {
+function PluginCardInner({ entry, enabled, onToggle }: PluginCardProps) {
   return (
     <View style={[styles.card, enabled && styles.cardEnabled]}>
       <View style={styles.row}>
@@ -24,7 +24,16 @@ export function PluginCard({ entry, enabled, onToggle }: PluginCardProps) {
         <View style={styles.info}>
           <Text style={styles.name}>{entry.name}</Text>
           <Text style={styles.desc} numberOfLines={2}>{entry.description}</Text>
-          <Text style={styles.version}>v{entry.version}</Text>
+          <View style={styles.metaRow}>
+            <Text style={styles.version}>v{entry.version}</Text>
+            {entry.size && <Text style={styles.size}>{entry.size}</Text>}
+            {entry.permissions && entry.permissions.length > 0 && (
+              <View style={styles.permBadge}>
+                <Ionicons name="key-outline" size={10} color={Colors.textMuted} />
+                <Text style={styles.permText}>{entry.permissions.length}</Text>
+              </View>
+            )}
+          </View>
         </View>
         <Pressable
           style={[styles.toggle, enabled ? styles.toggleOn : styles.toggleOff]}
@@ -39,6 +48,8 @@ export function PluginCard({ entry, enabled, onToggle }: PluginCardProps) {
     </View>
   );
 }
+
+export const PluginCard = memo(PluginCardInner);
 
 const styles = StyleSheet.create({
   card: {
@@ -82,7 +93,25 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     marginBottom: 4,
   },
+  metaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+  },
   version: {
+    ...Typography.caption,
+    color: Colors.textMuted,
+  },
+  size: {
+    ...Typography.caption,
+    color: Colors.textMuted,
+  },
+  permBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+  },
+  permText: {
     ...Typography.caption,
     color: Colors.textMuted,
   },

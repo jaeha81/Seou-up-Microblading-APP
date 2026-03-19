@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "lastUpdated": "2026-03-19",
   "minAppVersion": "1.0.0",
   "plugins": [
@@ -7,55 +7,65 @@
       "id": "simulate",
       "name": "Brow Simulation",
       "description": "Try 12+ eyebrow styles on your photo using AI. Core feature of Seou-up.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "core",
       "iconName": "camera-outline",
       "bundled": true,
       "enabledByDefault": true,
+      "permissions": ["camera", "storage", "network"],
+      "size": "~120KB",
       "githubUrl": "https://github.com/jaeha81/Seou-up-Microblading-/tree/main/plugins/plugin-simulate"
     },
     {
       "id": "guide",
       "name": "Startup Guide",
       "description": "Business articles for microblading entrepreneurs. Covers startup, technique, and marketing.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "business",
       "iconName": "book-outline",
       "bundled": true,
       "enabledByDefault": false,
+      "permissions": ["network"],
+      "size": "~45KB",
       "githubUrl": "https://github.com/jaeha81/Seou-up-Microblading-/tree/main/plugins/plugin-guide"
     },
     {
       "id": "providers",
       "name": "Find Providers",
       "description": "Browse certified microblading clinics and professionals near you.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "community",
       "iconName": "storefront-outline",
       "bundled": true,
       "enabledByDefault": false,
+      "permissions": ["network"],
+      "size": "~50KB",
       "githubUrl": "https://github.com/jaeha81/Seou-up-Microblading-/tree/main/plugins/plugin-providers"
     },
     {
       "id": "feedback",
       "name": "Feedback",
       "description": "Submit ratings, bug reports, and feature requests to the Seou-up team.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "community",
       "iconName": "chatbubble-ellipses-outline",
       "bundled": true,
       "enabledByDefault": false,
+      "permissions": ["network"],
+      "size": "~35KB",
       "githubUrl": "https://github.com/jaeha81/Seou-up-Microblading-/tree/main/plugins/plugin-feedback"
     },
     {
       "id": "admin",
       "name": "Admin Dashboard",
       "description": "Platform statistics, user management, and feedback review. Admin role required.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "management",
       "iconName": "shield-outline",
       "bundled": true,
       "enabledByDefault": false,
+      "permissions": ["network"],
+      "size": "~60KB",
       "githubUrl": "https://github.com/jaeha81/Seou-up-Microblading-/tree/main/plugins/plugin-admin"
     }
   ]

@@ -49,6 +49,7 @@ function MainTabNavigator() {
           shadowOpacity: 0,
         },
         tabBarLabelStyle: { fontSize: 11, fontWeight: '500' },
+        lazy: true,
       }}
     >
       <Tab.Screen
@@ -70,6 +71,7 @@ function MainTabNavigator() {
             component={ScreenComponent}
             options={{
               tabBarLabel: tabBar.label,
+              lazy: true,
               tabBarIcon: ({ color, focused, size }) => (
                 <Ionicons
                   name={(focused ? tabBar.iconNameFocused : tabBar.iconName) as keyof typeof Ionicons.glyphMap}

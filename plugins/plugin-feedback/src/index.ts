@@ -8,6 +8,8 @@ import type {
 import FeedbackScreen, { initFeedbackServices } from './screens/FeedbackScreen';
 
 export class FeedbackPlugin implements SeouPlugin {
+  private services: PluginServices | null = null;
+
   readonly manifest: PluginManifest = {
     id: 'feedback',
     displayName: 'Feedback',
@@ -17,6 +19,8 @@ export class FeedbackPlugin implements SeouPlugin {
     iconName: 'chatbubble-ellipses-outline',
     minAppVersion: '1.0.0',
     enabledByDefault: false,
+    permissions: ['network'],
+    size: '~35KB',
   };
 
   readonly tabBarConfig: PluginTabBarConfig = {
@@ -30,6 +34,11 @@ export class FeedbackPlugin implements SeouPlugin {
   ];
 
   async initialize(services: PluginServices): Promise<void> {
+    this.services = services;
     initFeedbackServices(services);
+  }
+
+  async dispose(): Promise<void> {
+    this.services = null;
   }
 }

@@ -1,35 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useAuth } from '../core/auth/AuthContext';
 import { usePluginRegistry } from '../core/plugins/PluginRegistry';
-import { usePluginStore } from '../core/plugins/PluginStore';
+import { usePluginManager } from '../core/plugins/PluginManager';
 import { CacheService } from '../core/cache/CacheService';
 import { apiClient } from '../core/api/client';
 import { Colors, Typography, Spacing, BorderRadius } from '../theme/colors';
+import { SkeletonGrid } from '../components/SkeletonLoader';
 import { MainTabParamList } from '../navigation/AppNavigator';
+import Constants from 'expo-constants';
 
 type Props = { navigation: BottomTabNavigationProp<MainTabParamList, 'Home'> };
 
 export default function HomeScreen({ navigation }: Props) {
   const { user } = useAuth();
-  const { enabledPlugins } = usePluginRegistry();
-  const { fetchRegistry } = usePluginStore();
+  const { enabledPlugins, initialized } = usePluginRegistry();
+  const { fetchRegistry } = usePluginManager();
 
   useEffect(() => {
-    fetchRegistry();
+    const url = Constants.expoConfig?.extra?.pluginRegistryUrl as string;
+    if (url) fetchRegistry(url);
+
+    // Prefetch common data asynchronously
     CacheService.prefetch(
       'eyebrow-styles',
       () => apiClient.get('/api/eyebrow-styles'),
       CacheService.TTL.LONG,
     );
-    CacheService.prefetch(
-      'guides',
-      () => apiClient.get('/api/guides'),
-      CacheService.TTL.MEDIUM,
-    );
   }, []);
+
+  const navigateToPlugin = useCallback(
+    (id: string) => navigation.navigate(id),
+    [navigation],
+  );
 
   const greeting = user?.name ? `Hi, ${user.name.split(' ')[0]}` : 'Welcome';
 
@@ -45,7 +50,9 @@ export default function HomeScreen({ navigation }: Props) {
         </View>
       </View>
 
-      {enabledPlugins.length > 0 ? (
+      {!initialized ? (
+        <SkeletonGrid count={4} columns={2} />
+      ) : enabledPlugins.length > 0 ? (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Active Features</Text>
           <View style={styles.grid}>
@@ -53,7 +60,7 @@ export default function HomeScreen({ navigation }: Props) {
               <Pressable
                 key={plugin.manifest.id}
                 style={styles.featureCard}
-                onPress={() => navigation.navigate(plugin.manifest.id)}
+                onPress={() => navigateToPlugin(plugin.manifest.id)}
               >
                 <View style={styles.featureIcon}>
                   <Ionicons

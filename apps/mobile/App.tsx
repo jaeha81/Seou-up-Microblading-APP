@@ -1,4 +1,3 @@
-import 'expo-dev-client';
 import './src/core/i18n';
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import { AuthProvider, useAuth } from './src/core/auth/AuthContext';
 import { PluginRegistryProvider } from './src/core/plugins/PluginRegistry';
-import { usePluginStore } from './src/core/plugins/PluginStore';
+import { usePluginManager } from './src/core/plugins/PluginManager';
 import { AppNavigator } from './src/navigation/AppNavigator';
 
 import { SimulatePlugin } from '../../plugins/plugin-simulate/src';
@@ -33,12 +32,10 @@ const DEFAULT_ENABLED: string[] = ['simulate'];
 
 function AppCore() {
   const { user, isLoading } = useAuth();
-  const { hydrate, enable, enabledPluginIds } = usePluginStore();
+  const { hydrate, enable, enabledIds } = usePluginManager();
 
   useEffect(() => {
-    (async () => {
-      await hydrate();
-    })();
+    hydrate();
   }, []);
 
   useEffect(() => {
@@ -48,8 +45,8 @@ function AppCore() {
   }, [isLoading]);
 
   useEffect(() => {
-    if (!isLoading && enabledPluginIds.size === 0) {
-      DEFAULT_ENABLED.forEach((id) => enable(id as Parameters<typeof enable>[0]));
+    if (!isLoading && enabledIds.size === 0) {
+      DEFAULT_ENABLED.forEach((id) => enable(id));
     }
   }, [isLoading]);
 
