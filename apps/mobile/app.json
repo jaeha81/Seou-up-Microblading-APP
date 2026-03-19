@@ -1,52 +1,6 @@
 {
   "expo": {
     "name": "Seou-up Microblading",
-    "slug": "seou-up-microblading",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#1a1a2e"
-    },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": false,
-      "bundleIdentifier": "com.seouup.microblading"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#1a1a2e"
-      },
-      "package": "com.seouup.microblading",
-      "versionCode": 1,
-      "permissions": [
-        "CAMERA",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
-        "INTERNET"
-      ]
-    },
-    "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "Allow Seou-up to access your photos for brow simulation.",
-          "cameraPermission": "Allow Seou-up to use your camera for brow simulation."
-        }
-      ],
-      "expo-secure-store",
-      "expo-font"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "seou-up-microblading"
-      },
-      "apiBaseUrl": "http://localhost:8000",
-      "pluginRegistryUrl": "https://raw.githubusercontent.com/jaeha81/Seou-up-Microblading-/main/plugin-registry.json"
-    }
+    "slug": "seou-up-microblading"
   }
 }

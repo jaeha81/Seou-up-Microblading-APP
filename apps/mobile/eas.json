@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 5.9.3"
+    "version": ">= 5.9.3",
+    "appVersionSource": "local"
   },
   "build": {
     "development": {
@@ -8,13 +9,27 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "http://localhost:8000"
       }
     },
     "preview": {
       "distribution": "internal",
       "android": {
-        "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease"
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "http://localhost:8000"
+      }
+    },
+    "preview-lan": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "http://192.168.0.1:8000"
       }
     },
     "production": {
