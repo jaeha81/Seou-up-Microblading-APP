@@ -1,15 +1,5 @@
-const { withAndroidManifest } = require('@expo/config-plugins');
-
-// API URL 우선순위:
-// 1. EXPO_PUBLIC_API_URL 환경변수
-// 2. app.json extra.apiBaseUrl
-// 3. 기본값 (개발 중 로컬 네트워크 자동 감지)
-const apiBaseUrl =
-  process.env.EXPO_PUBLIC_API_URL ||
-  'http://localhost:8000';
-
 /** @type {import('expo/config').ExpoConfig} */
-const config = {
+module.exports = {
   name: 'Seou-up Microblading',
   slug: 'seou-up-microblading',
   version: '1.0.0',
@@ -44,29 +34,20 @@ const config = {
     [
       'expo-image-picker',
       {
-        photosPermission:
-          'Allow Seou-up to access your photos for brow simulation.',
-        cameraPermission:
-          'Allow Seou-up to use your camera for brow simulation.',
+        photosPermission: 'Allow Seou-up to access your photos for brow simulation.',
+        cameraPermission: 'Allow Seou-up to use your camera for brow simulation.',
       },
     ],
     'expo-secure-store',
     'expo-font',
   ],
   extra: {
-    apiBaseUrl,
+    // API URL 우선순위: 빌드 시 env → 기본값
+    apiBaseUrl: process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8000',
     pluginRegistryUrl:
       'https://raw.githubusercontent.com/jaeha81/Seou-up-Microblading-APP/main/plugin-registry.json',
     eas: {
-      projectId: process.env.EAS_PROJECT_ID || 'seou-up-microblading',
+      projectId: process.env.EAS_PROJECT_ID || '',
     },
   },
-  updates: {
-    fallbackToCacheTimeout: 0,
-  },
-  runtimeVersion: {
-    policy: 'appVersion',
-  },
 };
-
-module.exports = config;
