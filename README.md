@@ -8,6 +8,7 @@
 - [개요](#개요)
 - [기술 스택](#기술-스택)
 - [실행 방법](#실행-방법)
+- [📱 모바일 개인 테스트 가이드](./docs/MOBILE_TEST_GUIDE.md)
   - [방법 1: Docker (권장)](#방법-1-docker-권장)
   - [방법 2: 로컬 개발](#방법-2-로컬-개발)
   - [방법 3: Windows 원클릭](#방법-3-windows-원클릭)
@@ -310,6 +311,8 @@ npx expo start
 - Provider Directory
 - Feedback
 - Admin Panel (Admin 계정 전용)
+
+> 📖 **상세 설치 가이드** → [docs/MOBILE_TEST_GUIDE.md](./docs/MOBILE_TEST_GUIDE.md)
 
 ---
 
