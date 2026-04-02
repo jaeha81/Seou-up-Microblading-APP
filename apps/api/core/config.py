@@ -34,9 +34,17 @@ class Settings(BaseSettings):
     UPLOAD_DIR: str = "storage/uploads"
     MAX_UPLOAD_SIZE_MB: int = 10
 
+    # Stripe (Phase 6 — paid plans)
+    # Get keys at https://dashboard.stripe.com/apikeys
+    STRIPE_SECRET_KEY: str = ""
+    STRIPE_PUBLISHABLE_KEY: str = ""
+    STRIPE_WEBHOOK_SECRET: str = ""
+    STRIPE_PRICE_ID_FEATURED: str = ""  # Monthly recurring price ID for Featured listing
+
     # App
     APP_ENV: str = "development"
     DEBUG: bool = True
+    APP_BASE_URL: str = "http://localhost:3000"
 
 
 settings = Settings()

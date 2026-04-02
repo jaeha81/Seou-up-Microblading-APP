@@ -21,6 +21,7 @@ from routers import (
     providers,
     feedback,
     admin,
+    subscriptions,
 )
 
 app = FastAPI(
@@ -63,6 +64,9 @@ app.include_router(guides.router, prefix="/api/guides", tags=["Guides"])
 app.include_router(providers.router, prefix="/api/providers", tags=["Providers"])
 app.include_router(feedback.router, prefix="/api/feedback", tags=["Feedback"])
 app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
+app.include_router(
+    subscriptions.router, prefix="/api/subscriptions", tags=["Subscriptions"]
+)
 
 
 # ── Health ─────────────────────────────────────────────────────────────────────

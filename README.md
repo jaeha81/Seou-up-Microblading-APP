@@ -332,28 +332,42 @@ npx expo start
 
 | 항목 | 상태 |
 |------|------|
-| **진행률** | `████████████████████` **92%** |
-| **빌드** | ✅ 18 routes · 0 errors |
+| **진행률** | `████████████████████` **100%** |
+| **빌드** | ✅ 21 routes · 0 errors · 0 TypeScript errors |
 | **레포** | https://github.com/jaeha81/Seou-up-Microblading-APP |
 
 ### ✅ 완료된 기능
 
 | 레이어 | 항목 |
 |--------|------|
-| Backend | FastAPI 9개 라우터 · DB 15개 테이블 · JWT 인증 |
+| Backend | FastAPI 10개 라우터 · DB 15개 테이블 · JWT 인증 |
 | Backend | Real AI (MediaPipe FaceMesh) eyebrow overlay |
 | Backend | Google + Kakao OAuth2 소셜 로그인 |
 | Backend | PDF Export (ReportLab A4 리포트) |
 | Backend | Celery + Redis 비동기 시뮬레이션 큐 |
-| Frontend | 18개 라우트 전체 UI/UX 완성 (EN/KO/TH/VI) |
+| Backend | **Stripe 구독 결제** (Featured Pro 플랜 · 웹훅 자동 플랜 업그레이드) |
+| Frontend | 21개 라우트 전체 UI/UX 완성 (EN/KO/TH/VI) |
 | Frontend | 소셜 로그인 콜백 페이지 |
+| Frontend | **프로바이더 지도** (Leaflet + OpenStreetMap · 리스트/지도 토글) |
+| Frontend | **파트너 유료 플랜 페이지** (Free / Featured Pro · Stripe Checkout 연동) |
+| Frontend | **가이드 상세 페이지** (마크다운 렌더링 · 관련 글 추천) |
 | Mobile | React Native/Expo + 플러그인 스크린 13개 |
 | Infra | Docker Compose 5서비스 (자동 마이그레이션) |
+| QA | **Playwright E2E 테스트** (landing · auth · simulate · providers · guide · pricing) |
 
-### 🔜 잔여 (8%)
-- Phase 6: Kakao/Google Maps 지도 연동
-- Phase 6: 파트너 유료 플랜
-- E2E 테스트 작성
+### Stripe 설정 방법
+
+1. [Stripe Dashboard](https://dashboard.stripe.com/) → API Keys에서 키 복사
+2. `apps/api/.env`에 입력:
+   ```env
+   STRIPE_SECRET_KEY=sk_test_...
+   STRIPE_PUBLISHABLE_KEY=pk_test_...
+   STRIPE_WEBHOOK_SECRET=whsec_...
+   STRIPE_PRICE_ID_FEATURED=price_...   # 월정액 가격 ID
+   ```
+3. Webhook URL: `http://your-domain/api/subscriptions/webhook`
+
+> 테스트 모드에서는 `sk_test_...` 키를 사용하세요. 실제 결제 없이 테스트 가능합니다.
 
 ---
 
