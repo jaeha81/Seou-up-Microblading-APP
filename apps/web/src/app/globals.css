@@ -3,24 +3,220 @@
 @tailwind utilities;
 
 :root {
+  /* ── Brand Core ── */
   --brand-primary: #d9563e;
+  --brand-50:  #fdf4f0;
+  --brand-100: #fbe7dc;
+  --brand-200: #f5cbb8;
+  --brand-300: #eda58c;
+  --brand-400: #e37960;
+  --brand-500: #d9563e;
+  --brand-600: #c33e2a;
+  --brand-700: #a13024;
+  --brand-800: #852a23;
+  --brand-900: #6e2621;
+
+  /* ── Gold Accent ── */
   --gold-accent: #d4a017;
+  --gold-300: #f4d58d;
+  --gold-400: #e8bc5a;
+  --gold-500: #d4a017;
+
+  /* ── Premium Neutrals ── */
+  --surface-base:   #fafaf9;
+  --surface-card:   #ffffff;
+  --surface-raised: #f7f6f5;
+  --surface-dark:   #1c1917;
+
+  /* ── Typography ── */
+  --text-primary:   #1c1917;
+  --text-secondary: #57534e;
+  --text-muted:     #a8a29e;
+  --text-inverse:   #fafaf9;
+
+  /* ── Spacing / Radius ── */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  /* ── Shadows ── */
+  --shadow-card: 0 1px 3px 0 rgba(0,0,0,0.07), 0 1px 2px -1px rgba(0,0,0,0.05);
+  --shadow-elevated: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-premium: 0 10px 25px -3px rgba(0,0,0,0.10), 0 4px 6px -4px rgba(0,0,0,0.07);
 }
 
 * {
   box-sizing: border-box;
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: #fafaf9;
-  color: #1c1917;
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ── Compliance Banner ── */
 .compliance-banner {
   background: #1c1917;
   color: #f5f5f4;
   font-size: 0.75rem;
   padding: 0.5rem 1rem;
   text-align: center;
+  letter-spacing: 0.01em;
 }
+
+/* ── Premium UI Components ── */
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-brand-500 hover:bg-brand-400 active:bg-brand-600 text-white px-6 py-3 rounded-2xl shadow-md hover:-translate-y-0.5 active:translate-y-0 focus-visible:ring-brand-400;
+  }
+  .btn-secondary {
+    @apply btn bg-white hover:bg-stone-50 active:bg-stone-100 text-stone-900 border border-stone-200 hover:border-stone-300 px-6 py-3 rounded-2xl focus-visible:ring-stone-400;
+  }
+  .btn-gold {
+    @apply btn bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-500 text-stone-900 px-6 py-3 rounded-2xl shadow-md hover:-translate-y-0.5 active:translate-y-0 focus-visible:ring-yellow-400;
+  }
+  .btn-ghost {
+    @apply btn text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-4 py-2 rounded-xl focus-visible:ring-stone-400;
+  }
+  .btn-danger {
+    @apply btn bg-red-500 hover:bg-red-400 text-white px-5 py-2.5 rounded-xl focus-visible:ring-red-400;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-3xl border border-stone-100 shadow-sm;
+  }
+  .card-premium {
+    @apply bg-white rounded-3xl border border-stone-100 shadow-xl;
+  }
+  .card-dark {
+    @apply bg-stone-900 rounded-3xl border border-stone-800;
+  }
+  .card-hover {
+    @apply card hover:shadow-xl hover:-translate-y-1 transition-all duration-300;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1 font-semibold text-xs px-2.5 py-1 rounded-full;
+  }
+  .badge-brand {
+    @apply badge bg-brand-100 text-brand-700;
+  }
+  .badge-gold {
+    @apply badge bg-yellow-100 text-yellow-800;
+  }
+  .badge-success {
+    @apply badge bg-green-100 text-green-700;
+  }
+  .badge-warning {
+    @apply badge bg-amber-100 text-amber-700;
+  }
+  .badge-error {
+    @apply badge bg-red-100 text-red-700;
+  }
+  .badge-neutral {
+    @apply badge bg-stone-100 text-stone-600;
+  }
+
+  /* Section Labels */
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-brand-500 mb-3 block;
+  }
+  .section-title {
+    @apply font-serif text-3xl md:text-4xl font-bold text-stone-900;
+  }
+  .section-subtitle {
+    @apply text-stone-500 text-base mt-3 max-w-xl mx-auto;
+  }
+
+  /* Form Inputs */
+  .input {
+    @apply w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm bg-white text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent transition-shadow;
+  }
+  .input-error {
+    @apply input border-red-300 focus:ring-red-400;
+  }
+  .label {
+    @apply block text-sm font-medium text-stone-700 mb-1.5;
+  }
+
+  /* Step Indicators */
+  .step-active {
+    @apply bg-brand-500 text-white ring-4 ring-brand-100;
+  }
+  .step-complete {
+    @apply bg-green-500 text-white;
+  }
+  .step-inactive {
+    @apply bg-stone-200 text-stone-400;
+  }
+
+  /* Premium gradient backgrounds */
+  .gradient-hero {
+    background: linear-gradient(135deg, #1c1917 0%, #292524 50%, #1c1917 100%);
+  }
+  .gradient-brand {
+    background: linear-gradient(135deg, var(--brand-600), var(--brand-500));
+  }
+  .gradient-gold {
+    background: linear-gradient(135deg, #f4d58d, #d4a017);
+  }
+
+  /* Glass Effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-md border border-white/10;
+  }
+}
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+@keyframes pulse-brand {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 86, 62, 0.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(217, 86, 62, 0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out;
+}
+.animate-pulse-brand {
+  animation: pulse-brand 2s ease-in-out infinite;
+}
+
+/* ── Skeleton Loader ── */
+.skeleton {
+  background: linear-gradient(90deg, #f5f4f3 25%, #ebe9e7 50%, #f5f4f3 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 0.5rem;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #a8a29e; }

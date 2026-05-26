@@ -109,18 +109,23 @@ export default async function GuidePage({ params }: { params: { locale: string }
             return (
               <div
                 key={article.id}
-                className="group bg-white rounded-2xl shadow-sm border border-stone-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                className="group bg-white rounded-2xl shadow-sm border border-stone-100 hover:shadow-lg hover:-translate-y-1 hover:border-stone-200 transition-all duration-200"
               >
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center gap-3 mb-3 flex-wrap">
                         {cfg && (
                           <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full border ${cfg.bg} ${cfg.color}`}>
                             {cfg.icon} {cfg.label}
                           </span>
                         )}
-                        <span className="text-xs text-stone-400">{READ_TIME[article.slug] ?? "5 min read"}</span>
+                        <span className="inline-flex items-center gap-1 text-xs font-medium text-stone-500 bg-stone-50 border border-stone-200 px-2.5 py-1 rounded-full">
+                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          {READ_TIME[article.slug] ?? "5 min read"}
+                        </span>
                         <span className="text-xs text-stone-300">·</span>
                         <span className="text-xs text-stone-400">#{idx + 1}</span>
                       </div>

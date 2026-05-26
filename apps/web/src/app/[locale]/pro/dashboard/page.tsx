@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import api from "@/lib/api";
@@ -37,6 +37,43 @@ const STYLE_NAMES: Record<number, string> = {
   12: "Powder Fill",
 };
 
+const STAT_ICONS: Record<string, React.ReactElement> = {
+  brand: (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5" />
+    </svg>
+  ),
+  green: (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+    </svg>
+  ),
+  gold: (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  stone: (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+    </svg>
+  ),
+};
+
+const ACCENT_ICON_COLOR: Record<string, string> = {
+  brand: "text-brand-500",
+  green: "text-green-500",
+  gold: "text-yellow-600",
+  stone: "text-stone-500",
+};
+
+const ACCENT_BORDER: Record<string, string> = {
+  brand: "border-brand-100",
+  green: "border-green-100",
+  gold: "border-yellow-100",
+  stone: "border-stone-100",
+};
+
 function StatCard({
   label,
   value,
@@ -56,13 +93,21 @@ function StatCard({
     gold: "bg-yellow-50 text-yellow-700",
     stone: "bg-stone-100 text-stone-600",
   };
-  const bar = accentMap[accent ?? "stone"];
+  const key = accent ?? "stone";
+  const bar = accentMap[key];
+  const iconColor = ACCENT_ICON_COLOR[key];
+  const borderColor = ACCENT_BORDER[key];
   return (
-    <div className="bg-white rounded-2xl p-5 shadow-sm border border-stone-100 flex flex-col gap-1">
-      <div className={`text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded-md self-start ${bar}`}>
-        {label}
+    <div className={`bg-white rounded-2xl p-5 shadow-sm border ${borderColor} flex flex-col gap-1`}>
+      <div className="flex items-center justify-between mb-1">
+        <div className={`text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded-md ${bar}`}>
+          {label}
+        </div>
+        <div className={`${iconColor} opacity-70`}>
+          {STAT_ICONS[key]}
+        </div>
       </div>
-      <div className="text-3xl font-bold text-stone-900 mt-2">
+      <div className="text-3xl font-bold text-stone-900 mt-1">
         {loading ? <span className="text-stone-300">—</span> : value}
       </div>
       {sub && <div className="text-xs text-stone-400">{sub}</div>}

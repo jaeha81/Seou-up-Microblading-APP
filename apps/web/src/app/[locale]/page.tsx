@@ -146,6 +146,83 @@ export default async function LandingPage({
         </div>
       </section>
 
+      {/* ── DASHBOARD PREVIEW ── */}
+      <section className="bg-white px-6 py-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-xs font-semibold uppercase tracking-widest text-brand-500 mb-3 block">
+              See It In Action
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900">
+              Your Pro Dashboard
+            </h2>
+            <p className="text-stone-500 text-base mt-3 max-w-xl mx-auto">
+              A complete overview of your clinic — clients, sessions, and revenue at a glance.
+            </p>
+          </div>
+
+          {/* Mock Dashboard Box */}
+          <div className="bg-stone-900 rounded-3xl p-6 md:p-8 shadow-2xl border border-stone-700">
+            {/* Dashboard Header */}
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-brand-400 mb-1">Pro Dashboard</div>
+                <div className="text-white font-bold text-lg">Clinic Overview</div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                <span className="text-xs text-stone-400">Live</span>
+              </div>
+            </div>
+
+            {/* Stat Cards Row */}
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              {[
+                { label: "Total Clients", value: "248명", icon: "👥", accent: "text-brand-400", bg: "bg-brand-500/10 border-brand-500/20" },
+                { label: "This Month", value: "32건", icon: "📅", accent: "text-green-400", bg: "bg-green-500/10 border-green-500/20" },
+                { label: "Revenue", value: "$1,840", icon: "💰", accent: "text-yellow-400", bg: "bg-yellow-500/10 border-yellow-500/20" },
+              ].map((card) => (
+                <div key={card.label} className={`rounded-2xl p-4 border ${card.bg}`}>
+                  <div className="text-xl mb-2">{card.icon}</div>
+                  <div className={`text-2xl font-bold ${card.accent}`}>{card.value}</div>
+                  <div className="text-xs text-stone-500 mt-1">{card.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Recent Clients Table */}
+            <div className="bg-stone-800 rounded-2xl overflow-hidden border border-stone-700">
+              <div className="px-5 py-3 border-b border-stone-700">
+                <span className="text-xs font-semibold uppercase tracking-widest text-stone-400">Recent Clients</span>
+              </div>
+              <div className="divide-y divide-stone-700/50">
+                {[
+                  { name: "Soo-Yeon K.", date: "May 26, 2026", treatment: "Natural Feather", status: "Completed", statusColor: "bg-green-500/20 text-green-400" },
+                  { name: "Areeya N.", date: "May 25, 2026", treatment: "Soft Arch", status: "Scheduled", statusColor: "bg-blue-500/20 text-blue-400" },
+                  { name: "Linh T.", date: "May 24, 2026", treatment: "Ombre Gradient", status: "Completed", statusColor: "bg-green-500/20 text-green-400" },
+                ].map((row) => (
+                  <div key={row.name} className="px-5 py-3.5 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400 text-xs font-bold shrink-0">
+                        {row.name.charAt(0)}
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-white">{row.name}</div>
+                        <div className="text-xs text-stone-500">{row.date}</div>
+                      </div>
+                    </div>
+                    <div className="hidden sm:block text-xs text-stone-400">{row.treatment}</div>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${row.statusColor}`}>
+                      {row.status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── HOW IT WORKS ── */}
       <section className="bg-white px-6 py-20">
         <div className="max-w-4xl mx-auto">
@@ -191,6 +268,102 @@ export default async function LandingPage({
         </div>
       </section>
 
+      {/* ── AI SIMULATOR PREVIEW ── */}
+      <section className="bg-stone-50 px-6 py-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left: Text */}
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-brand-500 mb-3 block">
+                AI Technology
+              </span>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-5 leading-tight">
+                Visualize Results
+                <br />
+                <span className="text-brand-500">Before the Procedure</span>
+              </h2>
+              <p className="text-stone-500 text-base leading-relaxed mb-6">
+                Our AI Brow Simulator lets clients see exactly how their brows will look
+                across <strong className="text-stone-700">12 professional styles</strong> — Natural Feather,
+                Soft Arch, Ombre Gradient, and more. Increase client confidence and reduce hesitation.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  "12 professionally designed brow styles",
+                  "Instant visualization on client photos",
+                  "Share results via link or PDF",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-stone-600">
+                    <span className="w-5 h-5 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={`/${locale}/simulate`}
+                className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-400 text-white font-semibold px-6 py-3.5 rounded-2xl transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+              >
+                무료로 체험해보기 →
+              </Link>
+            </div>
+
+            {/* Right: Simulator Mockup */}
+            <div className="flex justify-center">
+              <div className="bg-stone-900 rounded-3xl p-6 w-full max-w-xs shadow-2xl border border-stone-700">
+                <div className="text-center mb-4">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-stone-400">AI Simulator</span>
+                </div>
+
+                {/* Face Silhouette SVG */}
+                <div className="bg-stone-800 rounded-2xl flex items-center justify-center py-8 mb-5 border border-stone-700">
+                  <svg viewBox="0 0 120 130" className="w-32 h-36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Face outline */}
+                    <ellipse cx="60" cy="68" rx="42" ry="52" fill="#44403c" stroke="#78716c" strokeWidth="1.5"/>
+                    {/* Eyes */}
+                    <ellipse cx="44" cy="58" rx="7" ry="4" fill="#292524"/>
+                    <ellipse cx="76" cy="58" rx="7" ry="4" fill="#292524"/>
+                    {/* Eyebrows - brand color highlight */}
+                    <path d="M34 48 Q44 43 54 47" stroke="#d9563e" strokeWidth="3" strokeLinecap="round"/>
+                    <path d="M66 47 Q76 43 86 48" stroke="#d9563e" strokeWidth="3" strokeLinecap="round"/>
+                    {/* Nose */}
+                    <path d="M57 65 Q60 72 63 65" stroke="#78716c" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+                    {/* Lips */}
+                    <path d="M48 82 Q60 89 72 82" stroke="#78716c" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+                    {/* Hair */}
+                    <ellipse cx="60" cy="20" rx="42" ry="18" fill="#292524"/>
+                  </svg>
+                </div>
+
+                {/* Style label */}
+                <div className="text-center mb-4">
+                  <span className="text-xs font-semibold text-brand-400 bg-brand-500/10 px-3 py-1 rounded-full">
+                    Natural Feather Style
+                  </span>
+                </div>
+
+                {/* Color Swatches */}
+                <div className="flex items-center justify-center gap-2.5">
+                  {[
+                    { bg: "bg-stone-900", border: "border-brand-400 ring-2 ring-brand-400" },
+                    { bg: "bg-stone-600", border: "border-stone-500" },
+                    { bg: "bg-amber-800", border: "border-amber-700" },
+                    { bg: "bg-amber-600", border: "border-amber-500" },
+                    { bg: "bg-amber-300", border: "border-amber-200" },
+                    { bg: "bg-stone-400", border: "border-stone-300" },
+                  ].map((swatch, i) => (
+                    <div
+                      key={i}
+                      className={`w-7 h-7 rounded-full border-2 ${swatch.bg} ${swatch.border} cursor-pointer transition-transform hover:scale-110`}
+                    />
+                  ))}
+                </div>
+                <p className="text-center text-xs text-stone-500 mt-3">Choose pigment tone</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── PRICING PREVIEW ── */}
       <section className="bg-stone-900 px-6 py-20 text-white">
         <div className="max-w-3xl mx-auto">
@@ -201,7 +374,7 @@ export default async function LandingPage({
             <p className="text-stone-400 text-base">Start free, scale as you grow</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-5 mb-10">
+          <div className="grid sm:grid-cols-3 gap-5 mb-10 max-w-4xl mx-auto">
             {/* Free */}
             <div className="bg-stone-800 border border-stone-700 rounded-3xl p-7">
               <div className="mb-5">
@@ -211,9 +384,19 @@ export default async function LandingPage({
                   <span className="text-stone-400 text-sm mb-1">/month</span>
                 </div>
               </div>
-              <p className="text-sm text-stone-400 leading-relaxed">
-                Basic listing, simulator access
-              </p>
+              <ul className="space-y-2.5 mb-2">
+                {[
+                  "Basic clinic listing",
+                  "AI Simulator (3 sessions)",
+                  "Public profile page",
+                  "Community access",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-stone-400">
+                    <span className="text-stone-500 mt-0.5 shrink-0">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* Pro */}
@@ -228,9 +411,46 @@ export default async function LandingPage({
                   <span className="text-stone-400 text-sm mb-1">/month</span>
                 </div>
               </div>
-              <p className="text-sm text-stone-400 leading-relaxed">
-                Featured badge, client CRM, analytics
-              </p>
+              <ul className="space-y-2.5 mb-2">
+                {[
+                  "Featured badge & top listing",
+                  "Unlimited AI Simulator",
+                  "Full Client CRM",
+                  "Analytics dashboard",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-stone-300">
+                    <span className="text-brand-400 mt-0.5 shrink-0">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Agency */}
+            <div className="bg-stone-800 border border-gold-500/30 rounded-3xl p-7 relative overflow-hidden">
+              <div className="absolute top-4 right-4 bg-yellow-500 text-stone-900 text-xs font-bold px-3 py-1 rounded-full tracking-wide">
+                AGENCY
+              </div>
+              <div className="mb-5">
+                <div className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-2">Agency</div>
+                <div className="flex items-end gap-1">
+                  <span className="text-4xl font-bold text-white">$79</span>
+                  <span className="text-stone-400 text-sm mb-1">/month</span>
+                </div>
+              </div>
+              <ul className="space-y-2.5 mb-2">
+                {[
+                  "Everything in Pro",
+                  "Multi-location support",
+                  "Team accounts (5 seats)",
+                  "Priority support & API",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-stone-300">
+                    <span className="text-yellow-400 mt-0.5 shrink-0">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
@@ -260,27 +480,46 @@ export default async function LandingPage({
                 quote: "The simulator saves 20 minutes per consultation. Clients love seeing their results before committing.",
                 author: "Studio Owner",
                 location: "Seoul",
+                initials: "SO",
+                avatarBg: "bg-brand-100 text-brand-700",
               },
               {
                 quote: "Getting featured doubled our online inquiries within the first month.",
-                author: "Brow Artist",
+                author: "Kwon Areum",
                 location: "Bangkok",
+                initials: "KA",
+                avatarBg: "bg-yellow-100 text-yellow-700",
               },
               {
                 quote: "Finally a platform built for microblading studios, not generic salons.",
-                author: "Clinic Manager",
+                author: "Nguyen Van",
                 location: "Hanoi",
+                initials: "NV",
+                avatarBg: "bg-green-100 text-green-700",
               },
             ].map((t, i) => (
               <div
                 key={i}
                 className="bg-white rounded-3xl p-7 shadow-sm border border-stone-100 relative"
               >
+                {/* Star rating */}
+                <div className="flex items-center gap-0.5 mb-4">
+                  {Array.from({ length: 5 }).map((_, si) => (
+                    <svg key={si} className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                  ))}
+                </div>
                 <div className="text-4xl font-serif leading-none text-brand-100 select-none mb-3">&ldquo;</div>
                 <p className="text-sm text-stone-600 leading-relaxed mb-6">{t.quote}</p>
-                <div className="border-t border-stone-100 pt-4">
-                  <div className="text-sm font-semibold text-stone-900">{t.author}</div>
-                  <div className="text-xs text-stone-400 mt-0.5">{t.location}</div>
+                <div className="border-t border-stone-100 pt-4 flex items-center gap-3">
+                  <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${t.avatarBg}`}>
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-stone-900">{t.author}</div>
+                    <div className="text-xs text-stone-400 mt-0.5">{t.location}</div>
+                  </div>
                 </div>
               </div>
             ))}
