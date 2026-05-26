@@ -16,6 +16,7 @@ const NAV_LINKS = [
   { key: "simulate", href: "/simulate", label: "Brow Simulator", highlight: false },
   { key: "guide", href: "/guide", label: "Startup Guide", highlight: false },
   { key: "providers", href: "/providers", label: "Find Providers", highlight: false },
+  { key: "clinic", href: "/clinic", label: "Clinic B2B", highlight: false },
   { key: "pricing", href: "/pricing", label: "Pricing", highlight: true },
 ];
 
