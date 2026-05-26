@@ -1,0 +1,402 @@
+import Link from "next/link";
+
+export default function FeaturesPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  return (
+    <div className="min-h-screen bg-white">
+
+      {/* ── HERO ── */}
+      <section className="bg-gradient-to-b from-stone-950 to-stone-900 text-white px-6 py-24 text-center">
+        <span className="text-xs font-semibold uppercase tracking-widest text-brand-400 mb-4 block">
+          Platform Features
+        </span>
+        <h1 className="font-serif text-4xl md:text-5xl font-bold mb-5 max-w-3xl mx-auto leading-tight">
+          Everything Your Clinic Needs
+          <br />
+          <span className="text-brand-400">in One Place</span>
+        </h1>
+        <p className="text-stone-300 text-lg max-w-2xl mx-auto mb-10">
+          From AI-powered consultations to team management and analytics — Seou-up is the complete platform for microblading professionals.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href={`/${locale}/auth/register`}
+            className="inline-flex items-center justify-center bg-brand-500 hover:bg-brand-400 text-white font-semibold px-8 py-4 rounded-2xl transition-all shadow-lg hover:-translate-y-0.5"
+          >
+            Start Free Trial
+          </Link>
+          <Link
+            href={`/${locale}/simulate`}
+            className="inline-flex items-center justify-center border border-white/25 hover:border-white/50 hover:bg-white/8 text-white font-semibold px-8 py-4 rounded-2xl transition-all"
+          >
+            Try Simulator →
+          </Link>
+        </div>
+      </section>
+
+      {/* ── FEATURE 1: AI SIMULATOR ── */}
+      <section className="px-6 py-20 bg-stone-50">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-brand-100 text-brand-700 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wide">
+              <span>🎨</span> AI Technology
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-5 leading-tight">
+              Brow Simulator
+            </h2>
+            <p className="text-stone-500 text-base leading-relaxed mb-6">
+              Our AI-powered brow simulator lets clients visualize exactly how their brows will look before the procedure. Reduce hesitation, increase confidence, and close more bookings.
+            </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                "12 professionally designed brow styles",
+                "Upload client photos directly in-session",
+                "Instant before/after preview",
+                "Share results via link or PDF",
+                "Works on any device — desktop or tablet",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-stone-600">
+                  <span className="w-5 h-5 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={`/${locale}/simulate`}
+              className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-400 text-white font-semibold px-6 py-3.5 rounded-2xl transition-all shadow-md hover:-translate-y-0.5"
+            >
+              Try it free →
+            </Link>
+          </div>
+
+          {/* Simulator preview card */}
+          <div className="bg-stone-900 rounded-3xl p-6 shadow-2xl border border-stone-700">
+            <div className="text-center mb-4">
+              <span className="text-xs font-semibold uppercase tracking-widest text-stone-400">AI Simulator</span>
+            </div>
+            <div className="bg-stone-800 rounded-2xl flex items-center justify-center py-10 mb-5 border border-stone-700">
+              <svg viewBox="0 0 120 130" className="w-36 h-40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="60" cy="68" rx="42" ry="52" fill="#44403c" stroke="#78716c" strokeWidth="1.5"/>
+                <ellipse cx="44" cy="58" rx="7" ry="4" fill="#292524"/>
+                <ellipse cx="76" cy="58" rx="7" ry="4" fill="#292524"/>
+                <path d="M32 46 Q44 40 56 45" stroke="#d9563e" strokeWidth="3.5" strokeLinecap="round"/>
+                <path d="M64 45 Q76 40 88 46" stroke="#d9563e" strokeWidth="3.5" strokeLinecap="round"/>
+                <path d="M57 65 Q60 72 63 65" stroke="#78716c" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+                <path d="M48 82 Q60 89 72 82" stroke="#78716c" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+                <ellipse cx="60" cy="20" rx="42" ry="18" fill="#292524"/>
+              </svg>
+            </div>
+            <div className="flex flex-wrap gap-2 justify-center">
+              {["🪶 Natural", "🌅 Ombre", "🔥 Bold Arch", "🇰🇷 Korean", "💎 3D"].map((s) => (
+                <span key={s} className="text-xs bg-stone-800 border border-stone-700 text-stone-300 px-3 py-1.5 rounded-full font-medium">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURE 2: CRM ── */}
+      <section className="px-6 py-20 bg-white">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          {/* CRM mock */}
+          <div className="order-2 md:order-1 bg-white rounded-3xl border border-stone-100 shadow-xl overflow-hidden">
+            <div className="bg-stone-50 border-b border-stone-100 px-5 py-4 flex items-center justify-between">
+              <span className="text-sm font-semibold text-stone-700">Client CRM</span>
+              <span className="text-xs bg-green-100 text-green-700 font-semibold px-2.5 py-1 rounded-full">Live</span>
+            </div>
+            <div className="divide-y divide-stone-50">
+              {[
+                { name: "Soo-Yeon K.", style: "Natural Feather", date: "May 26", status: "Completed", statusCls: "bg-green-100 text-green-700" },
+                { name: "Areeya N.",   style: "Soft Arch",       date: "May 25", status: "Scheduled", statusCls: "bg-blue-100 text-blue-700" },
+                { name: "Linh T.",     style: "Ombre Gradient",  date: "May 24", status: "Completed", statusCls: "bg-green-100 text-green-700" },
+                { name: "Mei L.",      style: "Bold Arch",       date: "May 23", status: "Follow-up", statusCls: "bg-amber-100 text-amber-700" },
+              ].map((row) => (
+                <div key={row.name} className="px-5 py-3.5 flex items-center justify-between hover:bg-stone-50 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-xs font-bold shrink-0">
+                      {row.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium text-stone-900">{row.name}</div>
+                      <div className="text-xs text-stone-400">{row.style} · {row.date}</div>
+                    </div>
+                  </div>
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${row.statusCls}`}>
+                    {row.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="px-5 py-4 bg-stone-50 border-t border-stone-100 flex justify-between text-xs text-stone-500">
+              <span>248 total clients</span>
+              <span className="text-brand-500 font-semibold">View all →</span>
+            </div>
+          </div>
+
+          <div className="order-1 md:order-2">
+            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wide">
+              <span>👥</span> Client CRM
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-5 leading-tight">
+              Know Every Client
+            </h2>
+            <p className="text-stone-500 text-base leading-relaxed mb-6">
+              Track consultation history, style preferences, session notes, and booking status for every client — all searchable in one dashboard.
+            </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                "Full consultation history per client",
+                "Session notes & style recommendations",
+                "Before/after photo storage",
+                "Follow-up scheduling",
+                "Export client data (CSV)",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-stone-600">
+                  <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURE 3: TEAM MANAGEMENT ── */}
+      <section className="px-6 py-20 bg-stone-50">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wide">
+              <span>🏥</span> Team Management
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-5 leading-tight">
+              Manage Your Entire Studio
+            </h2>
+            <p className="text-stone-500 text-base leading-relaxed mb-6">
+              Invite staff, assign roles, and manage your entire team from one clinic dashboard. Perfect for studios with multiple artists.
+            </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                "Owner, Manager, and Staff roles",
+                "Per-staff simulation access control",
+                "Centralized booking calendar",
+                "Team performance reports",
+                "Multi-location support (Agency plan)",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-stone-600">
+                  <span className="w-5 h-5 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={`/${locale}/clinic/onboarding`}
+              className="inline-flex items-center gap-2 bg-stone-900 hover:bg-stone-700 text-white font-semibold px-6 py-3.5 rounded-2xl transition-all hover:-translate-y-0.5"
+            >
+              Set up your clinic →
+            </Link>
+          </div>
+
+          {/* Team card */}
+          <div className="bg-white rounded-3xl border border-stone-100 shadow-xl p-6">
+            <div className="flex items-center justify-between mb-5">
+              <h3 className="font-semibold text-stone-900 text-sm">Studio Team</h3>
+              <span className="text-xs bg-purple-100 text-purple-700 px-2.5 py-1 rounded-full font-semibold">Pro Clinic</span>
+            </div>
+            <div className="space-y-3">
+              {[
+                { name: "Kim Yura", role: "Owner", avatar: "KY", roleCls: "bg-brand-100 text-brand-700" },
+                { name: "Park Nari", role: "Manager", avatar: "PN", roleCls: "bg-purple-100 text-purple-700" },
+                { name: "Lee Sojung", role: "Staff", avatar: "LS", roleCls: "bg-stone-100 text-stone-600" },
+                { name: "Choi Minji", role: "Staff", avatar: "CM", roleCls: "bg-stone-100 text-stone-600" },
+              ].map((m) => (
+                <div key={m.name} className="flex items-center justify-between py-2.5 border-b border-stone-50 last:border-0">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-stone-200 flex items-center justify-center text-xs font-bold text-stone-600 shrink-0">
+                      {m.avatar}
+                    </div>
+                    <span className="text-sm font-medium text-stone-800">{m.name}</span>
+                  </div>
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${m.roleCls}`}>
+                    {m.role}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <button className="w-full mt-4 py-2.5 border border-dashed border-stone-200 rounded-xl text-xs text-stone-400 hover:border-brand-300 hover:text-brand-500 transition-colors font-medium">
+              + Invite staff member
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURE 4: ANALYTICS ── */}
+      <section className="px-6 py-20 bg-white">
+        <div className="max-w-5xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wide">
+            <span>📊</span> Analytics
+          </div>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-4">
+            Data-Driven Decisions
+          </h2>
+          <p className="text-stone-500 text-lg max-w-2xl mx-auto">
+            Understand which styles clients prefer, your conversion rates, and monthly revenue trends — all in one dashboard.
+          </p>
+        </div>
+
+        <div className="max-w-5xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { title: "Simulation Trends", desc: "See which styles are trending month over month", icon: "📈", color: "bg-brand-50 border-brand-100" },
+            { title: "Conversion Funnel", desc: "Track the path from simulation to booked appointment", icon: "🔄", color: "bg-blue-50 border-blue-100" },
+            { title: "Style Preferences", desc: "Breakdown of the most requested brow styles", icon: "🎨", color: "bg-purple-50 border-purple-100" },
+            { title: "Revenue Reports", desc: "Monthly revenue and booking value insights", icon: "💰", color: "bg-green-50 border-green-100" },
+          ].map((f) => (
+            <div key={f.title} className={`rounded-2xl border p-5 ${f.color}`}>
+              <div className="text-3xl mb-3">{f.icon}</div>
+              <h3 className="font-bold text-stone-900 text-sm mb-1.5">{f.title}</h3>
+              <p className="text-xs text-stone-500 leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="max-w-5xl mx-auto mt-6 text-center">
+          <Link
+            href={`/${locale}/clinic/analytics`}
+            className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-500 font-semibold text-sm transition-colors"
+          >
+            View Analytics Dashboard →
+          </Link>
+        </div>
+      </section>
+
+      {/* ── FEATURE 5: PROVIDER DIRECTORY ── */}
+      <section className="px-6 py-20 bg-stone-900 text-white">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-white/10 text-stone-200 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wide border border-white/15">
+              <span>🗺️</span> Provider Directory
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-5 leading-tight">
+              Get Discovered by
+              <br />
+              <span className="text-brand-400">New Clients</span>
+            </h2>
+            <p className="text-stone-400 text-base leading-relaxed mb-6">
+              List your clinic in the Seou-up directory. Pro members get a Featured badge, priority placement in search, and a highlighted map pin — putting you in front of more potential clients.
+            </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                "Verified clinic listing with full profile",
+                "Featured badge for Pro subscribers",
+                "Top placement in search results",
+                "Map pin highlighting",
+                "Direct contact button on profile",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-stone-300">
+                  <span className="w-5 h-5 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-stone-800 rounded-3xl border border-stone-700 p-6">
+            {[
+              { name: "Seoul Beauty Studio", city: "Seoul", featured: true, rating: 4.9, reviews: 124 },
+              { name: "Brow Lab Bangkok",    city: "Bangkok", featured: true, rating: 4.8, reviews: 87 },
+              { name: "ArtBrow Hanoi",       city: "Hanoi", featured: false, rating: 4.6, reviews: 42 },
+            ].map((p) => (
+              <div key={p.name} className="flex items-center justify-between py-4 border-b border-stone-700/50 last:border-0">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400 font-bold shrink-0">
+                    {p.name.charAt(0)}
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-sm font-medium text-white">{p.name}</span>
+                      {p.featured && (
+                        <span className="text-xs bg-yellow-400/20 text-yellow-400 px-2 py-0.5 rounded-full font-semibold">
+                          Featured
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-xs text-stone-400 mt-0.5">{p.city}</div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-sm font-bold text-yellow-400">{p.rating}★</div>
+                  <div className="text-xs text-stone-500">{p.reviews} reviews</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── COMPARISON TABLE ── */}
+      <section className="px-6 py-20 bg-stone-50">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="section-label">Compare Plans</span>
+            <h2 className="section-title">Everything Included</h2>
+          </div>
+
+          <div className="bg-white rounded-3xl border border-stone-100 shadow-sm overflow-hidden">
+            <div className="grid grid-cols-4 bg-stone-50 border-b border-stone-100">
+              <div className="col-span-2 px-6 py-4 text-sm font-semibold text-stone-500 uppercase tracking-wide">Feature</div>
+              <div className="px-4 py-4 text-center text-sm font-bold text-stone-700">Free</div>
+              <div className="px-4 py-4 text-center text-sm font-bold text-brand-600 bg-brand-50">Pro</div>
+            </div>
+            {[
+              ["AI Brow Simulator", "3/mo", "Unlimited"],
+              ["Client CRM", "—", "✓"],
+              ["Team Members", "—", "Unlimited"],
+              ["Analytics Dashboard", "—", "✓"],
+              ["Featured Badge", "—", "✓"],
+              ["Priority Support", "—", "✓"],
+              ["API Access", "—", "Agency"],
+              ["Multi-location", "—", "Agency"],
+            ].map(([feat, free, pro]) => (
+              <div key={feat} className="grid grid-cols-4 border-b border-stone-50 hover:bg-stone-50/50 transition-colors">
+                <div className="col-span-2 px-6 py-3.5 text-sm text-stone-700 font-medium">{feat}</div>
+                <div className="px-4 py-3.5 text-center text-sm text-stone-400">{free}</div>
+                <div className={`px-4 py-3.5 text-center text-sm font-semibold ${pro === "✓" ? "text-green-600" : pro === "—" ? "text-stone-300" : "text-stone-500"} bg-brand-50/30`}>
+                  {pro}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FINAL CTA ── */}
+      <section className="bg-brand-500 px-6 py-20 text-white text-center">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
+            Ready to Grow Your Clinic?
+          </h2>
+          <p className="text-brand-100 mb-8 text-lg">
+            Join 500+ clinics using Seou-up to run better consultations and grow their business.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href={`/${locale}/auth/register`}
+              className="inline-flex items-center justify-center bg-white hover:bg-stone-50 text-brand-600 font-semibold px-8 py-4 rounded-2xl transition-all shadow-lg hover:-translate-y-0.5"
+            >
+              Start Free Trial →
+            </Link>
+            <Link
+              href={`/${locale}/pricing`}
+              className="inline-flex items-center justify-center border border-white/40 hover:border-white/60 text-white font-semibold px-8 py-4 rounded-2xl transition-all"
+            >
+              View Pricing
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

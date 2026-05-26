@@ -46,6 +46,8 @@ const STYLE_META: Record<string, { emoji: string; desc: string }> = {
 
 type SimStatus = "idle" | "selecting" | "processing" | "done" | "error";
 
+type SaveStatus = "idle" | "saving" | "saved" | "error";
+
 const STEPS = [
   { n: 1, label: "Choose Style" },
   { n: 2, label: "Upload Photo" },
@@ -63,6 +65,11 @@ export default function SimulatePage() {
   const [preview, setPreview] = useState<string | null>(null);
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [simulationId, setSimulationId] = useState<number | null>(null);
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
+  const [saveNote, setSaveNote] = useState("");
+  const [clientName, setClientName] = useState("");
+  const [showCrmPanel, setShowCrmPanel] = useState(false);
 
   useEffect(() => {
     api.get("/api/eyebrow-styles")
@@ -93,6 +100,7 @@ export default function SimulatePage() {
       const { data: sim } = await api.post("/api/simulations", {
         eyebrow_style_id: selectedStyle.id,
       });
+      setSimulationId(sim.id);
       const formData = new FormData();
       formData.append("file", fileRef.current.files[0]);
       const { data: processed } = await api.post(
@@ -108,12 +116,31 @@ export default function SimulatePage() {
     }
   };
 
+  const handleSaveToCrm = async () => {
+    if (!simulationId) return;
+    setSaveStatus("saving");
+    try {
+      const note = [clientName && `Client: ${clientName}`, saveNote].filter(Boolean).join("\n");
+      if (note) {
+        await api.patch(`/api/simulations/${simulationId}/note`, { session_note: note });
+      }
+      setSaveStatus("saved");
+    } catch {
+      setSaveStatus("error");
+    }
+  };
+
   const handleReset = () => {
     setSelectedStyle(null);
     setPreview(null);
     setResult(null);
     setStatus("idle");
     setError(null);
+    setSimulationId(null);
+    setSaveStatus("idle");
+    setSaveNote("");
+    setClientName("");
+    setShowCrmPanel(false);
     if (fileRef.current) fileRef.current.value = "";
   };
 
@@ -364,9 +391,100 @@ export default function SimulatePage() {
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-stone-400 text-center">
+              <p className="text-xs text-stone-400 text-center mb-5">
                 Mock simulation · Visualization only · Not a procedure guarantee
               </p>
+
+              {/* ── CRM Save Panel ── */}
+              <div className="border-t border-stone-100 pt-5">
+                {!showCrmPanel ? (
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button
+                      onClick={() => setShowCrmPanel(true)}
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-400 text-white font-semibold px-6 py-3 rounded-2xl transition-all shadow-md hover:-translate-y-0.5 text-sm"
+                    >
+                      💾 Save to Client CRM
+                    </button>
+                    <Link
+                      href={`/${locale}/clinic`}
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 border border-stone-200 hover:border-stone-300 text-stone-700 font-semibold px-6 py-3 rounded-2xl transition-all text-sm"
+                    >
+                      Open Clinic Dashboard →
+                    </Link>
+                  </div>
+                ) : saveStatus === "saved" ? (
+                  <div className="bg-green-50 border border-green-200 rounded-2xl p-5 text-center">
+                    <div className="text-2xl mb-2">✅</div>
+                    <p className="font-bold text-green-800 text-sm">
+                      Saved to CRM{clientName ? ` — ${clientName}` : ""}
+                    </p>
+                    <p className="text-green-600 text-xs mt-1 mb-3">
+                      Simulation #{simulationId} has been linked to the client record.
+                    </p>
+                    <Link
+                      href={`/${locale}/clinic`}
+                      className="text-xs text-brand-500 hover:text-brand-600 font-semibold underline"
+                    >
+                      View in Clinic Dashboard →
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="bg-stone-50 border border-stone-100 rounded-2xl p-5">
+                    <h3 className="font-semibold text-stone-900 text-sm mb-3 flex items-center gap-2">
+                      <span>💾</span> Save to Client CRM
+                    </h3>
+                    <div className="space-y-3 mb-4">
+                      <div>
+                        <label className="block text-xs font-medium text-stone-600 mb-1">Client Name</label>
+                        <input
+                          type="text"
+                          value={clientName}
+                          onChange={(e) => setClientName(e.target.value)}
+                          placeholder="Client name (optional)"
+                          className="w-full border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent bg-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-stone-600 mb-1">Session Notes</label>
+                        <textarea
+                          value={saveNote}
+                          onChange={(e) => setSaveNote(e.target.value)}
+                          placeholder="Consultation notes, client preferences, skin condition..."
+                          rows={3}
+                          className="w-full border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent resize-none bg-white"
+                        />
+                      </div>
+                    </div>
+                    {saveStatus === "error" && (
+                      <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-xs text-red-700 mb-3">
+                        Failed to save. Please{" "}
+                        <Link href={`/${locale}/auth/login`} className="underline font-medium">sign in</Link>{" "}
+                        and try again.
+                      </div>
+                    )}
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => setShowCrmPanel(false)}
+                        className="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-600 font-medium rounded-xl text-sm transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={handleSaveToCrm}
+                        disabled={saveStatus === "saving"}
+                        className="flex-1 bg-brand-500 hover:bg-brand-400 disabled:opacity-60 text-white font-bold py-2.5 rounded-xl text-sm transition-all shadow-sm hover:-translate-y-0.5"
+                      >
+                        {saveStatus === "saving" ? (
+                          <span className="flex items-center justify-center gap-2">
+                            <span className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                            Saving…
+                          </span>
+                        ) : "Save to CRM"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

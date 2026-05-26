@@ -39,13 +39,19 @@ export default async function LandingPage({
               href={`/${locale}/auth/register`}
               className="inline-flex items-center justify-center bg-brand-500 hover:bg-brand-400 text-white font-semibold px-8 py-4 rounded-2xl transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0"
             >
-              Start Free Trial
+              무료 시작하기
             </Link>
             <Link
-              href={`/${locale}/pricing`}
+              href={`mailto:demo@seouup.dev?subject=Demo Request`}
+              className="inline-flex items-center justify-center bg-yellow-400 hover:bg-yellow-300 text-stone-900 font-semibold px-8 py-4 rounded-2xl transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0"
+            >
+              데모 신청하기 →
+            </Link>
+            <Link
+              href={`/${locale}/features`}
               className="inline-flex items-center justify-center border border-white/25 hover:border-white/50 hover:bg-white/8 text-white font-semibold px-8 py-4 rounded-2xl transition-all"
             >
-              See Pricing →
+              기능 살펴보기
             </Link>
           </div>
 

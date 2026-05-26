@@ -14,7 +14,7 @@ interface AuthUser {
 
 const NAV_LINKS = [
   { key: "simulate", href: "/simulate", label: "Brow Simulator", highlight: false },
-  { key: "guide", href: "/guide", label: "Startup Guide", highlight: false },
+  { key: "features", href: "/features", label: "Features", highlight: false },
   { key: "providers", href: "/providers", label: "Find Providers", highlight: false },
   { key: "pricing", href: "/pricing", label: "Pricing", highlight: true },
 ];
@@ -118,6 +118,16 @@ export default function Navbar() {
                   Admin
                 </Link>
               )}
+              <Link
+                href={`/${locale}/clinic`}
+                className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
+                  pathname.includes("/clinic")
+                    ? "bg-stone-800 text-white"
+                    : "bg-stone-100 text-stone-600 hover:bg-stone-200"
+                }`}
+              >
+                Clinic
+              </Link>
               {(user.role === "pro" || user.role === "admin") && (
                 <Link
                   href={`/${locale}/pro/dashboard`}
