@@ -41,6 +41,11 @@ class Settings(BaseSettings):
     STRIPE_WEBHOOK_SECRET: str = ""
     STRIPE_PRICE_ID_FEATURED: str = ""  # Monthly recurring price ID for Featured listing
 
+    # Stripe — B2B Clinic plans
+    STRIPE_PRICE_ID_CLINIC_BASIC: str = ""   # $49/mo — up to 3 staff, 300 sims/mo
+    STRIPE_PRICE_ID_CLINIC_PRO: str = ""     # $99/mo — unlimited staff + sims
+    STRIPE_WEBHOOK_SECRET_CLINIC: str = ""   # Clinic-specific Stripe webhook secret
+
     # App
     APP_ENV: str = "development"
     DEBUG: bool = True

@@ -16,6 +16,8 @@ const NAV_LINKS = [
   { key: "simulate", href: "/simulate", label: "Brow Simulator", emoji: "✨" },
   { key: "guide", href: "/guide", label: "Startup Guide", emoji: "🗂️" },
   { key: "providers", href: "/providers", label: "Find Providers", emoji: "📍" },
+  { key: "clinic", href: "/clinic", label: "Clinic", emoji: "🏥" },
+  { key: "pricing", href: "/pricing", label: "Pricing", emoji: "⭐" },
 ];
 
 export default function Navbar() {

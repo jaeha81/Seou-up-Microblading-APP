@@ -13,6 +13,7 @@ from .booking import Booking
 from .style_favorite import StyleFavorite
 from .refresh_token import RefreshToken
 from .audit_log import AuditLog
+from .clinic import Clinic, ClinicMember
 
 __all__ = [
     "User",
@@ -30,4 +31,6 @@ __all__ = [
     "StyleFavorite",
     "RefreshToken",
     "AuditLog",
+    "Clinic",
+    "ClinicMember",
 ]
