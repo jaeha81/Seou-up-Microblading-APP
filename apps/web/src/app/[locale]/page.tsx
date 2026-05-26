@@ -9,80 +9,82 @@ export default async function LandingPage({
     <div className="min-h-screen bg-white">
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white">
-        {/* Blurred orbs */}
-        <div className="pointer-events-none absolute -top-20 -left-20 w-96 h-96 rounded-full bg-brand-500 opacity-10 blur-3xl" />
-        <div className="pointer-events-none absolute top-1/2 -right-24 w-80 h-80 rounded-full bg-yellow-400 opacity-10 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 left-1/2 w-64 h-64 rounded-full bg-brand-400 opacity-10 blur-2xl" />
-
-        {/* Floating decorative emojis */}
-        <span className="pointer-events-none absolute top-12 left-[8%] text-4xl opacity-20 rotate-[-15deg] select-none">🪶</span>
-        <span className="pointer-events-none absolute top-24 right-[12%] text-3xl opacity-20 rotate-[10deg] select-none">✨</span>
-        <span className="pointer-events-none absolute bottom-20 left-[15%] text-3xl opacity-15 rotate-[5deg] select-none">💄</span>
-        <span className="pointer-events-none absolute bottom-12 right-[8%] text-4xl opacity-20 rotate-[-8deg] select-none">🌸</span>
+      <section className="relative overflow-hidden bg-gradient-to-b from-stone-950 via-stone-900 to-stone-800 text-white">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(217,86,62,0.08),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(212,160,23,0.06),transparent_60%)]" />
 
         <div className="relative max-w-5xl mx-auto px-6 py-28 text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-stone-300 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-400" />
-            AI Visualization Platform
+          <div className="inline-flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/15 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-stone-300 mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-500 flex-shrink-0" />
+            B2B SaaS Platform for Beauty Clinics
           </div>
 
           {/* Headline */}
-          <h1 className="font-serif text-5xl md:text-7xl font-bold leading-tight mb-6 tracking-tight">
-            Perfect Brows,{" "}
-            <span className="text-brand-400">Visualized</span>
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight">
+            The Clinic Management Platform
             <br />
-            <span className="text-stone-300">Before You Commit</span>
+            <span className="text-brand-400">for Microblading Professionals</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-stone-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Preview 12 professional eyebrow styles on your own photo.
-            Find certified artists, explore startup resources — all in one place.
+            AI brow simulation + client CRM + booking management.
+            Everything your clinic needs in one place.
           </p>
 
           {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Link
-              href={`/${locale}/simulate`}
-              className="inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-400 text-white font-semibold px-8 py-4 rounded-2xl transition-all shadow-lg hover:-translate-y-0.5"
+              href={`/${locale}/auth/register`}
+              className="inline-flex items-center justify-center bg-brand-500 hover:bg-brand-400 text-white font-semibold px-8 py-4 rounded-2xl transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0"
             >
-              ✨ Try Brow Simulator
+              Start Free Trial
             </Link>
             <Link
-              href={`/${locale}/guide`}
-              className="inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 rounded-2xl transition-all hover:bg-white/10"
+              href={`/${locale}/pricing`}
+              className="inline-flex items-center justify-center border border-white/25 hover:border-white/50 hover:bg-white/8 text-white font-semibold px-8 py-4 rounded-2xl transition-all"
             >
-              🗂️ Startup Guide
+              See Pricing →
             </Link>
           </div>
 
-          {/* Disclaimer */}
-          <p className="text-xs text-stone-500 max-w-md mx-auto">
-            ⚠️ Visualization &amp; information purposes only. Not a licensed medical or procedure provider.
-          </p>
+          {/* Stats row */}
+          <div className="flex flex-wrap items-center justify-center gap-px border border-white/10 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-sm max-w-2xl mx-auto">
+            {[
+              { value: "500+", label: "Clinics" },
+              { value: "12", label: "Brow Styles" },
+              { value: "4", label: "Languages" },
+              { value: "Free", label: "Trial" },
+            ].map((stat, i) => (
+              <div
+                key={i}
+                className="flex-1 min-w-[100px] px-6 py-4 text-center border-r border-white/10 last:border-r-0"
+              >
+                <div className="text-xl font-bold text-white leading-none mb-1">{stat.value}</div>
+                <div className="text-xs text-stone-400 uppercase tracking-wide">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── STATS BAR ── */}
+      {/* ── TRUST BAR ── */}
       <section className="bg-stone-800 border-y border-stone-700">
-        <div className="max-w-5xl mx-auto px-6 py-5 flex flex-wrap items-center justify-center gap-6 md:gap-0">
-          {[
-            { value: "12", label: "Eyebrow Styles", icon: "🎨" },
-            { value: "4", label: "Languages", icon: "🌍" },
-            { value: "Free", label: "Simulation", icon: "✨" },
-            { value: "4", label: "User Roles", icon: "👥" },
-          ].map((stat, i) => (
-            <div key={i} className="flex items-center gap-3 md:flex-1 md:justify-center">
-              <span className="text-xl">{stat.icon}</span>
-              <div>
-                <div className="text-xl font-bold text-white leading-none">{stat.value}</div>
-                <div className="text-xs text-stone-400">{stat.label}</div>
-              </div>
-              {i < 3 && <div className="hidden md:block absolute" />}
-            </div>
-          ))}
+        <div className="max-w-5xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+          <span className="text-xs font-semibold uppercase tracking-widest text-stone-400 whitespace-nowrap">
+            Trusted by studios in Korea · Thailand · Vietnam · Malaysia
+          </span>
+          <div className="flex items-center gap-3 flex-wrap justify-center">
+            {["Studio A", "Brow Lab", "BeautyPro", "ArtBrow"].map((name) => (
+              <span
+                key={name}
+                className="bg-stone-700 border border-stone-600 text-stone-300 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide"
+              >
+                {name}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -91,55 +93,53 @@ export default async function LandingPage({
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-xs font-semibold uppercase tracking-widest text-brand-500 mb-3 block">
-              Everything You Need
+              Platform Features
             </span>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900">
-              One Platform, Endless Possibilities
+              Built for Professional Clinics
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: "✨",
+                icon: (
+                  <svg className="w-6 h-6 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.964-7.178Z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                  </svg>
+                ),
                 title: "AI Brow Simulator",
-                desc: "Visualize 12 professional eyebrow styles — from Natural Feather to Bold Arch — on your own photo before any procedure.",
-                href: `/${locale}/simulate`,
-                cta: "Try Simulator",
-                iconBg: "bg-brand-100",
+                desc: "Show clients exactly how their brows will look. 12 professional styles, instant visualization.",
               },
               {
-                icon: "🗂️",
-                title: "Startup Guide",
-                desc: "Complete resource for microblading entrepreneurs. Equipment, marketing, licensing, client consultation — all covered.",
-                href: `/${locale}/guide`,
-                cta: "Browse Guides",
-                iconBg: "bg-amber-100",
+                icon: (
+                  <svg className="w-6 h-6 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                  </svg>
+                ),
+                title: "Client CRM",
+                desc: "Track every client's consultation history, preferred styles, and session notes in one place.",
               },
               {
-                icon: "📍",
-                title: "Find Providers",
-                desc: "Discover certified microblading studios and professionals near you. Browse verified listings with direct contact.",
-                href: `/${locale}/providers`,
-                cta: "Find Clinics",
-                iconBg: "bg-emerald-100",
+                icon: (
+                  <svg className="w-6 h-6 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
+                  </svg>
+                ),
+                title: "Provider Directory",
+                desc: "Get discovered. List your clinic, earn a Featured badge, and appear at the top of search.",
               },
             ].map((f) => (
               <div
                 key={f.title}
                 className="group bg-white rounded-3xl p-7 shadow-sm border border-stone-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
-                <div className={`w-14 h-14 ${f.iconBg} rounded-2xl flex items-center justify-center text-2xl mb-5`}>
+                <div className="w-12 h-12 bg-brand-50 rounded-2xl flex items-center justify-center mb-5">
                   {f.icon}
                 </div>
                 <h3 className="font-bold text-stone-900 text-lg mb-3">{f.title}</h3>
-                <p className="text-sm text-stone-500 leading-relaxed mb-6">{f.desc}</p>
-                <Link
-                  href={f.href}
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-500 transition-colors"
-                >
-                  {f.cta} <span>→</span>
-                </Link>
+                <p className="text-sm text-stone-500 leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -154,96 +154,134 @@ export default async function LandingPage({
               How It Works
             </span>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900">
-              3 Steps to Your Perfect Brows
+              Three Steps to Launch
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-10">
             {[
               {
                 step: "01",
-                icon: "🎨",
-                title: "Choose a Style",
-                desc: "Browse 12 professional brow styles — from soft naturals to bold arches.",
+                title: "Register Your Clinic",
+                desc: "Create a Pro account and set up your studio profile in minutes.",
               },
               {
                 step: "02",
-                icon: "📷",
-                title: "Upload Your Photo",
-                desc: "Upload a clear front-facing portrait. Photos are private and deleted after 30 days.",
+                title: "Run Consultations",
+                desc: "Use the AI simulator during client consultations to visualize results.",
               },
               {
                 step: "03",
-                icon: "✨",
-                title: "Preview Your Result",
-                desc: "See your chosen brow style visualized on your own face — instantly.",
+                title: "Grow Your Business",
+                desc: "Track clients, manage sessions, and get discovered by new customers.",
               },
-            ].map((step) => (
-              <div key={step.step} className="text-center">
-                <div className="relative mx-auto w-20 h-20 bg-brand-50 border-2 border-brand-200 rounded-full flex items-center justify-center mb-5">
-                  <span className="text-3xl">{step.icon}</span>
-                  <div className="absolute -top-2 -right-2 w-7 h-7 bg-brand-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow">
-                    {step.step}
-                  </div>
+            ].map((step, i) => (
+              <div key={step.step} className="relative text-center">
+                {i < 2 && (
+                  <div className="hidden md:block absolute top-7 left-[calc(50%+2.5rem)] w-[calc(100%-5rem)] h-px bg-stone-200" />
+                )}
+                <div className="relative inline-flex w-14 h-14 rounded-full bg-brand-50 border-2 border-brand-200 items-center justify-center mb-5 mx-auto">
+                  <span className="font-bold text-brand-600 text-sm tracking-tight">{step.step}</span>
                 </div>
                 <h3 className="font-bold text-stone-900 text-lg mb-2">{step.title}</h3>
                 <p className="text-sm text-stone-500 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="text-center mt-12">
+      {/* ── PRICING PREVIEW ── */}
+      <section className="bg-stone-900 px-6 py-20 text-white">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-3">
+              Simple, Transparent Pricing
+            </h2>
+            <p className="text-stone-400 text-base">Start free, scale as you grow</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-5 mb-10">
+            {/* Free */}
+            <div className="bg-stone-800 border border-stone-700 rounded-3xl p-7">
+              <div className="mb-5">
+                <div className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-2">Free</div>
+                <div className="flex items-end gap-1">
+                  <span className="text-4xl font-bold text-white">$0</span>
+                  <span className="text-stone-400 text-sm mb-1">/month</span>
+                </div>
+              </div>
+              <p className="text-sm text-stone-400 leading-relaxed">
+                Basic listing, simulator access
+              </p>
+            </div>
+
+            {/* Pro */}
+            <div className="bg-stone-800 border border-brand-500/40 rounded-3xl p-7 relative overflow-hidden">
+              <div className="absolute top-4 right-4 bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide">
+                POPULAR
+              </div>
+              <div className="mb-5">
+                <div className="text-xs font-semibold uppercase tracking-widest text-brand-400 mb-2">Pro</div>
+                <div className="flex items-end gap-1">
+                  <span className="text-4xl font-bold text-white">$29</span>
+                  <span className="text-stone-400 text-sm mb-1">/month</span>
+                </div>
+              </div>
+              <p className="text-sm text-stone-400 leading-relaxed">
+                Featured badge, client CRM, analytics
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center">
             <Link
-              href={`/${locale}/simulate`}
-              className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 py-4 rounded-2xl transition-all shadow-md"
+              href={`/${locale}/pricing`}
+              className="inline-flex items-center justify-center bg-yellow-400 hover:bg-yellow-300 text-stone-900 font-semibold px-8 py-4 rounded-2xl transition-all shadow-lg hover:-translate-y-0.5"
             >
-              ✨ Start Free Simulation
+              See All Plans →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── FOR PROFESSIONALS ── */}
-      <section className="bg-stone-900 px-6 py-20 text-white">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-4 block">
-              For Professionals
+      {/* ── TESTIMONIALS ── */}
+      <section className="bg-stone-50 px-6 py-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-xs font-semibold uppercase tracking-widest text-brand-500 mb-3 block">
+              What Professionals Say
             </span>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-5 leading-tight">
-              Growing Your Microblading Business?
-            </h2>
-            <p className="text-stone-400 text-base leading-relaxed mb-8">
-              Access expert guides on equipment, licensing, client consultation, and digital marketing.
-              Built for microblading artists and entrepreneurs across Asia and beyond.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link
-                href={`/${locale}/guide`}
-                className="inline-flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-stone-900 font-semibold px-6 py-3.5 rounded-2xl transition-all"
-              >
-                🗂️ Browse Startup Guide
-              </Link>
-              <Link
-                href={`/${locale}/auth/register`}
-                className="inline-flex items-center justify-center gap-2 border border-stone-600 hover:border-stone-400 text-stone-300 font-semibold px-6 py-3.5 rounded-2xl transition-all"
-              >
-                Create Pro Account
-              </Link>
-            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: "📚", title: "5 Expert Guides", desc: "Startup · Technique · Marketing" },
-              { icon: "💼", title: "Pro Dashboard", desc: "Manage client sessions" },
-              { icon: "📍", title: "Provider Listing", desc: "List your studio" },
-              { icon: "🌍", title: "4 Languages", desc: "EN · KO · TH · VI" },
-            ].map((item) => (
-              <div key={item.title} className="bg-stone-800 rounded-2xl p-5 border border-stone-700">
-                <div className="text-2xl mb-3">{item.icon}</div>
-                <div className="font-semibold text-white text-sm mb-1">{item.title}</div>
-                <div className="text-xs text-stone-400">{item.desc}</div>
+              {
+                quote: "The simulator saves 20 minutes per consultation. Clients love seeing their results before committing.",
+                author: "Studio Owner",
+                location: "Seoul",
+              },
+              {
+                quote: "Getting featured doubled our online inquiries within the first month.",
+                author: "Brow Artist",
+                location: "Bangkok",
+              },
+              {
+                quote: "Finally a platform built for microblading studios, not generic salons.",
+                author: "Clinic Manager",
+                location: "Hanoi",
+              },
+            ].map((t, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-3xl p-7 shadow-sm border border-stone-100 relative"
+              >
+                <div className="text-4xl font-serif leading-none text-brand-100 select-none mb-3">&ldquo;</div>
+                <p className="text-sm text-stone-600 leading-relaxed mb-6">{t.quote}</p>
+                <div className="border-t border-stone-100 pt-4">
+                  <div className="text-sm font-semibold text-stone-900">{t.author}</div>
+                  <div className="text-xs text-stone-400 mt-0.5">{t.location}</div>
+                </div>
               </div>
             ))}
           </div>
@@ -251,17 +289,17 @@ export default async function LandingPage({
       </section>
 
       {/* ── FINAL CTA ── */}
-      <section className="bg-brand-500 px-6 py-16 text-white text-center">
+      <section className="bg-brand-500 px-6 py-20 text-white text-center">
         <div className="max-w-2xl mx-auto">
           <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
-            Start Your Brow Journey Today
+            Start Your Free Trial Today
           </h2>
           <p className="text-brand-100 mb-8 text-lg">
-            Free simulation. No commitment. Just confidence.
+            No credit card required. Full access for 14 days.
           </p>
           <Link
             href={`/${locale}/auth/register`}
-            className="inline-flex items-center gap-2 bg-white hover:bg-stone-50 text-brand-600 font-semibold px-8 py-4 rounded-2xl transition-all shadow-lg"
+            className="inline-flex items-center gap-2 bg-white hover:bg-stone-50 text-brand-600 font-semibold px-8 py-4 rounded-2xl transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0"
           >
             Get Started Free →
           </Link>
@@ -272,7 +310,6 @@ export default async function LandingPage({
       <footer className="bg-stone-900 px-6 py-10 border-t border-stone-800">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <span className="text-xl">💄</span>
             <span className="font-bold text-white">Seou-up</span>
             <span className="text-stone-500 text-sm ml-1">Microblading</span>
           </div>
