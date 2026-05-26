@@ -13,11 +13,10 @@ interface AuthUser {
 }
 
 const NAV_LINKS = [
-  { key: "simulate", href: "/simulate", label: "Brow Simulator", emoji: "✨" },
-  { key: "guide", href: "/guide", label: "Startup Guide", emoji: "🗂️" },
-  { key: "providers", href: "/providers", label: "Find Providers", emoji: "📍" },
-  { key: "clinic", href: "/clinic", label: "Clinic", emoji: "🏥" },
-  { key: "pricing", href: "/pricing", label: "Pricing", emoji: "⭐" },
+  { key: "simulate", href: "/simulate", label: "Brow Simulator", highlight: false },
+  { key: "guide", href: "/guide", label: "Startup Guide", highlight: false },
+  { key: "providers", href: "/providers", label: "Find Providers", highlight: false },
+  { key: "pricing", href: "/pricing", label: "Pricing", highlight: true },
 ];
 
 export default function Navbar() {
@@ -56,26 +55,38 @@ export default function Navbar() {
           href={`/${locale}`}
           className="flex items-center gap-2 shrink-0 group"
         >
-          <span className="text-xl">💄</span>
-          <span className="font-bold text-stone-900 group-hover:text-brand-500 transition-colors">
-            Seou-up
+          <span className="font-bold text-stone-900 group-hover:text-brand-500 transition-colors tracking-tight">
+            Seou<span className="text-brand-500">-up</span>
           </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1 flex-1 justify-center">
           {NAV_LINKS.map((link) => (
-            <Link
-              key={link.key}
-              href={`/${locale}${link.href}`}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                isActive(link.href)
-                  ? "bg-brand-50 text-brand-600"
-                  : "text-stone-600 hover:text-stone-900 hover:bg-stone-50"
-              }`}
-            >
-              <span className="text-base leading-none">{link.emoji}</span>
-              <span>{link.label}</span>
-            </Link>
+            link.highlight ? (
+              <Link
+                key={link.key}
+                href={`/${locale}${link.href}`}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors border ${
+                  isActive(link.href)
+                    ? "bg-brand-500 text-white border-brand-500"
+                    : "text-brand-600 border-brand-200 hover:bg-brand-50 hover:border-brand-300"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <Link
+                key={link.key}
+                href={`/${locale}${link.href}`}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  isActive(link.href)
+                    ? "bg-brand-50 text-brand-600"
+                    : "text-stone-600 hover:text-stone-900 hover:bg-stone-50"
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
           ))}
         </nav>
 
@@ -185,12 +196,15 @@ export default function Navbar() {
               href={`/${locale}${link.href}`}
               onClick={() => setMenuOpen(false)}
               className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                isActive(link.href)
+                link.highlight
+                  ? isActive(link.href)
+                    ? "bg-brand-500 text-white"
+                    : "text-brand-600 bg-brand-50 hover:bg-brand-100"
+                  : isActive(link.href)
                   ? "bg-brand-50 text-brand-600"
                   : "text-stone-700 hover:bg-stone-50"
               }`}
             >
-              <span>{link.emoji}</span>
               <span>{link.label}</span>
             </Link>
           ))}
