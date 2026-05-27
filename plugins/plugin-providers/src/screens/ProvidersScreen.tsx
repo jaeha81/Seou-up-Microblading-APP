@@ -28,7 +28,7 @@ export default function ProvidersScreen({ navigation }: PluginScreenProps) {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Find Providers</Text>
-        <Text style={styles.subtitle}>Certified microblading professionals near you</Text>
+        <Text style={styles.subtitle}>Microblading professionals near you</Text>
       </View>
 
       <View style={styles.disclaimer}>

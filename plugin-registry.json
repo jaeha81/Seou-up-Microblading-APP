@@ -28,7 +28,7 @@
     {
       "id": "providers",
       "name": "Find Providers",
-      "description": "Browse certified microblading clinics and professionals near you.",
+      "description": "Browse microblading clinics and professionals near you.",
       "version": "1.0.0",
       "category": "community",
       "iconName": "storefront-outline",

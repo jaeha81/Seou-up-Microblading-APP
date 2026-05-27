@@ -28,10 +28,11 @@ from models.user import User
 
 # ── Rate Limit Config ────────────────────────────────────────────────────────
 
-# Free plan: 3 simulations per day, Pro/Paid users: 100 per day
+# consumer/free: 3 simulations per day; pro/founder/admin: 100 per day
 RATE_LIMITS = {
-    "free": 3,
+    "consumer": 3,
     "pro": 100,
+    "founder": 100,
     "admin": 100,
 }
 DEFAULT_DAILY_LIMIT = 3  # fallback for unknown roles
@@ -322,7 +323,7 @@ class SimulationService:
     def _check_rate_limit(self, user: User) -> None:
         """Enforce daily simulation rate limits based on user role."""
         # Determine daily limit
-        role = getattr(user, "role", "free")
+        role = getattr(user, "role", "consumer")
         if hasattr(role, "value"):
             role = role.value
         daily_limit = RATE_LIMITS.get(str(role), DEFAULT_DAILY_LIMIT)
@@ -346,7 +347,7 @@ class SimulationService:
                 status_code=status.HTTP_429_TOO_MANY_REQUESTS,
                 detail=(
                     f"Daily simulation limit reached ({daily_limit}/day). "
-                    "Upgrade to Pro for up to 100 simulations per day."
+                    "Upgrade to Pro or Founder plan for up to 100 simulations per day."
                 ),
             )
 

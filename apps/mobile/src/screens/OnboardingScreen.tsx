@@ -7,7 +7,7 @@ import { Colors, Typography, Spacing, BorderRadius } from '../theme/colors';
 const STEPS = [
   {
     title: 'Welcome to Seou-up',
-    body: 'Your personal microblading companion. Simulate eyebrow styles, find certified providers, and grow your business.',
+    body: 'Your personal microblading companion. Simulate eyebrow styles, find providers, and grow your business.',
   },
   {
     title: 'What You Can Do',

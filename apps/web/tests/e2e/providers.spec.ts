@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("Providers Page", () => {
   test("loads provider list", async ({ page }) => {
     await page.goto("/en/providers");
-    await expect(page.getByRole("heading", { name: /Find Certified Providers/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Find Listed Providers/i })).toBeVisible();
   });
 
   test("shows disclaimer banner", async ({ page }) => {
