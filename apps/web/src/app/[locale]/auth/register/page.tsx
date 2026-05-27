@@ -5,26 +5,42 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import api from "@/lib/api";
 
+const UserIcon = () => (
+  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+  </svg>
+);
+const BriefcaseIcon = () => (
+  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+  </svg>
+);
+const ChartIcon = () => (
+  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+  </svg>
+);
+
 const ROLES = [
   {
     value: "consumer",
     label: "Consumer",
     desc: "I want to explore brow styles for myself",
-    emoji: "👤",
+    Icon: UserIcon,
     detail: "Access the brow simulator and find certified providers near you.",
   },
   {
     value: "pro",
     label: "Pro Artist",
     desc: "I'm a licensed microblading professional",
-    emoji: "💼",
+    Icon: BriefcaseIcon,
     detail: "Manage client sessions, run consultations, and track your work.",
   },
   {
     value: "founder",
     label: "Entrepreneur",
     desc: "I want to start a microblading business",
-    emoji: "🚀",
+    Icon: ChartIcon,
     detail: "Access startup guides, business resources, and industry insights.",
   },
 ];
@@ -63,10 +79,10 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-stone-50 flex">
       {/* Left: Brand panel (desktop only) */}
-      <div className="hidden lg:flex flex-col justify-between w-[420px] shrink-0 bg-gradient-to-br from-stone-900 to-stone-800 text-white p-10">
+      <div className="hidden lg:flex flex-col justify-between w-[420px] shrink-0 bg-stone-950 text-white p-10">
         <div>
           <Link href={`/${locale}`} className="flex items-center gap-2 group">
-            <span className="text-2xl">💄</span>
+            <span className="w-7 h-7 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold text-sm">S</span>
             <span className="font-bold text-xl group-hover:text-brand-300 transition-colors">Seou-up</span>
           </Link>
         </div>
@@ -85,7 +101,7 @@ export default function RegisterPage() {
                   : "border-stone-700 bg-stone-800/50"
               }`}>
                 <div className="flex items-center gap-2 mb-1">
-                  <span>{r.emoji}</span>
+                  <span className="text-stone-400"><r.Icon /></span>
                   <span className="font-semibold text-sm">{r.label}</span>
                 </div>
                 <p className="text-xs text-stone-400">{r.detail}</p>
@@ -104,7 +120,7 @@ export default function RegisterPage() {
           {/* Mobile logo */}
           <div className="lg:hidden mb-8 text-center">
             <Link href={`/${locale}`} className="inline-flex items-center gap-2">
-              <span className="text-2xl">💄</span>
+              <span className="w-7 h-7 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold text-sm">S</span>
               <span className="font-bold text-xl text-stone-900">Seou-up</span>
             </Link>
           </div>
@@ -149,7 +165,7 @@ export default function RegisterPage() {
                     }`}
                   >
                     <div className="flex items-start gap-3">
-                      <span className="text-2xl">{r.emoji}</span>
+                      <span className={`mt-0.5 shrink-0 ${role === r.value ? "text-brand-500" : "text-stone-400"}`}><r.Icon /></span>
                       <div className="flex-1">
                         <div className="font-semibold text-stone-900 flex items-center gap-2">
                           {r.label}
@@ -174,7 +190,7 @@ export default function RegisterPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {error && (
                 <div className="bg-red-50 border border-red-200 rounded-xl p-3.5 text-sm text-red-700 flex items-start gap-2">
-                  <span className="shrink-0">⚠️</span>
+                  <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
                   {error}
                 </div>
               )}

@@ -35,10 +35,10 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-stone-50 flex">
       {/* Left: Brand panel (desktop only) */}
-      <div className="hidden lg:flex flex-col justify-between w-[420px] shrink-0 bg-gradient-to-br from-stone-900 to-stone-800 text-white p-10">
+      <div className="hidden lg:flex flex-col justify-between w-[420px] shrink-0 bg-stone-950 text-white p-10">
         <div>
           <Link href={`/${locale}`} className="flex items-center gap-2 group">
-            <span className="text-2xl">💄</span>
+            <span className="w-7 h-7 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold text-sm">S</span>
             <span className="font-bold text-xl group-hover:text-brand-300 transition-colors">Seou-up</span>
           </Link>
         </div>
@@ -51,12 +51,21 @@ export default function LoginPage() {
           </p>
           <div className="space-y-3">
             {[
-              { icon: "✨", text: "12 eyebrow styles to explore" },
-              { icon: "🔒", text: "Photos private & auto-deleted after 30 days" },
-              { icon: "🌍", text: "Available in EN · KO · TH · VI" },
+              {
+                text: "12 eyebrow styles to explore",
+                icon: <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" /></svg>,
+              },
+              {
+                text: "Photos private & auto-deleted after 30 days",
+                icon: <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>,
+              },
+              {
+                text: "Available in EN · KO · TH · VI",
+                icon: <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg>,
+              },
             ].map((item) => (
               <div key={item.text} className="flex items-center gap-3 text-sm text-stone-400">
-                <span>{item.icon}</span>
+                <span className="text-stone-500">{item.icon}</span>
                 <span>{item.text}</span>
               </div>
             ))}
@@ -73,7 +82,7 @@ export default function LoginPage() {
           {/* Mobile logo */}
           <div className="lg:hidden mb-8 text-center">
             <Link href={`/${locale}`} className="inline-flex items-center gap-2">
-              <span className="text-2xl">💄</span>
+              <span className="w-7 h-7 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold text-sm">S</span>
               <span className="font-bold text-xl text-stone-900">Seou-up</span>
             </Link>
           </div>
@@ -85,7 +94,7 @@ export default function LoginPage() {
 
           {error && (
             <div className="bg-red-50 border border-red-200 rounded-xl p-3.5 text-sm text-red-700 mb-5 flex items-start gap-2">
-              <span className="shrink-0 mt-0.5">⚠️</span>
+              <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
               {error}
             </div>
           )}
@@ -180,7 +189,7 @@ export default function LoginPage() {
                 }}
                 className="flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-stone-900 font-medium py-2.5 px-4 rounded-xl transition-colors text-sm"
               >
-                <span className="text-base">💬</span>
+                <span className="font-bold text-sm leading-none">K</span>
                 Kakao
               </button>
             </div>
