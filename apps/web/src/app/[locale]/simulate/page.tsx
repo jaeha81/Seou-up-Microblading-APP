@@ -70,6 +70,7 @@ export default function SimulatePage() {
   const [saveNote, setSaveNote] = useState("");
   const [clientName, setClientName] = useState("");
   const [showCrmPanel, setShowCrmPanel] = useState(false);
+  const [agreeConsent, setAgreeConsent] = useState(false);
 
   useEffect(() => {
     api.get("/api/eyebrow-styles")
@@ -141,6 +142,7 @@ export default function SimulatePage() {
     setSaveNote("");
     setClientName("");
     setShowCrmPanel(false);
+    setAgreeConsent(false);
     if (fileRef.current) fileRef.current.value = "";
   };
 
@@ -265,10 +267,23 @@ export default function SimulatePage() {
               </div>
 
               <div className="p-4">
+                {/* Consent checkbox */}
+                <label className="flex items-start gap-2.5 mb-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={agreeConsent}
+                    onChange={(e) => setAgreeConsent(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded border-stone-300 text-brand-500 focus:ring-brand-400 shrink-0 cursor-pointer"
+                  />
+                  <span className="text-xs text-stone-600 leading-relaxed group-hover:text-stone-800 transition-colors">
+                    I agree that this image will be processed by AI and used for simulation only.
+                  </span>
+                </label>
+
                 <div
-                  className="relative w-full cursor-pointer mb-3"
+                  className={`relative w-full mb-3 ${agreeConsent ? "cursor-pointer" : "cursor-not-allowed opacity-60"}`}
                   style={{ paddingBottom: "177.78%" }}
-                  onClick={() => fileRef.current?.click()}
+                  onClick={() => agreeConsent && fileRef.current?.click()}
                 >
                   <div className={`absolute inset-0 border-2 border-dashed rounded-xl overflow-hidden flex items-center justify-center transition-colors ${
                     preview ? "border-brand-300" : "border-stone-200 hover:border-brand-300"
@@ -294,8 +309,9 @@ export default function SimulatePage() {
                 />
                 {preview && (
                   <button
-                    onClick={() => fileRef.current?.click()}
-                    className="w-full text-xs text-stone-400 hover:text-stone-600 transition-colors py-1"
+                    onClick={() => agreeConsent && fileRef.current?.click()}
+                    disabled={!agreeConsent}
+                    className="w-full text-xs text-stone-400 hover:text-stone-600 transition-colors py-1 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     Click to change photo
                   </button>
@@ -306,9 +322,9 @@ export default function SimulatePage() {
             {/* Run button */}
             <button
               onClick={handleSimulate}
-              disabled={!selectedStyle || !preview || status === "processing"}
+              disabled={!selectedStyle || !preview || !agreeConsent || status === "processing"}
               className={`w-full font-semibold py-4 rounded-2xl transition-all text-sm ${
-                !selectedStyle || !preview
+                !selectedStyle || !preview || !agreeConsent
                   ? "bg-stone-100 text-stone-400 cursor-not-allowed"
                   : status === "processing"
                   ? "bg-brand-300 text-white cursor-wait"
@@ -324,6 +340,8 @@ export default function SimulatePage() {
                 "← Select a style first"
               ) : !preview ? (
                 "← Upload your photo"
+              ) : !agreeConsent ? (
+                "← Agree to the consent above"
               ) : (
                 "Run Simulation →"
               )}

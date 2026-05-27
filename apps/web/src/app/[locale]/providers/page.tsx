@@ -57,8 +57,8 @@ export default function ProvidersPage({ params }: { params: { locale: string } }
       <div className="bg-gradient-to-br from-stone-900 to-stone-800 text-white px-6 py-16">
         <div className="max-w-5xl mx-auto">
           <span className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-4 block">Directory</span>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">Find Certified Providers</h1>
-          <p className="text-stone-300 text-lg max-w-xl">Discover certified microblading studios near you.</p>
+          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">Find Listed Providers</h1>
+          <p className="text-stone-300 text-lg max-w-xl">Discover listed microblading studios near you.</p>
         </div>
       </div>
 

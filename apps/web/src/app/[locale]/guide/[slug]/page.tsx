@@ -225,7 +225,7 @@ export default async function GuideDetailPage({
         <div className="mt-8 grid sm:grid-cols-2 gap-4">
           <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-5 text-center">
             <div className="text-2xl mb-2">📍</div>
-            <p className="font-semibold text-stone-900 text-sm mb-1">Find a Certified Pro</p>
+            <p className="font-semibold text-stone-900 text-sm mb-1">Find a Listed Pro</p>
             <p className="text-xs text-stone-500 mb-3">Browse verified studios near you.</p>
             <Link
               href={`/${locale}/providers`}

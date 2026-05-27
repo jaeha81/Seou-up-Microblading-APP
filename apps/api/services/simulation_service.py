@@ -17,12 +17,24 @@ import shutil
 from datetime import datetime, timezone
 from typing import Optional
 
-from fastapi import UploadFile
+from fastapi import UploadFile, HTTPException, status
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from core.config import settings
 from models.simulation import Simulation
 from models.user import User
+
+
+# ── Rate Limit Config ────────────────────────────────────────────────────────
+
+# Free plan: 3 simulations per day, Pro/Paid users: 100 per day
+RATE_LIMITS = {
+    "free": 3,
+    "pro": 100,
+    "admin": 100,
+}
+DEFAULT_DAILY_LIMIT = 3  # fallback for unknown roles
 
 
 # ── Adapter Interface ────────────────────────────────────────────────────────
@@ -307,9 +319,42 @@ class SimulationService:
         self.db = db
         self.adapter = get_adapter()
 
+    def _check_rate_limit(self, user: User) -> None:
+        """Enforce daily simulation rate limits based on user role."""
+        # Determine daily limit
+        role = getattr(user, "role", "free")
+        if hasattr(role, "value"):
+            role = role.value
+        daily_limit = RATE_LIMITS.get(str(role), DEFAULT_DAILY_LIMIT)
+
+        # Count today's simulations for this user
+        today_start = datetime.now(timezone.utc).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+        count = (
+            self.db.query(func.count(Simulation.id))
+            .filter(
+                Simulation.user_id == user.id,
+                Simulation.created_at >= today_start,
+            )
+            .scalar()
+            or 0
+        )
+
+        if count >= daily_limit:
+            raise HTTPException(
+                status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+                detail=(
+                    f"Daily simulation limit reached ({daily_limit}/day). "
+                    "Upgrade to Pro for up to 100 simulations per day."
+                ),
+            )
+
     async def create(
         self, user: User, eyebrow_style_id: Optional[int] = None
     ) -> Simulation:
+        self._check_rate_limit(user)
+
         sim = Simulation(
             user_id=user.id,
             eyebrow_style_id=eyebrow_style_id,

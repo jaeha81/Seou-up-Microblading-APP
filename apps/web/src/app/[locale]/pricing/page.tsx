@@ -42,7 +42,7 @@ const PLANS: Plan[] = [
       "Basic provider listing (city, country, phone, website)",
       "AI Brow Simulator access",
       "Standard search placement",
-      "Up to 10 client consultations/month",
+      "Up to 3 AI simulations/month",
       "Email support",
     ],
     cta: "Get Started Free",

@@ -27,7 +27,7 @@ const ROLES = [
     label: "Consumer",
     desc: "I want to explore brow styles for myself",
     Icon: UserIcon,
-    detail: "Access the brow simulator and find certified providers near you.",
+    detail: "Access the brow simulator and find listed providers near you.",
   },
   {
     value: "pro",
