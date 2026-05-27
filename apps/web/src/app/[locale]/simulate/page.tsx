@@ -29,19 +29,19 @@ const FALLBACK_STYLES: EyebrowStyle[] = [
   { id: 12, slug: "feather-touch",      name_en: "Feather Touch",     name_ko: "페더 터치" },
 ];
 
-const STYLE_META: Record<string, { emoji: string; desc: string }> = {
-  "natural-feather":    { emoji: "🪶", desc: "Soft, hair-like strokes" },
-  "ombre-powder":       { emoji: "🌅", desc: "Gradient powder fill" },
-  "combination-brow":   { emoji: "✨", desc: "Strokes + powder blend" },
-  "bold-arch":          { emoji: "🔥", desc: "Dramatic, defined arch" },
-  "straight-korean":    { emoji: "🇰🇷", desc: "Flat, youthful shape" },
-  "micro-shading":      { emoji: "🎨", desc: "Fine-dot shading" },
-  "3d-hair-stroke":     { emoji: "💎", desc: "Hyper-realistic depth" },
-  "soft-classic":       { emoji: "🌸", desc: "Timeless soft lines" },
-  "nano-brow":          { emoji: "🔬", desc: "Ultra-fine precision" },
-  "fluffy-brow":        { emoji: "☁️", desc: "Full, textured look" },
-  "angular-power-brow": { emoji: "⚡", desc: "Strong geometric arch" },
-  "feather-touch":      { emoji: "🕊️", desc: "Light, wispy strokes" },
+const STYLE_META: Record<string, { desc: string }> = {
+  "natural-feather":    { desc: "Soft, hair-like strokes" },
+  "ombre-powder":       { desc: "Gradient powder fill" },
+  "combination-brow":   { desc: "Strokes + powder blend" },
+  "bold-arch":          { desc: "Dramatic, defined arch" },
+  "straight-korean":    { desc: "Flat, youthful shape" },
+  "micro-shading":      { desc: "Fine-dot shading" },
+  "3d-hair-stroke":     { desc: "Hyper-realistic depth" },
+  "soft-classic":       { desc: "Timeless soft lines" },
+  "nano-brow":          { desc: "Ultra-fine precision" },
+  "fluffy-brow":        { desc: "Full, textured look" },
+  "angular-power-brow": { desc: "Strong geometric arch" },
+  "feather-touch":      { desc: "Light, wispy strokes" },
 };
 
 type SimStatus = "idle" | "selecting" | "processing" | "done" | "error";
@@ -203,7 +203,7 @@ export default function SimulatePage() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Disclaimer */}
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-6 text-sm text-amber-800 flex items-start gap-2">
-          <span className="shrink-0">⚠️</span>
+          <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
           <span>
             <strong>Visualization Only</strong> — Results are for illustration only.
             Not a guarantee of procedure outcomes. Always consult a licensed professional.
@@ -224,7 +224,7 @@ export default function SimulatePage() {
               </div>
               {selectedStyle && (
                 <span className="text-xs bg-brand-50 text-brand-600 px-2.5 py-1 rounded-full font-medium">
-                  {STYLE_META[selectedStyle.slug]?.emoji} {getStyleName(selectedStyle)}
+                  {getStyleName(selectedStyle)}
                 </span>
               )}
             </div>
@@ -240,8 +240,7 @@ export default function SimulatePage() {
                       : "border-stone-100 hover:border-stone-300 bg-stone-50"
                   }`}
                 >
-                  <div className="text-xl mb-1">{STYLE_META[s.slug]?.emoji ?? "✨"}</div>
-                  <div className="text-xs font-medium text-stone-800 leading-tight">{getStyleName(s)}</div>
+                  <div className="text-xs font-semibold text-stone-800 leading-tight mb-0.5">{getStyleName(s)}</div>
                   <div className="text-xs text-stone-400 mt-0.5 leading-tight">
                     {STYLE_META[s.slug]?.desc}
                   </div>
@@ -279,7 +278,7 @@ export default function SimulatePage() {
                       <img src={preview} alt="preview" className="w-full h-full object-cover" />
                     ) : (
                       <div className="text-center text-stone-400 px-4">
-                        <div className="text-4xl mb-2">📷</div>
+                        <svg className="w-10 h-10 mx-auto mb-2 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
                         <div className="text-sm font-medium">Click to upload</div>
                         <div className="text-xs mt-1 text-stone-300">Front-facing portrait works best</div>
                       </div>
@@ -326,7 +325,7 @@ export default function SimulatePage() {
               ) : !preview ? (
                 "← Upload your photo"
               ) : (
-                "✨ Run Simulation"
+                "Run Simulation →"
               )}
             </button>
 
@@ -351,7 +350,7 @@ export default function SimulatePage() {
                 <span className="font-semibold text-stone-900 text-sm">
                   Simulation Complete —{" "}
                   <span className="text-brand-600">
-                    {STYLE_META[selectedStyle?.slug ?? ""]?.emoji} {selectedStyle && getStyleName(selectedStyle)}
+                    {selectedStyle && getStyleName(selectedStyle)}
                   </span>
                 </span>
               </div>

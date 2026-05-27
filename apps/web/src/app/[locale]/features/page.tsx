@@ -42,7 +42,8 @@ export default function FeaturesPage({
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-brand-100 text-brand-700 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wide">
-              <span>🎨</span> AI Technology
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" /></svg>
+              AI Technology
             </div>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-5 leading-tight">
               Brow Simulator
@@ -90,7 +91,7 @@ export default function FeaturesPage({
               </svg>
             </div>
             <div className="flex flex-wrap gap-2 justify-center">
-              {["🪶 Natural", "🌅 Ombre", "🔥 Bold Arch", "🇰🇷 Korean", "💎 3D"].map((s) => (
+              {["Natural", "Ombre", "Bold Arch", "Korean", "3D Hair"].map((s) => (
                 <span key={s} className="text-xs bg-stone-800 border border-stone-700 text-stone-300 px-3 py-1.5 rounded-full font-medium">
                   {s}
                 </span>
@@ -140,7 +141,8 @@ export default function FeaturesPage({
 
           <div className="order-1 md:order-2">
             <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wide">
-              <span>👥</span> Client CRM
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>
+              Client CRM
             </div>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-5 leading-tight">
               Know Every Client
@@ -171,7 +173,8 @@ export default function FeaturesPage({
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wide">
-              <span>🏥</span> Team Management
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
+              Team Management
             </div>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-5 leading-tight">
               Manage Your Entire Studio
@@ -238,7 +241,8 @@ export default function FeaturesPage({
       <section className="px-6 py-20 bg-white">
         <div className="max-w-5xl mx-auto text-center mb-14">
           <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wide">
-            <span>📊</span> Analytics
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg>
+            Analytics
           </div>
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-4">
             Data-Driven Decisions
@@ -250,13 +254,37 @@ export default function FeaturesPage({
 
         <div className="max-w-5xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { title: "Simulation Trends", desc: "See which styles are trending month over month", icon: "📈", color: "bg-brand-50 border-brand-100" },
-            { title: "Conversion Funnel", desc: "Track the path from simulation to booked appointment", icon: "🔄", color: "bg-blue-50 border-blue-100" },
-            { title: "Style Preferences", desc: "Breakdown of the most requested brow styles", icon: "🎨", color: "bg-purple-50 border-purple-100" },
-            { title: "Revenue Reports", desc: "Monthly revenue and booking value insights", icon: "💰", color: "bg-green-50 border-green-100" },
+            {
+              title: "Simulation Trends",
+              desc: "See which styles are trending month over month",
+              color: "bg-brand-50 border-brand-100",
+              iconCls: "text-brand-500",
+              icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg>,
+            },
+            {
+              title: "Conversion Funnel",
+              desc: "Track the path from simulation to booked appointment",
+              color: "bg-blue-50 border-blue-100",
+              iconCls: "text-blue-500",
+              icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" /></svg>,
+            },
+            {
+              title: "Style Preferences",
+              desc: "Breakdown of the most requested brow styles",
+              color: "bg-purple-50 border-purple-100",
+              iconCls: "text-purple-500",
+              icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" /></svg>,
+            },
+            {
+              title: "Revenue Reports",
+              desc: "Monthly revenue and booking value insights",
+              color: "bg-green-50 border-green-100",
+              iconCls: "text-green-600",
+              icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>,
+            },
           ].map((f) => (
             <div key={f.title} className={`rounded-2xl border p-5 ${f.color}`}>
-              <div className="text-3xl mb-3">{f.icon}</div>
+              <div className={`mb-3 ${f.iconCls}`}>{f.icon}</div>
               <h3 className="font-bold text-stone-900 text-sm mb-1.5">{f.title}</h3>
               <p className="text-xs text-stone-500 leading-relaxed">{f.desc}</p>
             </div>
@@ -278,7 +306,8 @@ export default function FeaturesPage({
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-white/10 text-stone-200 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wide border border-white/15">
-              <span>🗺️</span> Provider Directory
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+              Provider Directory
             </div>
             <h2 className="font-serif text-3xl md:text-4xl font-bold mb-5 leading-tight">
               Get Discovered by
