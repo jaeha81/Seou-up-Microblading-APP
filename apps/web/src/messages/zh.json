@@ -1,0 +1,58 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "save": "保存",
+    "cancel": "取消",
+    "back": "返回",
+    "continue": "继续",
+    "submit": "提交",
+    "disclaimer": "Seou-up Microblading 仅为信息和可视化支持平台，不提供医疗或手术服务。"
+  },
+  "nav": {
+    "home": "首页",
+    "simulate": "眉形模拟器",
+    "guide": "创业指南",
+    "providers": "查找服务商",
+    "feedback": "反馈",
+    "login": "登录",
+    "register": "注册账户",
+    "profile": "个人资料",
+    "admin": "管理员"
+  },
+  "landing": {
+    "hero_title": "Seou-up Microblading",
+    "hero_subtitle": "在手术前预览完美眉形。",
+    "cta_simulate": "试用眉形模拟器",
+    "cta_guide": "创业指南",
+    "disclaimer": "仅供可视化和信息参考。不提供医疗或手术服务。"
+  },
+  "simulate": {
+    "title": "眉形模拟器",
+    "subtitle": "选择风格，上传照片，预览新眉形。",
+    "choose_style": "1. 选择风格",
+    "upload_photo": "2. 上传照片",
+    "run_simulation": "开始模拟",
+    "running": "模拟中...",
+    "result_title": "模拟完成",
+    "disclaimer": "仅供可视化 — 结果不保证实际手术效果。"
+  },
+  "auth": {
+    "login_title": "登录",
+    "register_title": "注册账户",
+    "email": "邮箱",
+    "password": "密码",
+    "full_name": "全名",
+    "sign_in": "登录",
+    "create_account": "创建账户",
+    "no_account": "没有账户？",
+    "have_account": "已有账户？",
+    "role_consumer": "消费者",
+    "role_pro": "专业艺术师",
+    "role_founder": "创业者"
+  },
+  "compliance": {
+    "banner": "⚠️ Seou-up 仅为信息和可视化支持平台，不提供医疗或手术服务。",
+    "learn_more": "了解更多"
+  }
+}

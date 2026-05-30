@@ -1,0 +1,58 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "back": "Retour",
+    "continue": "Continuer",
+    "submit": "Soumettre",
+    "disclaimer": "Seou-up Microblading est une plateforme d'information et de visualisation uniquement. Pas un prestataire médical ou de procédures."
+  },
+  "nav": {
+    "home": "Accueil",
+    "simulate": "Simulateur de sourcils",
+    "guide": "Guide de démarrage",
+    "providers": "Trouver des praticiens",
+    "feedback": "Retour d'expérience",
+    "login": "Se connecter",
+    "register": "Créer un compte",
+    "profile": "Profil",
+    "admin": "Admin"
+  },
+  "landing": {
+    "hero_title": "Seou-up Microblading",
+    "hero_subtitle": "Prévisualisez vos sourcils parfaits avant toute procédure.",
+    "cta_simulate": "Essayer le simulateur",
+    "cta_guide": "Guide de démarrage",
+    "disclaimer": "À des fins de visualisation et d'information uniquement. Pas un prestataire médical ou de procédures."
+  },
+  "simulate": {
+    "title": "Simulateur de sourcils",
+    "subtitle": "Choisissez un style, uploadez votre photo et prévisualisez vos nouveaux sourcils.",
+    "choose_style": "1. Choisir un style",
+    "upload_photo": "2. Uploader votre photo",
+    "run_simulation": "Lancer la simulation",
+    "running": "Simulation en cours...",
+    "result_title": "Simulation terminée",
+    "disclaimer": "Visualisation uniquement — Les résultats ne garantissent pas les effets réels de la procédure."
+  },
+  "auth": {
+    "login_title": "Se connecter",
+    "register_title": "Créer un compte",
+    "email": "Email",
+    "password": "Mot de passe",
+    "full_name": "Nom complet",
+    "sign_in": "Se connecter",
+    "create_account": "Créer un compte",
+    "no_account": "Pas de compte ?",
+    "have_account": "Vous avez déjà un compte ?",
+    "role_consumer": "Consommateur",
+    "role_pro": "Artiste Pro",
+    "role_founder": "Entrepreneur"
+  },
+  "compliance": {
+    "banner": "⚠️ Seou-up est une plateforme d'information et de visualisation uniquement. Pas un prestataire médical ou de procédures.",
+    "learn_more": "En savoir plus"
+  }
+}

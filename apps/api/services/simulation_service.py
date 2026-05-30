@@ -57,10 +57,17 @@ class MockAdapter(BaseSimulationAdapter):
     async def process(
         self, input_image_path: str, eyebrow_style_id: Optional[int]
     ) -> dict:
-        # Simulate processing delay (remove in production)
+        # Copy input image as output so the result URL resolves to a real file
+        output_filename = f"mock_result_{uuid.uuid4().hex}.jpg"
+        output_dir = os.path.dirname(input_image_path)
+        output_path = os.path.join(output_dir, output_filename)
+        try:
+            shutil.copy2(input_image_path, output_path)
+        except Exception:
+            output_filename = os.path.basename(input_image_path)
         return {
             "status": "completed",
-            "output_image_url": f"/uploads/mock_result_{eyebrow_style_id or 1}.jpg",
+            "output_image_url": f"/uploads/{output_filename}",
             "landmarks_data": {
                 "adapter": "mock",
                 "eyebrow_style_id": eyebrow_style_id,

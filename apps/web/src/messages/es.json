@@ -1,0 +1,58 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Se produjo un error",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "back": "Volver",
+    "continue": "Continuar",
+    "submit": "Enviar",
+    "disclaimer": "Seou-up Microblading es una plataforma de información y visualización únicamente. No es un proveedor médico ni de procedimientos."
+  },
+  "nav": {
+    "home": "Inicio",
+    "simulate": "Simulador de cejas",
+    "guide": "Guía de inicio",
+    "providers": "Buscar proveedores",
+    "feedback": "Comentarios",
+    "login": "Iniciar sesión",
+    "register": "Crear cuenta",
+    "profile": "Perfil",
+    "admin": "Administrador"
+  },
+  "landing": {
+    "hero_title": "Seou-up Microblading",
+    "hero_subtitle": "Previsualiza tus cejas perfectas antes de cualquier procedimiento.",
+    "cta_simulate": "Probar el simulador",
+    "cta_guide": "Guía de inicio",
+    "disclaimer": "Solo para fines de visualización e información. No es un proveedor médico ni de procedimientos."
+  },
+  "simulate": {
+    "title": "Simulador de cejas",
+    "subtitle": "Elige un estilo, sube tu foto y previsualiza tus nuevas cejas.",
+    "choose_style": "1. Elegir estilo",
+    "upload_photo": "2. Subir foto",
+    "run_simulation": "Iniciar simulación",
+    "running": "Simulando...",
+    "result_title": "Simulación completada",
+    "disclaimer": "Solo visualización — Los resultados no garantizan los efectos reales del procedimiento."
+  },
+  "auth": {
+    "login_title": "Iniciar sesión",
+    "register_title": "Crear cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "full_name": "Nombre completo",
+    "sign_in": "Iniciar sesión",
+    "create_account": "Crear cuenta",
+    "no_account": "¿No tienes cuenta?",
+    "have_account": "¿Ya tienes una cuenta?",
+    "role_consumer": "Consumidor",
+    "role_pro": "Artista Pro",
+    "role_founder": "Emprendedor"
+  },
+  "compliance": {
+    "banner": "⚠️ Seou-up es una plataforma de información y visualización únicamente. No es un proveedor médico ni de procedimientos.",
+    "learn_more": "Más información"
+  }
+}

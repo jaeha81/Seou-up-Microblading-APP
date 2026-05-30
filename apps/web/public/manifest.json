@@ -1,0 +1,43 @@
+{
+  "name": "Seou-up Microblading",
+  "short_name": "Seou-up",
+  "description": "AI 눈썹문신 시뮬레이터 & 클리닉 관리 플랫폼",
+  "start_url": "/en",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fafaf9",
+  "theme_color": "#c8956c",
+  "orientation": "portrait-primary",
+  "categories": ["beauty", "business", "health"],
+  "lang": "en",
+  "icons": [
+    { "src": "/icons/icon-72x72.png",   "sizes": "72x72",   "type": "image/png" },
+    { "src": "/icons/icon-96x96.png",   "sizes": "96x96",   "type": "image/png" },
+    { "src": "/icons/icon-128x128.png", "sizes": "128x128", "type": "image/png" },
+    { "src": "/icons/icon-144x144.png", "sizes": "144x144", "type": "image/png" },
+    { "src": "/icons/icon-152x152.png", "sizes": "152x152", "type": "image/png" },
+    { "src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-384x384.png", "sizes": "384x384", "type": "image/png" },
+    { "src": "/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Brow Simulator",
+      "short_name": "Simulator",
+      "description": "AI 눈썹 시뮬레이터 실행",
+      "url": "/en/simulate",
+      "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Client CRM",
+      "short_name": "CRM",
+      "description": "고객 관리",
+      "url": "/en/clinic",
+      "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

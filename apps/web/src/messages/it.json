@@ -1,0 +1,8 @@
+{
+  "common": { "loading": "Caricamento...", "error": "Si è verificato un errore", "save": "Salva", "cancel": "Annulla", "back": "Indietro", "continue": "Continua", "submit": "Invia", "disclaimer": "Seou-up Microblading è solo una piattaforma informativa e di visualizzazione. Non è un fornitore medico." },
+  "nav": { "home": "Home", "simulate": "Simulatore sopracciglia", "guide": "Guida avvio", "providers": "Trova professionisti", "feedback": "Feedback", "login": "Accedi", "register": "Crea account", "profile": "Profilo", "admin": "Admin" },
+  "landing": { "hero_title": "Seou-up Microblading", "hero_subtitle": "Anteprima delle sopracciglia perfette prima della procedura.", "cta_simulate": "Prova il simulatore", "cta_guide": "Guida avvio", "disclaimer": "Solo per visualizzazione e informazioni. Non è un fornitore medico." },
+  "simulate": { "title": "Simulatore sopracciglia", "subtitle": "Scegli uno stile, carica la tua foto e visualizza le nuove sopracciglia.", "choose_style": "1. Scegli stile", "upload_photo": "2. Carica foto", "run_simulation": "Avvia simulazione", "running": "Simulando...", "result_title": "Simulazione completata", "disclaimer": "Solo visualizzazione — Non garantisce i risultati reali della procedura." },
+  "auth": { "login_title": "Accedi", "register_title": "Crea account", "email": "Email", "password": "Password", "full_name": "Nome completo", "sign_in": "Accedi", "create_account": "Crea account", "no_account": "Non hai un account?", "have_account": "Hai già un account?", "role_consumer": "Consumatore", "role_pro": "Artista Pro", "role_founder": "Imprenditore" },
+  "compliance": { "banner": "⚠️ Seou-up è una piattaforma informativa e di visualizzazione. Non è un fornitore medico.", "learn_more": "Scopri di più" }
+}

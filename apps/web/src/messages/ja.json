@@ -1,0 +1,58 @@
+{
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "back": "戻る",
+    "continue": "続ける",
+    "submit": "送信",
+    "disclaimer": "Seou-up Microbladingは情報・可視化支援プラットフォームです。医療または施術サービスの提供者ではありません。"
+  },
+  "nav": {
+    "home": "ホーム",
+    "simulate": "眉シミュレーター",
+    "guide": "スタートアップガイド",
+    "providers": "施術者を探す",
+    "feedback": "フィードバック",
+    "login": "ログイン",
+    "register": "アカウント作成",
+    "profile": "プロフィール",
+    "admin": "管理者"
+  },
+  "landing": {
+    "hero_title": "Seou-up Microblading",
+    "hero_subtitle": "施術前に完璧な眉をプレビュー。",
+    "cta_simulate": "眉シミュレーターを試す",
+    "cta_guide": "スタートアップガイド",
+    "disclaimer": "可視化・情報提供のみを目的としています。医療または施術サービスの提供者ではありません。"
+  },
+  "simulate": {
+    "title": "眉シミュレーター",
+    "subtitle": "スタイルを選択し、写真をアップロードして新しい眉をプレビューします。",
+    "choose_style": "1. スタイルを選ぶ",
+    "upload_photo": "2. 写真をアップロード",
+    "run_simulation": "シミュレーション開始",
+    "running": "シミュレーション中...",
+    "result_title": "シミュレーション完了",
+    "disclaimer": "可視化のみ — 実際の施術結果を保証するものではありません。"
+  },
+  "auth": {
+    "login_title": "ログイン",
+    "register_title": "アカウント作成",
+    "email": "メール",
+    "password": "パスワード",
+    "full_name": "氏名",
+    "sign_in": "ログイン",
+    "create_account": "アカウント作成",
+    "no_account": "アカウントをお持ちでない方？",
+    "have_account": "すでにアカウントをお持ちの方？",
+    "role_consumer": "一般ユーザー",
+    "role_pro": "プロアーティスト",
+    "role_founder": "起業家"
+  },
+  "compliance": {
+    "banner": "⚠️ Seou-upは情報・可視化支援プラットフォームです。医療または施術サービスの提供者ではありません。",
+    "learn_more": "詳細を見る"
+  }
+}

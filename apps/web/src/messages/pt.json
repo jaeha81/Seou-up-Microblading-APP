@@ -1,0 +1,8 @@
+{
+  "common": { "loading": "Carregando...", "error": "Ocorreu um erro", "save": "Salvar", "cancel": "Cancelar", "back": "Voltar", "continue": "Continuar", "submit": "Enviar", "disclaimer": "Seou-up Microblading é uma plataforma de informação e visualização apenas. Não é um provedor médico." },
+  "nav": { "home": "Início", "simulate": "Simulador de sobrancelhas", "guide": "Guia de início", "providers": "Encontrar provedores", "feedback": "Feedback", "login": "Entrar", "register": "Criar conta", "profile": "Perfil", "admin": "Admin" },
+  "landing": { "hero_title": "Seou-up Microblading", "hero_subtitle": "Pré-visualize sobrancelhas perfeitas antes do procedimento.", "cta_simulate": "Experimentar simulador", "cta_guide": "Guia de início", "disclaimer": "Apenas para visualização e informação. Não é um provedor médico." },
+  "simulate": { "title": "Simulador de sobrancelhas", "subtitle": "Escolha um estilo, faça upload da foto e pré-visualize suas novas sobrancelhas.", "choose_style": "1. Escolher estilo", "upload_photo": "2. Enviar foto", "run_simulation": "Iniciar simulação", "running": "Simulando...", "result_title": "Simulação concluída", "disclaimer": "Apenas visualização — Não garante resultados reais do procedimento." },
+  "auth": { "login_title": "Entrar", "register_title": "Criar conta", "email": "E-mail", "password": "Senha", "full_name": "Nome completo", "sign_in": "Entrar", "create_account": "Criar conta", "no_account": "Não tem conta?", "have_account": "Já tem uma conta?", "role_consumer": "Consumidor", "role_pro": "Artista Pro", "role_founder": "Empreendedor" },
+  "compliance": { "banner": "⚠️ Seou-up é uma plataforma de informação e visualização. Não é um provedor médico.", "learn_more": "Saiba mais" }
+}

@@ -1,0 +1,8 @@
+{
+  "common": { "loading": "Yükleniyor...", "error": "Bir hata oluştu", "save": "Kaydet", "cancel": "İptal", "back": "Geri", "continue": "Devam", "submit": "Gönder", "disclaimer": "Seou-up Microblading yalnızca bilgi ve görselleştirme platformudur. Tıbbi hizmet sağlayıcı değildir." },
+  "nav": { "home": "Ana Sayfa", "simulate": "Kaş Simülatörü", "guide": "Başlangıç Rehberi", "providers": "Sağlayıcı Bul", "feedback": "Geri Bildirim", "login": "Giriş Yap", "register": "Hesap Oluştur", "profile": "Profil", "admin": "Yönetici" },
+  "landing": { "hero_title": "Seou-up Microblading", "hero_subtitle": "Herhangi bir işlemden önce mükemmel kaşlarınızı önizleyin.", "cta_simulate": "Simülatörü Dene", "cta_guide": "Başlangıç Rehberi", "disclaimer": "Yalnızca görselleştirme ve bilgi amaçlıdır. Tıbbi hizmet sağlayıcı değildir." },
+  "simulate": { "title": "Kaş Simülatörü", "subtitle": "Stil seçin, fotoğraf yükleyin ve yeni kaşlarınızı önizleyin.", "choose_style": "1. Stil Seç", "upload_photo": "2. Fotoğraf Yükle", "run_simulation": "Simülasyonu Başlat", "running": "Simüle ediliyor...", "result_title": "Simülasyon Tamamlandı", "disclaimer": "Yalnızca görselleştirme — Gerçek sonuçları garanti etmez." },
+  "auth": { "login_title": "Giriş Yap", "register_title": "Hesap Oluştur", "email": "E-posta", "password": "Şifre", "full_name": "Tam Ad", "sign_in": "Giriş Yap", "create_account": "Hesap Oluştur", "no_account": "Hesabınız yok mu?", "have_account": "Zaten hesabınız var mı?", "role_consumer": "Tüketici", "role_pro": "Profesyonel Sanatçı", "role_founder": "Girişimci" },
+  "compliance": { "banner": "⚠️ Seou-up bilgi ve görselleştirme platformudur. Tıbbi hizmet sağlayıcı değildir.", "learn_more": "Daha fazla bilgi" }
+}
