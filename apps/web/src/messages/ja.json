@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "ナレッジベース",
+    "title": "スタートアップガイド",
+    "subtitle": "最初のブレードからスタジオ運営まで — マイクロブレーディングビジネス立ち上げと成長に必要なすべて。",
+    "stat_guides": "専門ガイド",
+    "stat_topics": "トピック",
+    "stat_access": "無料",
+    "disclaimer_title": "教育目的コンテンツ",
+    "disclaimer_body": "すべてのガイドは情報提供を目的としています。管轄地域のライセンスおよび保健規制を必ず確認してください。",
+    "category_startup": "起業",
+    "category_technique": "技術",
+    "category_marketing": "マーケティング",
+    "read_button": "読む",
+    "min_read": "分",
+    "cta_title": "眉のスタイルをビジュアル化する準備はできましたか？",
+    "cta_body": "ブロウシミュレーターをお試しください — 施術前に12スタイルを自分の写真でプレビューしましょう。",
+    "cta_button": "ブロウシミュレーターを開く →"
   }
 }

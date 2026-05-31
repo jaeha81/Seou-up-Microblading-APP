@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "Basis Pengetahuan",
+    "title": "Panduan Memulai",
+    "subtitle": "Semua yang Anda butuhkan untuk meluncurkan dan mengembangkan bisnis microblading — dari bilah pertama hingga studio lengkap.",
+    "stat_guides": "Panduan Ahli",
+    "stat_topics": "Topik",
+    "stat_access": "Gratis",
+    "disclaimer_title": "Konten Edukasi Saja",
+    "disclaimer_body": "Semua panduan hanya untuk tujuan informasi. Selalu verifikasi lisensi lokal dan peraturan kesehatan di yurisdiksi Anda.",
+    "category_startup": "Mulai Usaha",
+    "category_technique": "Teknik",
+    "category_marketing": "Pemasaran",
+    "read_button": "Baca",
+    "min_read": "menit baca",
+    "cta_title": "Siap memvisualisasikan gaya alis?",
+    "cta_body": "Coba simulator alis kami — pratinjau 12 gaya di foto Anda sendiri sebelum prosedur apa pun.",
+    "cta_button": "Buka Simulator Alis →"
   }
 }

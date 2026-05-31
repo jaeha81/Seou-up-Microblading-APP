@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "Bilgi Tabanı",
+    "title": "Başlangıç Rehberi",
+    "subtitle": "Microblading işinizi başlatmak ve büyütmek için ihtiyacınız olan her şey — ilk bıçaktan tam stüdyoya kadar.",
+    "stat_guides": "Uzman Rehberleri",
+    "stat_topics": "Konular",
+    "stat_access": "Ücretsiz",
+    "disclaimer_title": "Yalnızca Eğitim İçeriği",
+    "disclaimer_body": "Tüm rehberler yalnızca bilgilendirme amaçlıdır. Yetki alanınızdaki yerel lisanslama ve sağlık yönetmeliklerini her zaman doğrulayın.",
+    "category_startup": "Başlangıç",
+    "category_technique": "Teknik",
+    "category_marketing": "Pazarlama",
+    "read_button": "Oku",
+    "min_read": "dk okuma",
+    "cta_title": "Kaş stillerini görselleştirmeye hazır mısınız?",
+    "cta_body": "Kaş simülatörümüzü deneyin — herhangi bir işlemden önce kendi fotoğrafınızda 12 stili önizleyin.",
+    "cta_button": "Kaş Simülatörünü Aç →"
   }
 }

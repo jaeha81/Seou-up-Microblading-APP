@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "Base de Conocimiento",
+    "title": "Guía de Inicio",
+    "subtitle": "Todo lo que necesitas para lanzar y hacer crecer tu negocio de microblading — desde la primera cuchilla hasta el estudio completo.",
+    "stat_guides": "Guías Expertas",
+    "stat_topics": "Temas",
+    "stat_access": "Gratis",
+    "disclaimer_title": "Solo Contenido Educativo",
+    "disclaimer_body": "Todas las guías son solo para fines informativos. Siempre verifica las licencias locales y las regulaciones sanitarias en tu jurisdicción.",
+    "category_startup": "Inicio",
+    "category_technique": "Técnica",
+    "category_marketing": "Marketing",
+    "read_button": "Leer",
+    "min_read": "min de lectura",
+    "cta_title": "¿Listo para visualizar estilos de cejas?",
+    "cta_body": "Prueba nuestro simulador de cejas — previsualiza 12 estilos en tu propia foto antes de cualquier procedimiento.",
+    "cta_button": "Abrir Simulador de Cejas →"
   }
 }

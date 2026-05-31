@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "Pangkalan Pengetahuan",
+    "title": "Panduan Permulaan",
+    "subtitle": "Semua yang anda perlukan untuk melancarkan dan mengembangkan perniagaan microblading anda — dari pisau pertama hingga studio penuh.",
+    "stat_guides": "Panduan Pakar",
+    "stat_topics": "Topik",
+    "stat_access": "Percuma",
+    "disclaimer_title": "Kandungan Pendidikan Sahaja",
+    "disclaimer_body": "Semua panduan adalah untuk tujuan maklumat sahaja. Sentiasa sahkan pelesenan tempatan dan peraturan kesihatan di kawasan anda.",
+    "category_startup": "Permulaan",
+    "category_technique": "Teknik",
+    "category_marketing": "Pemasaran",
+    "read_button": "Baca",
+    "min_read": "min baca",
+    "cta_title": "Bersedia untuk menggambarkan gaya kening?",
+    "cta_body": "Cuba simulator kening kami — pratonton 12 gaya pada foto anda sendiri sebelum sebarang prosedur.",
+    "cta_button": "Buka Simulator Kening →"
   }
 }

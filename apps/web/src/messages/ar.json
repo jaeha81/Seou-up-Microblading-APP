@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "قاعدة المعرفة",
+    "title": "دليل البدء",
+    "subtitle": "كل ما تحتاجه لإطلاق وتنمية أعمال الميكروبليدينج — من أول شفرة إلى استوديو كامل.",
+    "stat_guides": "أدلة الخبراء",
+    "stat_topics": "المواضيع",
+    "stat_access": "مجاني",
+    "disclaimer_title": "محتوى تعليمي فقط",
+    "disclaimer_body": "جميع الأدلة لأغراض إعلامية فقط. تحقق دائمًا من التراخيص المحلية واللوائح الصحية في منطقتك.",
+    "category_startup": "بدء",
+    "category_technique": "تقنية",
+    "category_marketing": "تسويق",
+    "read_button": "اقرأ",
+    "min_read": "دقيقة قراءة",
+    "cta_title": "هل أنت مستعد لتصور أنماط الحواجب؟",
+    "cta_body": "جرب محاكي الحواجب — عاين 12 نمطًا على صورتك الخاصة قبل أي إجراء.",
+    "cta_button": "افتح محاكي الحواجب →"
   }
 }

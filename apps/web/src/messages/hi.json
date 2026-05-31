@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "ज्ञान आधार",
+    "title": "स्टार्टअप गाइड",
+    "subtitle": "पहले ब्लेड से पूरे स्टूडियो तक — अपना माइक्रोब्लेडिंग व्यवसाय शुरू करने और बढ़ाने के लिए सब कुछ.",
+    "stat_guides": "विशेषज्ञ गाइड",
+    "stat_topics": "विषय",
+    "stat_access": "मुफ़्त",
+    "disclaimer_title": "केवल शैक्षिक सामग्री",
+    "disclaimer_body": "सभी गाइड केवल सूचनात्मक उद्देश्यों के लिए हैं. अपने क्षेत्र में स्थानीय लाइसेंसिंग और स्वास्थ्य नियमों की हमेशा जाँच करें.",
+    "category_startup": "स्टार्टअप",
+    "category_technique": "तकनीक",
+    "category_marketing": "मार्केटिंग",
+    "read_button": "पढ़ें",
+    "min_read": "मिनट पढ़ें",
+    "cta_title": "भौंह शैलियों को देखने के लिए तैयार हैं?",
+    "cta_body": "हमारे भौंह सिमुलेटर को आज़माएं — किसी भी प्रक्रिया से पहले अपनी फ़ोटो पर 12 शैलियों का पूर्वावलोकन करें.",
+    "cta_button": "भौंह सिमुलेटर खोलें →"
   }
 }

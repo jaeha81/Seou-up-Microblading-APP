@@ -307,5 +307,23 @@
     "upgrade_body": "에이전시 플랜으로 무제한 상담, 전체 CRM, 분석 및 Featured 배지를 이용하세요.",
     "upgrade_cta": "플랜 보기 →",
     "session_label": "세션"
+  },
+  "guide": {
+    "badge": "지식 베이스",
+    "title": "창업 가이드",
+    "subtitle": "첫 시술부터 스튜디오 운영까지 — 마이크로블레이딩 비즈니스 런칭과 성장을 위한 모든 것.",
+    "stat_guides": "전문 가이드",
+    "stat_topics": "주제",
+    "stat_access": "무료",
+    "disclaimer_title": "교육 목적 콘텐츠",
+    "disclaimer_body": "모든 가이드는 정보 제공 목적입니다. 관할 지역의 라이선스 및 보건 규정을 반드시 확인하세요.",
+    "category_startup": "창업",
+    "category_technique": "기술",
+    "category_marketing": "마케팅",
+    "read_button": "읽기",
+    "min_read": "분 소요",
+    "cta_title": "눈썹 스타일을 미리 볼 준비가 됐나요?",
+    "cta_body": "브로우 시뮬레이터를 사용해보세요 — 시술 전에 12가지 스타일을 내 사진으로 미리 확인하세요.",
+    "cta_button": "브로우 시뮬레이터 열기 →"
   }
 }

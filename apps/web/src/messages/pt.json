@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "Base de Conhecimento",
+    "title": "Guia de Início",
+    "subtitle": "Tudo o que você precisa para lançar e expandir seu negócio de microblading — da primeira lâmina ao estúdio completo.",
+    "stat_guides": "Guias Especializados",
+    "stat_topics": "Tópicos",
+    "stat_access": "Grátis",
+    "disclaimer_title": "Apenas Conteúdo Educacional",
+    "disclaimer_body": "Todos os guias são apenas para fins informativos. Verifique sempre as licenças locais e os regulamentos de saúde na sua jurisdição.",
+    "category_startup": "Início",
+    "category_technique": "Técnica",
+    "category_marketing": "Marketing",
+    "read_button": "Ler",
+    "min_read": "min de leitura",
+    "cta_title": "Pronto para visualizar estilos de sobrancelha?",
+    "cta_body": "Experimente nosso simulador de sobrancelhas — visualize 12 estilos na sua própria foto antes de qualquer procedimento.",
+    "cta_button": "Abrir Simulador de Sobrancelhas →"
   }
 }

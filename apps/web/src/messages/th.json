@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "ฐานความรู้",
+    "title": "คู่มือเริ่มต้น",
+    "subtitle": "ทุกสิ่งที่คุณต้องการในการเปิดและพัฒนาธุรกิจไมโครเบลดดิ้ง — จากใบมีดแรกสู่สตูดิโอครบครัน",
+    "stat_guides": "คู่มือผู้เชี่ยวชาญ",
+    "stat_topics": "หัวข้อ",
+    "stat_access": "ฟรี",
+    "disclaimer_title": "เนื้อหาเพื่อการศึกษาเท่านั้น",
+    "disclaimer_body": "คู่มือทั้งหมดมีไว้เพื่อข้อมูลเท่านั้น โปรดตรวจสอบใบอนุญาตในพื้นที่และกฎระเบียบด้านสุขภาพในเขตอำนาจของคุณเสมอ",
+    "category_startup": "เริ่มต้นธุรกิจ",
+    "category_technique": "เทคนิค",
+    "category_marketing": "การตลาด",
+    "read_button": "อ่าน",
+    "min_read": "นาทีในการอ่าน",
+    "cta_title": "พร้อมที่จะแสดงภาพสไตล์คิ้วแล้วหรือยัง?",
+    "cta_body": "ลองใช้โปรแกรมจำลองคิ้วของเรา — ดูตัวอย่าง 12 สไตล์บนรูปถ่ายของคุณเองก่อนทำหัตถการ",
+    "cta_button": "เปิดโปรแกรมจำลองคิ้ว →"
   }
 }

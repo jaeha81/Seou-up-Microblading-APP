@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "知识库",
+    "title": "创业指南",
+    "subtitle": "从第一刀到完整工作室 — 启动和发展纹眉业务所需的一切。",
+    "stat_guides": "专业指南",
+    "stat_topics": "主题",
+    "stat_access": "免费",
+    "disclaimer_title": "教育内容声明",
+    "disclaimer_body": "所有指南仅供参考。请务必核实您所在地区的许可证和卫生法规。",
+    "category_startup": "创业",
+    "category_technique": "技术",
+    "category_marketing": "营销",
+    "read_button": "阅读",
+    "min_read": "分钟阅读",
+    "cta_title": "准备好可视化眉形了吗？",
+    "cta_body": "试用我们的眉毛模拟器 — 在任何手术前，用您自己的照片预览12种风格。",
+    "cta_button": "打开眉毛模拟器 →"
   }
 }

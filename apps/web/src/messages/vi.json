@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "Cơ sở Kiến thức",
+    "title": "Hướng dẫn Khởi nghiệp",
+    "subtitle": "Mọi thứ bạn cần để khởi động và phát triển doanh nghiệp microblading — từ lưỡi dao đầu tiên đến studio hoàn chỉnh.",
+    "stat_guides": "Hướng dẫn Chuyên gia",
+    "stat_topics": "Chủ đề",
+    "stat_access": "Miễn phí",
+    "disclaimer_title": "Chỉ Nội dung Giáo dục",
+    "disclaimer_body": "Tất cả hướng dẫn chỉ nhằm mục đích thông tin. Luôn xác minh cấp phép địa phương và các quy định y tế trong khu vực của bạn.",
+    "category_startup": "Khởi nghiệp",
+    "category_technique": "Kỹ thuật",
+    "category_marketing": "Tiếp thị",
+    "read_button": "Đọc",
+    "min_read": "phút đọc",
+    "cta_title": "Sẵn sàng hình dung các kiểu lông mày?",
+    "cta_body": "Thử trình mô phỏng lông mày của chúng tôi — xem trước 12 kiểu trên ảnh của bạn trước bất kỳ thủ thuật nào.",
+    "cta_button": "Mở Trình mô phỏng Lông mày →"
   }
 }

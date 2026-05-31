@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "Wissensdatenbank",
+    "title": "Startup-Leitfaden",
+    "subtitle": "Alles, was Sie brauchen, um Ihr Microblading-Geschäft zu starten und auszubauen — vom ersten Blade bis zum vollständigen Studio.",
+    "stat_guides": "Expertenanleitungen",
+    "stat_topics": "Themen",
+    "stat_access": "Kostenlos",
+    "disclaimer_title": "Nur zu Bildungszwecken",
+    "disclaimer_body": "Alle Anleitungen dienen nur zu Informationszwecken. Überprüfen Sie stets die lokalen Lizenz- und Gesundheitsvorschriften in Ihrer Region.",
+    "category_startup": "Startup",
+    "category_technique": "Technik",
+    "category_marketing": "Marketing",
+    "read_button": "Lesen",
+    "min_read": "Min. Lesezeit",
+    "cta_title": "Bereit, Augenbrauen-Stile zu visualisieren?",
+    "cta_body": "Probieren Sie unseren Brauensimulator — sehen Sie 12 Stile auf Ihrem eigenen Foto vor einem Eingriff.",
+    "cta_button": "Brauensimulator öffnen →"
   }
 }

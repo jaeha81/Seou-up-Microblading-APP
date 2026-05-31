@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "Base di Conoscenza",
+    "title": "Guida all'Avvio",
+    "subtitle": "Tutto ciò di cui hai bisogno per avviare e far crescere la tua attività di microblading — dalla prima lama allo studio completo.",
+    "stat_guides": "Guide Esperte",
+    "stat_topics": "Argomenti",
+    "stat_access": "Gratuito",
+    "disclaimer_title": "Solo Contenuto Educativo",
+    "disclaimer_body": "Tutte le guide sono solo a scopo informativo. Verifica sempre le licenze locali e le normative sanitarie nella tua giurisdizione.",
+    "category_startup": "Avvio",
+    "category_technique": "Tecnica",
+    "category_marketing": "Marketing",
+    "read_button": "Leggi",
+    "min_read": "min di lettura",
+    "cta_title": "Pronto a visualizzare gli stili di sopracciglia?",
+    "cta_body": "Prova il nostro simulatore di sopracciglia — anteprima 12 stili sulla tua foto prima di qualsiasi procedura.",
+    "cta_button": "Apri il Simulatore di Sopracciglia →"
   }
 }

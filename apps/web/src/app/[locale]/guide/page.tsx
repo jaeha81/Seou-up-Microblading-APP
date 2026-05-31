@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 interface GuideArticle {
@@ -27,24 +28,38 @@ const FALLBACK_GUIDES: GuideArticle[] = [
   { id: 5, slug: "aftercare-and-healing",                title_en: "Aftercare & Healing: What Clients Need to Know",                title_ko: "사후 관리 및 치유: 고객이 알아야 할 것",          body_en: "Proper aftercare is essential for long-lasting results. Guide your clients through the healing process.", category: "technique" },
 ];
 
-const CATEGORY_CONFIG: Record<string, { icon: string; label: string; color: string; bg: string }> = {
-  startup:   { icon: "🚀", label: "Startup",   color: "text-blue-700",   bg: "bg-blue-50 border-blue-200" },
-  technique: { icon: "🎨", label: "Technique", color: "text-green-700",  bg: "bg-green-50 border-green-200" },
-  marketing: { icon: "📣", label: "Marketing", color: "text-purple-700", bg: "bg-purple-50 border-purple-200" },
+const READ_TIME: Record<string, string> = {
+  "microblading-business-basics":         "8",
+  "equipment-and-tools":                  "6",
+  "client-consultation-guide":            "7",
+  "marketing-your-microblading-business": "5",
+  "aftercare-and-healing":                "4",
 };
 
-const READ_TIME: Record<string, string> = {
-  "microblading-business-basics":         "8 min read",
-  "equipment-and-tools":                  "6 min read",
-  "client-consultation-guide":            "7 min read",
-  "marketing-your-microblading-business": "5 min read",
-  "aftercare-and-healing":                "4 min read",
+const CATEGORY_ICONS: Record<string, string> = {
+  startup:   "🚀",
+  technique: "🎨",
+  marketing: "📣",
+};
+
+const CATEGORY_STYLES: Record<string, string> = {
+  startup:   "text-blue-700 bg-blue-50 border-blue-200",
+  technique: "text-green-700 bg-green-50 border-green-200",
+  marketing: "text-purple-700 bg-purple-50 border-purple-200",
 };
 
 export default async function GuidePage({ params }: { params: { locale: string } }) {
+  const { locale } = params;
+  const t = await getTranslations({ locale, namespace: "guide" });
+
   const guides = await getGuides();
   const displayGuides = guides.length > 0 ? guides : FALLBACK_GUIDES;
-  const locale = params.locale;
+
+  const categoryLabels: Record<string, string> = {
+    startup:   t("category_startup"),
+    technique: t("category_technique"),
+    marketing: t("category_marketing"),
+  };
 
   return (
     <div className="min-h-screen bg-stone-50">
@@ -52,25 +67,24 @@ export default async function GuidePage({ params }: { params: { locale: string }
       <div className="bg-gradient-to-br from-stone-900 to-stone-800 text-white px-6 py-16">
         <div className="max-w-4xl mx-auto">
           <span className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-4 block">
-            Knowledge Base
+            {t("badge")}
           </span>
           <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            Startup Guide
+            {t("title")}
           </h1>
           <p className="text-stone-300 text-lg max-w-xl">
-            Everything you need to launch and grow your microblading business —
-            from first blade to full studio.
+            {t("subtitle")}
           </p>
 
           <div className="flex flex-wrap gap-8 mt-8">
             {[
-              { v: displayGuides.length.toString(), l: "Expert Guides" },
-              { v: "3", l: "Topics" },
-              { v: "Free", l: "Access" },
-            ].map((s) => (
-              <div key={s.l}>
+              { v: displayGuides.length.toString(), l: t("stat_guides") },
+              { v: "3",    l: t("stat_topics") },
+              { v: t("stat_access"), l: "" },
+            ].map((s, i) => (
+              <div key={i}>
                 <div className="text-2xl font-bold text-white">{s.v}</div>
-                <div className="text-xs text-stone-400">{s.l}</div>
+                {s.l && <div className="text-xs text-stone-400">{s.l}</div>}
               </div>
             ))}
           </div>
@@ -82,19 +96,18 @@ export default async function GuidePage({ params }: { params: { locale: string }
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-8 text-sm text-amber-800 flex items-start gap-2">
           <span className="shrink-0">⚠️</span>
           <span>
-            <strong>Educational Content Only</strong> — All guides are for informational purposes.
-            Always verify local licensing and health regulations in your jurisdiction.
+            <strong>{t("disclaimer_title")}</strong> — {t("disclaimer_body")}
           </span>
         </div>
 
         {/* Category legend */}
         <div className="flex flex-wrap gap-2 mb-8">
-          {Object.entries(CATEGORY_CONFIG).map(([key, cfg]) => (
+          {(["startup", "technique", "marketing"] as const).map((key) => (
             <span
               key={key}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border ${cfg.bg} ${cfg.color}`}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border ${CATEGORY_STYLES[key]}`}
             >
-              {cfg.icon} {cfg.label}
+              {CATEGORY_ICONS[key]} {categoryLabels[key]}
             </span>
           ))}
         </div>
@@ -102,9 +115,12 @@ export default async function GuidePage({ params }: { params: { locale: string }
         {/* Guide cards */}
         <div className="space-y-4">
           {displayGuides.map((article, idx) => {
-            const cfg = CATEGORY_CONFIG[article.category ?? ""];
+            const catStyle = CATEGORY_STYLES[article.category ?? ""];
+            const catIcon  = CATEGORY_ICONS[article.category ?? ""];
+            const catLabel = categoryLabels[article.category ?? ""] ?? article.category;
             const title = locale === "ko" && article.title_ko ? article.title_ko : article.title_en;
             const excerpt = article.body_en?.substring(0, 120);
+            const readTime = READ_TIME[article.slug] ?? "5";
 
             return (
               <div
@@ -115,16 +131,16 @@ export default async function GuidePage({ params }: { params: { locale: string }
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-3 flex-wrap">
-                        {cfg && (
-                          <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full border ${cfg.bg} ${cfg.color}`}>
-                            {cfg.icon} {cfg.label}
+                        {catStyle && (
+                          <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full border ${catStyle}`}>
+                            {catIcon} {catLabel}
                           </span>
                         )}
                         <span className="inline-flex items-center gap-1 text-xs font-medium text-stone-500 bg-stone-50 border border-stone-200 px-2.5 py-1 rounded-full">
                           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
-                          {READ_TIME[article.slug] ?? "5 min read"}
+                          {readTime} {t("min_read")}
                         </span>
                         <span className="text-xs text-stone-300">·</span>
                         <span className="text-xs text-stone-400">#{idx + 1}</span>
@@ -145,7 +161,7 @@ export default async function GuidePage({ params }: { params: { locale: string }
                       href={`/${locale}/guide/${article.slug}`}
                       className="shrink-0 flex items-center gap-1.5 bg-stone-50 hover:bg-brand-50 hover:text-brand-600 text-stone-600 text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors border border-stone-200 hover:border-brand-200"
                     >
-                      Read <span>→</span>
+                      {t("read_button")} <span>→</span>
                     </Link>
                   </div>
                 </div>
@@ -156,15 +172,13 @@ export default async function GuidePage({ params }: { params: { locale: string }
 
         {/* CTA */}
         <div className="mt-10 bg-brand-500 rounded-2xl p-8 text-white text-center">
-          <h3 className="font-serif text-2xl font-bold mb-2">Ready to visualize brow styles?</h3>
-          <p className="text-brand-100 text-sm mb-5">
-            Try our brow simulator — preview 12 styles on your own photo before any procedure.
-          </p>
+          <h3 className="font-serif text-2xl font-bold mb-2">{t("cta_title")}</h3>
+          <p className="text-brand-100 text-sm mb-5">{t("cta_body")}</p>
           <Link
             href={`/${locale}/simulate`}
             className="inline-flex items-center gap-2 bg-white hover:bg-stone-50 text-brand-600 font-semibold px-6 py-3 rounded-xl transition-all shadow"
           >
-            ✨ Open Brow Simulator →
+            ✨ {t("cta_button")}
           </Link>
         </div>
       </div>

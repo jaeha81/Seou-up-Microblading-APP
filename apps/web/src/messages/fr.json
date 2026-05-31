@@ -230,5 +230,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "Base de Connaissances",
+    "title": "Guide de Démarrage",
+    "subtitle": "Tout ce qu'il vous faut pour lancer et développer votre activité de microblading — de la première lame au studio complet.",
+    "stat_guides": "Guides Experts",
+    "stat_topics": "Sujets",
+    "stat_access": "Gratuit",
+    "disclaimer_title": "Contenu Éducatif Uniquement",
+    "disclaimer_body": "Tous les guides sont à des fins d'information uniquement. Vérifiez toujours les licences locales et les réglementations sanitaires dans votre région.",
+    "category_startup": "Démarrage",
+    "category_technique": "Technique",
+    "category_marketing": "Marketing",
+    "read_button": "Lire",
+    "min_read": "min de lecture",
+    "cta_title": "Prêt à visualiser les styles de sourcils ?",
+    "cta_body": "Essayez notre simulateur de sourcils — prévisualisez 12 styles sur votre propre photo avant toute procédure.",
+    "cta_button": "Ouvrir le Simulateur de Sourcils →"
   }
 }

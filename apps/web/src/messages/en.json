@@ -308,5 +308,23 @@
     "upgrade_body": "Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.",
     "upgrade_cta": "See Plans →",
     "session_label": "Session"
+  },
+  "guide": {
+    "badge": "Knowledge Base",
+    "title": "Startup Guide",
+    "subtitle": "Everything you need to launch and grow your microblading business — from first blade to full studio.",
+    "stat_guides": "Expert Guides",
+    "stat_topics": "Topics",
+    "stat_access": "Free",
+    "disclaimer_title": "Educational Content Only",
+    "disclaimer_body": "All guides are for informational purposes. Always verify local licensing and health regulations in your jurisdiction.",
+    "category_startup": "Startup",
+    "category_technique": "Technique",
+    "category_marketing": "Marketing",
+    "read_button": "Read",
+    "min_read": "min read",
+    "cta_title": "Ready to visualize brow styles?",
+    "cta_body": "Try our brow simulator — preview 12 styles on your own photo before any procedure.",
+    "cta_button": "Open Brow Simulator →"
   }
 }
