@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 
 const LANGUAGES = [
@@ -25,7 +25,6 @@ const LANGUAGES = [
 ];
 
 export default function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
-  const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -43,7 +42,7 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
   const handleSwitch = (code: string) => {
     const segments = pathname.split("/");
     segments[1] = code;
-    router.push(segments.join("/"));
+    window.location.href = segments.join("/");
     setOpen(false);
   };
 
