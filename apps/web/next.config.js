@@ -26,7 +26,7 @@ const nextConfig = {
     ];
   },
   async rewrites() {
-    const apiPort = process.env.API_PORT || "8001";
+    const apiPort = process.env.API_PORT || "8000";
     return [
       {
         source: "/api/:path*",
