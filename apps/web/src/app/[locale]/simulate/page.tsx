@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import api from "@/lib/api";
 
 interface EyebrowStyle {
@@ -45,19 +46,21 @@ const STYLE_META: Record<string, { desc: string }> = {
 };
 
 type SimStatus = "idle" | "selecting" | "processing" | "done" | "error";
-
 type SaveStatus = "idle" | "saving" | "saved" | "error";
-
-const STEPS = [
-  { n: 1, label: "Choose Style" },
-  { n: 2, label: "Upload Photo" },
-  { n: 3, label: "Preview Result" },
-];
 
 export default function SimulatePage() {
   const params = useParams();
   const locale = params.locale as string;
+  const t = useTranslations("simulate");
+  const tAuth = useTranslations("auth");
+  const tCommon = useTranslations("common");
   const fileRef = useRef<HTMLInputElement>(null);
+
+  const STEPS = [
+    { n: 1, label: t("step_choose_style") },
+    { n: 2, label: t("step_upload_photo") },
+    { n: 3, label: t("step_preview_result") },
+  ];
 
   const [styles, setStyles] = useState<EyebrowStyle[]>(FALLBACK_STYLES);
   const [selectedStyle, setSelectedStyle] = useState<EyebrowStyle | null>(null);
@@ -112,7 +115,7 @@ export default function SimulatePage() {
       setResult(processed.output_image_url || preview);
       setStatus("done");
     } catch {
-      setError("Simulation failed. Please try again.");
+      setError(t("error_sign_in"));
       setStatus("error");
     }
   };
@@ -158,15 +161,15 @@ export default function SimulatePage() {
         <div className="max-w-4xl mx-auto">
           <div className="flex items-start justify-between gap-4 mb-6">
             <div>
-              <h1 className="text-2xl font-bold text-stone-900 mb-1">Brow Simulator</h1>
-              <p className="text-stone-500 text-sm">Preview 12 styles on your own photo — free &amp; instant</p>
+              <h1 className="text-2xl font-bold text-stone-900 mb-1">{t("title")}</h1>
+              <p className="text-stone-500 text-sm">{t("subtitle_full")}</p>
             </div>
             {status !== "idle" && (
               <button
                 onClick={handleReset}
                 className="text-xs text-stone-400 hover:text-stone-600 transition-colors px-3 py-1.5 border border-stone-200 rounded-lg"
               >
-                ↺ Reset
+                ↺ {t("reset")}
               </button>
             )}
           </div>
@@ -207,8 +210,7 @@ export default function SimulatePage() {
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-6 text-sm text-amber-800 flex items-start gap-2">
           <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
           <span>
-            <strong>Visualization Only</strong> — Results are for illustration only.
-            Not a guarantee of procedure outcomes. Always consult a licensed professional.
+            <strong>{t("disclaimer").split("—")[0].trim()}</strong> — {t("viz_only_full")}
           </span>
         </div>
 
@@ -222,7 +224,7 @@ export default function SimulatePage() {
                 }`}>
                   {selectedStyle ? "✓" : "1"}
                 </div>
-                <span className="font-semibold text-stone-900 text-sm">Choose a Style</span>
+                <span className="font-semibold text-stone-900 text-sm">{t("choose_a_style")}</span>
               </div>
               {selectedStyle && (
                 <span className="text-xs bg-brand-50 text-brand-600 px-2.5 py-1 rounded-full font-medium">
@@ -261,9 +263,9 @@ export default function SimulatePage() {
                   }`}>
                     {preview ? "✓" : "2"}
                   </div>
-                  <span className="font-semibold text-stone-900 text-sm">Upload Your Photo</span>
+                  <span className="font-semibold text-stone-900 text-sm">{t("upload_your_photo")}</span>
                 </div>
-                <span className="text-xs text-stone-400">9:16 portrait</span>
+                <span className="text-xs text-stone-400">{t("portrait_hint")}</span>
               </div>
 
               <div className="p-4">
@@ -276,7 +278,7 @@ export default function SimulatePage() {
                     className="mt-0.5 w-4 h-4 rounded border-stone-300 text-brand-500 focus:ring-brand-400 shrink-0 cursor-pointer"
                   />
                   <span className="text-xs text-stone-600 leading-relaxed group-hover:text-stone-800 transition-colors">
-                    I agree that this image will be processed by AI and used for simulation only.
+                    {t("consent_label")}
                   </span>
                 </label>
 
@@ -294,8 +296,8 @@ export default function SimulatePage() {
                     ) : (
                       <div className="text-center text-stone-400 px-4">
                         <svg className="w-10 h-10 mx-auto mb-2 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
-                        <div className="text-sm font-medium">Click to upload</div>
-                        <div className="text-xs mt-1 text-stone-300">Front-facing portrait works best</div>
+                        <div className="text-sm font-medium">{t("click_to_upload")}</div>
+                        <div className="text-xs mt-1 text-stone-300">{t("portrait_tip")}</div>
                       </div>
                     )}
                   </div>
@@ -313,7 +315,7 @@ export default function SimulatePage() {
                     disabled={!agreeConsent}
                     className="w-full text-xs text-stone-400 hover:text-stone-600 transition-colors py-1 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    Click to change photo
+                    {t("change_photo")}
                   </button>
                 )}
               </div>
@@ -334,26 +336,25 @@ export default function SimulatePage() {
               {status === "processing" ? (
                 <span className="flex items-center justify-center gap-2">
                   <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin inline-block" />
-                  Simulating...
+                  {t("running")}
                 </span>
               ) : !selectedStyle ? (
-                "← Select a style first"
+                `← ${t("select_style_first")}`
               ) : !preview ? (
-                "← Upload your photo"
+                `← ${t("upload_photo_first")}`
               ) : !agreeConsent ? (
-                "← Agree to the consent above"
+                `← ${t("agree_first")}`
               ) : (
-                "Run Simulation →"
+                `${t("run_simulation")} →`
               )}
             </button>
 
             {status === "error" && (
               <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-700">
-                {error}{" "}
+                {t("failed_to_save")}{" "}
                 <Link href={`/${locale}/auth/login`} className="underline font-medium">
-                  Sign in
-                </Link>{" "}
-                if not logged in.
+                  {tAuth("sign_in_link")}
+                </Link>
               </div>
             )}
           </div>
@@ -366,7 +367,7 @@ export default function SimulatePage() {
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold">✓</div>
                 <span className="font-semibold text-stone-900 text-sm">
-                  Simulation Complete —{" "}
+                  {t("simulation_complete")} —{" "}
                   <span className="text-brand-600">
                     {selectedStyle && getStyleName(selectedStyle)}
                   </span>
@@ -376,14 +377,14 @@ export default function SimulatePage() {
                 onClick={handleReset}
                 className="text-xs text-brand-500 hover:text-brand-600 font-medium"
               >
-                Try another →
+                {t("try_another")} →
               </button>
             </div>
 
             <div className="p-4">
               <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <p className="text-xs text-stone-400 font-semibold uppercase tracking-widest mb-2 text-center">Before</p>
+                  <p className="text-xs text-stone-400 font-semibold uppercase tracking-widest mb-2 text-center">{t("before")}</p>
                   <div className="relative w-full" style={{ paddingBottom: "177.78%" }}>
                     <div className="absolute inset-0 bg-stone-100 rounded-xl overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -392,7 +393,7 @@ export default function SimulatePage() {
                   </div>
                 </div>
                 <div>
-                  <p className="text-xs text-brand-500 font-semibold uppercase tracking-widest mb-2 text-center">After</p>
+                  <p className="text-xs text-brand-500 font-semibold uppercase tracking-widest mb-2 text-center">{t("after")}</p>
                   <div className="relative w-full" style={{ paddingBottom: "177.78%" }}>
                     <div className="absolute inset-0 bg-stone-100 rounded-xl overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -408,9 +409,7 @@ export default function SimulatePage() {
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-stone-400 text-center mb-5">
-                Mock simulation · Visualization only · Not a procedure guarantee
-              </p>
+              <p className="text-xs text-stone-400 text-center mb-5">{t("mock_note")}</p>
 
               {/* ── CRM Save Panel ── */}
               <div className="border-t border-stone-100 pt-5">
@@ -420,53 +419,53 @@ export default function SimulatePage() {
                       onClick={() => setShowCrmPanel(true)}
                       className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-400 text-white font-semibold px-6 py-3 rounded-2xl transition-all shadow-md hover:-translate-y-0.5 text-sm"
                     >
-                      💾 Save to Client CRM
+                      💾 {t("save_to_crm")}
                     </button>
                     <Link
                       href={`/${locale}/clinic`}
                       className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 border border-stone-200 hover:border-stone-300 text-stone-700 font-semibold px-6 py-3 rounded-2xl transition-all text-sm"
                     >
-                      Open Clinic Dashboard →
+                      {t("open_clinic")} →
                     </Link>
                   </div>
                 ) : saveStatus === "saved" ? (
                   <div className="bg-green-50 border border-green-200 rounded-2xl p-5 text-center">
                     <div className="text-2xl mb-2">✅</div>
                     <p className="font-bold text-green-800 text-sm">
-                      Saved to CRM{clientName ? ` — ${clientName}` : ""}
+                      {t("saved_to_crm_title")}{clientName ? ` — ${clientName}` : ""}
                     </p>
                     <p className="text-green-600 text-xs mt-1 mb-3">
-                      Simulation #{simulationId} has been linked to the client record.
+                      {t("sim_linked")}
                     </p>
                     <Link
                       href={`/${locale}/clinic`}
                       className="text-xs text-brand-500 hover:text-brand-600 font-semibold underline"
                     >
-                      View in Clinic Dashboard →
+                      {t("view_in_clinic")} →
                     </Link>
                   </div>
                 ) : (
                   <div className="bg-stone-50 border border-stone-100 rounded-2xl p-5">
                     <h3 className="font-semibold text-stone-900 text-sm mb-3 flex items-center gap-2">
-                      <span>💾</span> Save to Client CRM
+                      <span>💾</span> {t("save_to_crm")}
                     </h3>
                     <div className="space-y-3 mb-4">
                       <div>
-                        <label className="block text-xs font-medium text-stone-600 mb-1">Client Name</label>
+                        <label className="block text-xs font-medium text-stone-600 mb-1">{t("client_name_label")}</label>
                         <input
                           type="text"
                           value={clientName}
                           onChange={(e) => setClientName(e.target.value)}
-                          placeholder="Client name (optional)"
+                          placeholder={t("client_name_placeholder")}
                           className="w-full border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent bg-white"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-stone-600 mb-1">Session Notes</label>
+                        <label className="block text-xs font-medium text-stone-600 mb-1">{t("notes_label")}</label>
                         <textarea
                           value={saveNote}
                           onChange={(e) => setSaveNote(e.target.value)}
-                          placeholder="Consultation notes, client preferences, skin condition..."
+                          placeholder={t("notes_placeholder")}
                           rows={3}
                           className="w-full border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent resize-none bg-white"
                         />
@@ -474,9 +473,7 @@ export default function SimulatePage() {
                     </div>
                     {saveStatus === "error" && (
                       <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-xs text-red-700 mb-3">
-                        Failed to save. Please{" "}
-                        <Link href={`/${locale}/auth/login`} className="underline font-medium">sign in</Link>{" "}
-                        and try again.
+                        {t("failed_to_save")}
                       </div>
                     )}
                     <div className="flex gap-3">
@@ -484,7 +481,7 @@ export default function SimulatePage() {
                         onClick={() => setShowCrmPanel(false)}
                         className="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-600 font-medium rounded-xl text-sm transition-colors"
                       >
-                        Cancel
+                        {tCommon("cancel")}
                       </button>
                       <button
                         onClick={handleSaveToCrm}
@@ -494,9 +491,9 @@ export default function SimulatePage() {
                         {saveStatus === "saving" ? (
                           <span className="flex items-center justify-center gap-2">
                             <span className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                            Saving…
+                            {t("saving")}
                           </span>
-                        ) : "Save to CRM"}
+                        ) : t("save_button")}
                       </button>
                     </div>
                   </div>
@@ -510,13 +507,13 @@ export default function SimulatePage() {
         {status === "idle" && (
           <div className="mt-6 grid sm:grid-cols-3 gap-3">
             {[
-              { icon: "💡", tip: "Use a front-facing photo with good lighting for best results" },
-              { icon: "📐", tip: "Portrait orientation (9:16) works best for accurate simulation" },
-              { icon: "🔒", tip: "Your photos are private and automatically deleted after 30 days" },
-            ].map((t) => (
-              <div key={t.tip} className="bg-white rounded-xl p-4 border border-stone-100 flex items-start gap-3">
-                <span className="text-lg shrink-0">{t.icon}</span>
-                <p className="text-xs text-stone-500 leading-relaxed">{t.tip}</p>
+              { icon: "💡", tip: t("tip1") },
+              { icon: "📐", tip: t("tip2") },
+              { icon: "🔒", tip: t("tip3") },
+            ].map((tip) => (
+              <div key={tip.tip} className="bg-white rounded-xl p-4 border border-stone-100 flex items-start gap-3">
+                <span className="text-lg shrink-0">{tip.icon}</span>
+                <p className="text-xs text-stone-500 leading-relaxed">{tip.tip}</p>
               </div>
             ))}
           </div>

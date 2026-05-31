@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import api from "@/lib/api";
 
 const UserIcon = () => (
@@ -21,34 +22,36 @@ const ChartIcon = () => (
   </svg>
 );
 
-const ROLES = [
-  {
-    value: "consumer",
-    label: "Consumer",
-    desc: "I want to explore brow styles for myself",
-    Icon: UserIcon,
-    detail: "Access the brow simulator and find listed providers near you.",
-  },
-  {
-    value: "pro",
-    label: "Pro Artist",
-    desc: "I'm a licensed microblading professional",
-    Icon: BriefcaseIcon,
-    detail: "Manage client sessions, run consultations, and track your work.",
-  },
-  {
-    value: "founder",
-    label: "Entrepreneur",
-    desc: "I want to start a microblading business",
-    Icon: ChartIcon,
-    detail: "Access startup guides, business resources, and industry insights.",
-  },
-];
-
 export default function RegisterPage() {
   const params = useParams();
   const locale = params.locale as string;
   const router = useRouter();
+  const t = useTranslations("auth");
+  const tCommon = useTranslations("common");
+
+  const ROLES = [
+    {
+      value: "consumer",
+      label: t("role_consumer"),
+      desc: t("role_consumer_desc"),
+      Icon: UserIcon,
+      detail: t("role_consumer_detail"),
+    },
+    {
+      value: "pro",
+      label: t("role_pro"),
+      desc: t("role_pro_desc"),
+      Icon: BriefcaseIcon,
+      detail: t("role_pro_detail"),
+    },
+    {
+      value: "founder",
+      label: t("role_founder"),
+      desc: t("role_founder_desc"),
+      Icon: ChartIcon,
+      detail: t("role_founder_detail"),
+    },
+  ];
 
   const [step, setStep] = useState<1 | 2>(1);
   const [role, setRole] = useState("consumer");
@@ -68,7 +71,7 @@ export default function RegisterPage() {
       router.push(`/${locale}/onboarding`);
     } catch (err: unknown) {
       const msg = (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail;
-      setError(msg || "Registration failed. Please try again.");
+      setError(msg || t("registration_failed"));
     } finally {
       setLoading(false);
     }
@@ -88,10 +91,10 @@ export default function RegisterPage() {
         </div>
         <div>
           <h2 className="font-serif text-3xl font-bold leading-tight mb-4">
-            Start your brow journey today
+            {t("register_start_journey_title")}
           </h2>
           <p className="text-stone-400 text-sm leading-relaxed mb-8">
-            Join thousands exploring microblading styles and building their beauty businesses.
+            {t("register_start_journey_sub")}
           </p>
           <div className="space-y-3">
             {ROLES.map((r) => (
@@ -110,7 +113,7 @@ export default function RegisterPage() {
           </div>
         </div>
         <p className="text-xs text-stone-600">
-          Visualization platform only. Not a licensed medical or procedure provider.
+          {t("viz_only_short")}
         </p>
       </div>
 
@@ -137,7 +140,7 @@ export default function RegisterPage() {
                   {step > s ? "✓" : s}
                 </div>
                 <span className={`text-xs font-medium ${step >= s ? "text-stone-700" : "text-stone-400"}`}>
-                  {s === 1 ? "Choose Role" : "Account Details"}
+                  {s === 1 ? t("register_step1_label") : t("register_step2_label")}
                 </span>
                 {s < 2 && <div className="w-8 h-px bg-stone-200 mx-1" />}
               </div>
@@ -145,9 +148,11 @@ export default function RegisterPage() {
           </div>
 
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-stone-900 mb-1">Create Account</h1>
+            <h1 className="text-2xl font-bold text-stone-900 mb-1">{t("register_title")}</h1>
             <p className="text-stone-500 text-sm">
-              {step === 1 ? "Tell us who you are to personalize your experience" : `Creating your ${selectedRole.label} account`}
+              {step === 1
+                ? t("register_personalize")
+                : t("register_creating_account", { role: selectedRole.label })}
             </p>
           </div>
 
@@ -170,7 +175,7 @@ export default function RegisterPage() {
                         <div className="font-semibold text-stone-900 flex items-center gap-2">
                           {r.label}
                           {role === r.value && (
-                            <span className="text-brand-500 text-xs">✓ Selected</span>
+                            <span className="text-brand-500 text-xs">✓ {t("selected")}</span>
                           )}
                         </div>
                         <div className="text-xs text-stone-500 mt-0.5">{r.desc}</div>
@@ -183,7 +188,7 @@ export default function RegisterPage() {
                 onClick={() => setStep(2)}
                 className="w-full bg-brand-500 hover:bg-brand-600 text-white font-semibold py-3 rounded-xl transition-all"
               >
-                Continue as {selectedRole.label} →
+                {t("register_continue_as", { role: selectedRole.label })} →
               </button>
             </div>
           ) : (
@@ -196,18 +201,18 @@ export default function RegisterPage() {
               )}
 
               <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1.5">Full Name</label>
+                <label className="block text-sm font-medium text-stone-700 mb-1.5">{t("full_name")}</label>
                 <input
                   type="text"
                   value={form.full_name}
                   onChange={(e) => setForm({ ...form, full_name: e.target.value })}
                   className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-brand-400 transition-colors bg-white"
-                  placeholder="Your name"
+                  placeholder={t("your_name_placeholder")}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1.5">Email</label>
+                <label className="block text-sm font-medium text-stone-700 mb-1.5">{t("email")}</label>
                 <input
                   type="email"
                   value={form.email}
@@ -219,14 +224,14 @@ export default function RegisterPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1.5">Password</label>
+                <label className="block text-sm font-medium text-stone-700 mb-1.5">{t("password")}</label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     value={form.password}
                     onChange={(e) => setForm({ ...form, password: e.target.value })}
                     className="w-full border border-stone-200 rounded-xl px-4 py-3 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-brand-400 transition-colors bg-white"
-                    placeholder="Min 8 characters"
+                    placeholder={t("password_placeholder")}
                     minLength={8}
                     required
                   />
@@ -236,7 +241,7 @@ export default function RegisterPage() {
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 text-xs px-1 py-1"
                     tabIndex={-1}
                   >
-                    {showPassword ? "Hide" : "Show"}
+                    {showPassword ? t("hide_password") : t("show_password")}
                   </button>
                 </div>
               </div>
@@ -247,7 +252,7 @@ export default function RegisterPage() {
                   onClick={() => setStep(1)}
                   className="flex-1 border border-stone-200 text-stone-600 font-medium py-3 rounded-xl hover:bg-stone-50 transition-colors"
                 >
-                  ← Back
+                  ← {tCommon("back")}
                 </button>
                 <button
                   type="submit"
@@ -257,10 +262,10 @@ export default function RegisterPage() {
                   {loading ? (
                     <>
                       <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                      Creating...
+                      {t("register_creating")}
                     </>
                   ) : (
-                    "Create Account"
+                    t("create_account")
                   )}
                 </button>
               </div>
@@ -268,9 +273,9 @@ export default function RegisterPage() {
           )}
 
           <p className="text-center text-sm text-stone-500 mt-6">
-            Already have an account?{" "}
+            {t("have_account")}{" "}
             <Link href={`/${locale}/auth/login`} className="text-brand-500 font-semibold hover:text-brand-600 transition-colors">
-              Sign in
+              {t("sign_in_link")}
             </Link>
           </p>
         </div>

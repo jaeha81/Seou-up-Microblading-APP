@@ -1,4 +1,5 @@
 import { getRequestConfig } from "next-intl/server";
+import type { AbstractIntlMessages } from "next-intl";
 import { routing } from "./routing";
 
 export default getRequestConfig(async ({ requestLocale }) => {
@@ -6,13 +7,13 @@ export default getRequestConfig(async ({ requestLocale }) => {
   if (!locale || !routing.locales.includes(locale as (typeof routing.locales)[number])) {
     locale = routing.defaultLocale;
   }
-  const localeMessages = (await import(`./messages/${locale}.json`)).default;
+  const localeMessages = (await import(`./messages/${locale}.json`)).default as AbstractIntlMessages;
   const fallbackMessages = locale !== "en"
-    ? (await import(`./messages/en.json`)).default
-    : {};
+    ? (await import(`./messages/en.json`)).default as AbstractIntlMessages
+    : {} as AbstractIntlMessages;
   return {
     locale,
-    messages: deepMerge(fallbackMessages as Record<string, unknown>, localeMessages),
+    messages: deepMerge(fallbackMessages as Record<string, unknown>, localeMessages as Record<string, unknown>) as AbstractIntlMessages,
   };
 });
 

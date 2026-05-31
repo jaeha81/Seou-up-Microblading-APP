@@ -3,6 +3,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import type { MapProvider } from "@/components/ProviderMap";
 
 const ProviderMap = dynamic(() => import("@/components/ProviderMap"), { ssr: false });
@@ -25,6 +26,9 @@ interface Provider {
 
 export default function ProvidersPage({ params }: { params: { locale: string } }) {
   const locale = params.locale;
+  const t = useTranslations("providers");
+  const tLanding = useTranslations("landing");
+
   const [providers, setProviders] = useState<Provider[]>([]);
   const [showMap, setShowMap] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -56,24 +60,24 @@ export default function ProvidersPage({ params }: { params: { locale: string } }
     <div className="min-h-screen bg-stone-50">
       <div className="bg-gradient-to-br from-stone-900 to-stone-800 text-white px-6 py-16">
         <div className="max-w-5xl mx-auto">
-          <span className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-4 block">Directory</span>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">Find Listed Providers</h1>
-          <p className="text-stone-300 text-lg max-w-xl">Discover listed microblading studios near you.</p>
+          <span className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-4 block">{t("directory_label")}</span>
+          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">{t("title")}</h1>
+          <p className="text-stone-300 text-lg max-w-xl">{t("subtitle")}</p>
         </div>
       </div>
 
       <div className="max-w-5xl mx-auto px-6 py-10">
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-6 text-sm text-amber-800 flex items-start gap-2">
           <span className="shrink-0">⚠️</span>
-          <span><strong>Disclaimer</strong> — Seou-up does not certify providers. Always verify credentials before booking.</span>
+          <span><strong>Disclaimer</strong> — {t("disclaimer")}</span>
         </div>
 
         {providers.length > 0 && (
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-4">
-              <span className="text-sm text-stone-500"><strong className="text-stone-900">{providers.length}</strong> listed</span>
+              <span className="text-sm text-stone-500"><strong className="text-stone-900">{providers.length}</strong> {t("listed")}</span>
               <span className="text-stone-300">·</span>
-              <span className="text-sm text-stone-500"><strong className="text-green-600">{providers.filter((p) => p.is_verified).length}</strong> verified</span>
+              <span className="text-sm text-stone-500"><strong className="text-green-600">{providers.filter((p) => p.is_verified).length}</strong> {t("verified")}</span>
             </div>
             <div className="flex gap-2">
               <button onClick={() => setShowMap(false)} className={listToggleBase + (!showMap ? activeToggle : inactiveToggle)}>📋 List</button>
@@ -85,18 +89,18 @@ export default function ProvidersPage({ params }: { params: { locale: string } }
         {loading ? (
           <div className="text-center py-16 text-stone-400">
             <div className="animate-spin w-8 h-8 border-2 border-brand-400 border-t-transparent rounded-full mx-auto mb-3" />
-            Loading providers...
+            {t("loading")}
           </div>
         ) : providers.length === 0 ? (
           <div className="text-center py-16">
             <div className="text-5xl mb-4">📍</div>
-            <h2 className="font-serif text-2xl font-bold text-stone-800 mb-3">No providers listed yet</h2>
-            <Link href={`/${locale}/auth/register`} className="inline-flex items-center gap-2 bg-brand-500 text-white font-semibold px-6 py-3 rounded-xl">📋 List Your Studio</Link>
+            <h2 className="font-serif text-2xl font-bold text-stone-800 mb-3">{t("no_providers_title")}</h2>
+            <Link href={`/${locale}/auth/register`} className="inline-flex items-center gap-2 bg-brand-500 text-white font-semibold px-6 py-3 rounded-xl">📋 {t("list_your_studio")}</Link>
           </div>
         ) : showMap ? (
           <div className="mb-10">
             <ProviderMap providers={mapProviders} locale={locale} height="500px" />
-            <p className="text-xs text-stone-400 mt-2 text-center">Map &#169; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap</a></p>
+            <p className="text-xs text-stone-400 mt-2 text-center">{t("map_credit")} &#169; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap</a></p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-4 mb-10">
@@ -109,21 +113,21 @@ export default function ProvidersPage({ params }: { params: { locale: string } }
                       <div className="flex items-start justify-between gap-2 flex-wrap">
                         <h3 className="font-bold text-stone-900 leading-tight">{p.business_name}</h3>
                         <div className="flex gap-1.5 shrink-0">
-                          {p.plan === "paid_plan" && <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">⭐ Featured</span>}
-                          {p.is_verified && <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">✓ Verified</span>}
+                          {p.plan === "paid_plan" && <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">⭐ {t("featured_badge")}</span>}
+                          {p.is_verified && <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">✓ {t("verified_label")}</span>}
                         </div>
                       </div>
-                      <p className="text-sm text-stone-500 mt-0.5">{[p.city, p.country].filter(Boolean).join(", ") || "Location not listed"}</p>
+                      <p className="text-sm text-stone-500 mt-0.5">{[p.city, p.country].filter(Boolean).join(", ") || "—"}</p>
                     </div>
                   </div>
                   {p.description && <p className="text-sm text-stone-600 leading-relaxed mb-4 line-clamp-2">{p.description}</p>}
                   <div className="flex items-center justify-between gap-3 pt-3 border-t border-stone-50">
                     <div className="flex gap-3 flex-wrap">
                       {p.phone && <a href={`tel:${p.phone}`} className="text-xs text-stone-500 hover:text-brand-500">📞 {p.phone}</a>}
-                      {p.website_url && <a href={p.website_url} target="_blank" rel="noopener noreferrer" className="text-xs text-stone-500 hover:text-brand-500">🌐 Website</a>}
-                      {p.instagram_url && <a href={p.instagram_url} target="_blank" rel="noopener noreferrer" className="text-xs text-stone-500 hover:text-brand-500">📸 IG</a>}
+                      {p.website_url && <a href={p.website_url} target="_blank" rel="noopener noreferrer" className="text-xs text-stone-500 hover:text-brand-500">🌐 {t("website_label")}</a>}
+                      {p.instagram_url && <a href={p.instagram_url} target="_blank" rel="noopener noreferrer" className="text-xs text-stone-500 hover:text-brand-500">📸 {t("instagram_label")}</a>}
                     </div>
-                    <Link href={`/${locale}/providers/${p.id}`} className="shrink-0 text-xs font-semibold text-brand-600">View Profile →</Link>
+                    <Link href={`/${locale}/providers/${p.id}`} className="shrink-0 text-xs font-semibold text-brand-600">{t("view_profile")} →</Link>
                   </div>
                 </div>
               </div>
@@ -132,11 +136,11 @@ export default function ProvidersPage({ params }: { params: { locale: string } }
         )}
 
         <div className="bg-stone-900 rounded-2xl p-8 text-white text-center">
-          <h3 className="font-serif text-2xl font-bold mb-2">Are you a microblading professional?</h3>
-          <p className="text-stone-400 text-sm mb-5">List free or upgrade to Featured for more visibility.</p>
+          <h3 className="font-serif text-2xl font-bold mb-2">{tLanding("feature3_title")}</h3>
+          <p className="text-stone-400 text-sm mb-5">{tLanding("feature3_desc")}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href={`/${locale}/auth/register`} className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white font-semibold px-6 py-3 rounded-xl">📋 List Free →</Link>
-            <Link href={`/${locale}/pricing`} className="inline-flex items-center gap-2 border border-yellow-400 text-yellow-300 font-semibold px-6 py-3 rounded-xl">⭐ Featured Plans →</Link>
+            <Link href={`/${locale}/auth/register`} className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white font-semibold px-6 py-3 rounded-xl">📋 {t("list_your_studio")} →</Link>
+            <Link href={`/${locale}/pricing`} className="inline-flex items-center gap-2 border border-yellow-400 text-yellow-300 font-semibold px-6 py-3 rounded-xl">⭐ {tLanding("pricing_cta")}</Link>
           </div>
         </div>
       </div>

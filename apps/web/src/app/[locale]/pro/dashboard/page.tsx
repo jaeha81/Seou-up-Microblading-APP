@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import api from "@/lib/api";
 
 interface Simulation {
@@ -118,9 +119,17 @@ function StatCard({
 export default function ProDashboardPage() {
   const params = useParams();
   const locale = params.locale as string;
+  const t = useTranslations("pro_dashboard");
   const [simulations, setSimulations] = useState<Simulation[]>([]);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<"sessions" | "clients">("sessions");
+
+  const QUICK_ACTIONS = [
+    { label: t("action_consultation"), href: `/${locale}/pro/session`, icon: "+" },
+    { label: t("action_simulator"), href: `/${locale}/simulate`, icon: "✦" },
+    { label: t("action_guides"), href: `/${locale}/guide`, icon: "◎" },
+    { label: t("action_profile"), href: `/${locale}/profile`, icon: "◈" },
+  ];
 
   useEffect(() => {
     api
@@ -138,7 +147,6 @@ export default function ProDashboardPage() {
   });
   const withNotes = simulations.filter((s) => s.session_note);
 
-  // Derive mock clients from simulations for display
   const mockClients: Client[] = simulations.slice(0, 8).map((sim, i) => ({
     id: sim.id,
     name: `Client #${String(i + 1).padStart(3, "0")}`,
@@ -156,26 +164,24 @@ export default function ProDashboardPage() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="text-xs font-semibold uppercase tracking-widest text-brand-500 bg-brand-50 px-2 py-0.5 rounded-md">
-                Pro Clinic
+                {t("badge")}
               </span>
             </div>
-            <h1 className="text-2xl font-bold text-stone-900">Clinic Dashboard</h1>
-            <p className="text-stone-500 text-sm mt-0.5">
-              Manage consultations, track clients, and monitor your growth.
-            </p>
+            <h1 className="text-2xl font-bold text-stone-900">{t("title")}</h1>
+            <p className="text-stone-500 text-sm mt-0.5">{t("subtitle")}</p>
           </div>
           <div className="flex items-center gap-3">
             <Link
               href={`/${locale}/pricing`}
               className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-yellow-700 bg-yellow-50 border border-yellow-200 px-3 py-2 rounded-lg hover:bg-yellow-100 transition-colors"
             >
-              Upgrade to Agency
+              {t("upgrade_agency")}
             </Link>
             <Link
               href={`/${locale}/pro/session`}
               className="bg-brand-500 hover:bg-brand-600 text-white font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm"
             >
-              + New Session
+              {t("new_session")}
             </Link>
           </div>
         </div>
@@ -186,38 +192,37 @@ export default function ProDashboardPage() {
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 flex items-start gap-2">
           <span className="shrink-0 font-bold">!</span>
           <span>
-            <strong>Professional Use Only</strong> — Sessions are for consultation visualization.
-            Always hold valid local licenses before performing procedures.
+            <strong>{t("disclaimer_title")}</strong> — {t("disclaimer_body")}
           </span>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <StatCard
-            label="Total Sessions"
+            label={t("stat_total")}
             value={simulations.length}
-            sub="All time"
+            sub={t("stat_total_sub")}
             accent="brand"
             loading={loading}
           />
           <StatCard
-            label="This Month"
+            label={t("stat_month")}
             value={thisMonth.length}
             sub={new Date().toLocaleString("en", { month: "long", year: "numeric" })}
             accent="green"
             loading={loading}
           />
           <StatCard
-            label="Completed"
+            label={t("stat_completed")}
             value={completed.length}
-            sub={`${simulations.length > 0 ? Math.round((completed.length / simulations.length) * 100) : 0}% completion rate`}
+            sub={`${simulations.length > 0 ? Math.round((completed.length / simulations.length) * 100) : 0}${t("stat_completed_sub")}`}
             accent="gold"
             loading={loading}
           />
           <StatCard
-            label="With Notes"
+            label={t("stat_notes")}
             value={withNotes.length}
-            sub="Sessions documented"
+            sub={t("stat_notes_sub")}
             accent="stone"
             loading={loading}
           />
@@ -225,12 +230,7 @@ export default function ProDashboardPage() {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {[
-            { label: "New Consultation", href: `/${locale}/pro/session`, icon: "+" },
-            { label: "Brow Simulator", href: `/${locale}/simulate`, icon: "✦" },
-            { label: "View Guides", href: `/${locale}/guide`, icon: "◎" },
-            { label: "Manage Profile", href: `/${locale}/profile`, icon: "◈" },
-          ].map((a) => (
+          {QUICK_ACTIONS.map((a) => (
             <Link
               key={a.label}
               href={a.href}
@@ -250,17 +250,17 @@ export default function ProDashboardPage() {
         <div className="bg-white rounded-2xl shadow-sm border border-stone-100">
           <div className="px-6 pt-5 border-b border-stone-100">
             <div className="flex items-center gap-1">
-              {(["sessions", "clients"] as const).map((t) => (
+              {(["sessions", "clients"] as const).map((tabKey) => (
                 <button
-                  key={t}
-                  onClick={() => setTab(t)}
+                  key={tabKey}
+                  onClick={() => setTab(tabKey)}
                   className={`px-4 py-2 text-sm font-semibold rounded-t-lg -mb-px border-b-2 transition-colors ${
-                    tab === t
+                    tab === tabKey
                       ? "border-brand-500 text-brand-600"
                       : "border-transparent text-stone-400 hover:text-stone-600"
                   }`}
                 >
-                  {t === "sessions" ? "Recent Sessions" : "Clients"}
+                  {tabKey === "sessions" ? t("tab_sessions") : t("tab_clients")}
                 </button>
               ))}
             </div>
@@ -269,18 +269,18 @@ export default function ProDashboardPage() {
           {tab === "sessions" && (
             <>
               {loading ? (
-                <div className="p-10 text-center text-stone-400 text-sm">Loading sessions…</div>
+                <div className="p-10 text-center text-stone-400 text-sm">{t("loading_sessions")}</div>
               ) : simulations.length === 0 ? (
                 <div className="p-12 text-center">
                   <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
                     📋
                   </div>
-                  <p className="text-stone-500 text-sm mb-3">No sessions yet.</p>
+                  <p className="text-stone-500 text-sm mb-3">{t("no_sessions_title")}</p>
                   <Link
                     href={`/${locale}/pro/session`}
                     className="text-brand-500 hover:text-brand-400 text-sm font-semibold"
                   >
-                    Start your first session →
+                    {t("no_sessions_cta")}
                   </Link>
                 </div>
               ) : (
@@ -293,7 +293,7 @@ export default function ProDashboardPage() {
                         </div>
                         <div>
                           <div className="font-medium text-stone-900 text-sm">
-                            Session #{sim.id}
+                            {t("session_label")} #{sim.id}
                             {sim.eyebrow_style_id && (
                               <span className="ml-2 text-xs text-stone-400 font-normal">
                                 — {STYLE_NAMES[sim.eyebrow_style_id] ?? `Style ${sim.eyebrow_style_id}`}
@@ -331,7 +331,7 @@ export default function ProDashboardPage() {
                   ))}
                   {simulations.length > 10 && (
                     <div className="px-6 py-3 text-xs text-stone-400 text-center">
-                      Showing 10 of {simulations.length} sessions
+                      {t("showing_of", { shown: 10, total: simulations.length })}
                     </div>
                   )}
                 </div>
@@ -342,25 +342,23 @@ export default function ProDashboardPage() {
           {tab === "clients" && (
             <>
               {loading ? (
-                <div className="p-10 text-center text-stone-400 text-sm">Loading clients…</div>
+                <div className="p-10 text-center text-stone-400 text-sm">{t("loading_clients")}</div>
               ) : mockClients.length === 0 ? (
                 <div className="p-12 text-center">
                   <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
                     👥
                   </div>
-                  <p className="text-stone-500 text-sm mb-1">No clients tracked yet.</p>
-                  <p className="text-xs text-stone-400">
-                    Start a session to automatically create client records.
-                  </p>
+                  <p className="text-stone-500 text-sm mb-1">{t("no_clients_title")}</p>
+                  <p className="text-xs text-stone-400">{t("no_clients_sub")}</p>
                 </div>
               ) : (
                 <>
                   <div className="px-6 py-3 border-b border-stone-50 bg-stone-50/50">
                     <div className="grid grid-cols-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">
-                      <span>Client</span>
-                      <span>Preferred Style</span>
-                      <span>Sessions</span>
-                      <span>Last Visit</span>
+                      <span>{t("client_col_client")}</span>
+                      <span>{t("client_col_style")}</span>
+                      <span>{t("client_col_sessions")}</span>
+                      <span>{t("client_col_last")}</span>
                     </div>
                   </div>
                   <div className="divide-y divide-stone-50">
@@ -392,9 +390,7 @@ export default function ProDashboardPage() {
                     ))}
                   </div>
                   <div className="px-6 py-3 border-t border-stone-100 bg-stone-50/50">
-                    <p className="text-xs text-stone-400">
-                      Client records are derived from session data. Full CRM available on Agency plan.
-                    </p>
+                    <p className="text-xs text-stone-400">{t("clients_footer")}</p>
                   </div>
                 </>
               )}
@@ -406,17 +402,15 @@ export default function ProDashboardPage() {
         <div className="bg-gradient-to-r from-stone-900 to-stone-800 rounded-2xl px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <div className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-1">
-              Upgrade
+              {t("upgrade_label")}
             </div>
-            <p className="text-white font-semibold text-sm">
-              Get unlimited consultations, full CRM, analytics & Featured badge on Agency plan.
-            </p>
+            <p className="text-white font-semibold text-sm">{t("upgrade_body")}</p>
           </div>
           <Link
             href={`/${locale}/pricing`}
             className="shrink-0 bg-yellow-400 hover:bg-yellow-300 text-stone-900 font-bold px-5 py-2.5 rounded-xl text-sm transition-colors"
           >
-            See Plans →
+            {t("upgrade_cta")}
           </Link>
         </div>
       </div>

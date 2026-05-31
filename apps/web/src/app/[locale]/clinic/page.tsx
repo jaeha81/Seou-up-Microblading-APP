@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import api from "@/lib/api";
 
 type ClinicData = {
@@ -31,9 +32,9 @@ type Member = {
   role: string;
 };
 
-const PLAN_LABELS: Record<string, { label: string; price: string; color: string }> = {
-  basic: { label: "Basic Clinic", price: "$49/mo", color: "bg-blue-100 text-blue-800" },
-  pro:   { label: "Pro Clinic",   price: "$99/mo", color: "bg-purple-100 text-purple-800" },
+const PLAN_COLORS: Record<string, string> = {
+  basic: "bg-blue-100 text-blue-800",
+  pro:   "bg-purple-100 text-purple-800",
 };
 
 const STATUS_COLOR: Record<string, string> = {
@@ -43,33 +44,35 @@ const STATUS_COLOR: Record<string, string> = {
   cancelled: "text-stone-400",
 };
 
+const PLAN_PRICE: Record<string, string> = {
+  basic: "$49/mo",
+  pro:   "$99/mo",
+};
+
 export default function ClinicPage({ params }: { params: { locale: string } }) {
   const locale = params.locale;
+  const t = useTranslations("clinic");
+  const tCommon = useTranslations("common");
 
   const [mine, setMine] = useState<MineResponse | null>(null);
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Create clinic form
   const [creating, setCreating] = useState(false);
   const [form, setForm] = useState({ name: "", city: "", country: "", phone: "", website_url: "" });
   const [createError, setCreateError] = useState("");
   const [createLoading, setCreateLoading] = useState(false);
 
-  // Invite member
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteRole, setInviteRole] = useState("staff");
   const [inviteMsg, setInviteMsg] = useState("");
   const [inviteLoading, setInviteLoading] = useState(false);
 
-  // Checkout
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
 
-  useEffect(() => {
-    fetchMine();
-  }, []);
+  useEffect(() => { fetchMine(); }, []);
 
   async function fetchMine() {
     setLoading(true);
@@ -82,7 +85,7 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
         setMembers(mems);
       }
     } catch {
-      setError("Failed to load clinic data. Make sure you are logged in.");
+      setError(t("error_load"));
     } finally {
       setLoading(false);
     }
@@ -90,7 +93,7 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.name.trim()) { setCreateError("Clinic name is required."); return; }
+    if (!form.name.trim()) { setCreateError(t("field_name") + " is required."); return; }
     setCreateLoading(true);
     setCreateError("");
     try {
@@ -102,7 +105,7 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
         err && typeof err === "object" && "response" in err
           ? (err as { response?: { data?: { detail?: string } } }).response?.data?.detail
           : undefined;
-      setCreateError(detail ?? "Failed to create clinic.");
+      setCreateError(detail ?? t("error_create"));
     } finally {
       setCreateLoading(false);
     }
@@ -126,7 +129,7 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
         err && typeof err === "object" && "response" in err
           ? (err as { response?: { data?: { detail?: string } } }).response?.data?.detail
           : undefined;
-      setInviteMsg(detail ?? "Failed to invite member.");
+      setInviteMsg(detail ?? t("error_invite"));
     } finally {
       setInviteLoading(false);
     }
@@ -138,7 +141,7 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
       await api.delete(`/api/clinics/${mine.clinic.id}/members/${userId}`);
       fetchMine();
     } catch {
-      alert("Failed to remove member.");
+      alert(t("error_remove"));
     }
   }
 
@@ -147,16 +150,14 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
     setCheckoutLoading(true);
     setCheckoutError("");
     try {
-      const { data } = await api.post(
-        `/api/clinics/${mine.clinic.id}/checkout?plan=${plan}`
-      );
+      const { data } = await api.post(`/api/clinics/${mine.clinic.id}/checkout?plan=${plan}`);
       if (data.checkout_url) window.location.href = data.checkout_url;
     } catch (err: unknown) {
       const detail =
         err && typeof err === "object" && "response" in err
           ? (err as { response?: { data?: { detail?: string } } }).response?.data?.detail
           : undefined;
-      setCheckoutError(detail ?? "Checkout failed. Ensure Stripe is configured.");
+      setCheckoutError(detail ?? t("error_checkout"));
     } finally {
       setCheckoutLoading(false);
     }
@@ -165,7 +166,7 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-stone-50 flex items-center justify-center">
-        <div className="text-stone-400 text-sm animate-pulse">Loading clinic dashboard…</div>
+        <div className="text-stone-400 text-sm animate-pulse">{t("loading")}</div>
       </div>
     );
   }
@@ -177,7 +178,7 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
           {error}
           <br />
           <a href={`/${locale}/auth/login`} className="underline mt-2 inline-block">
-            Sign in
+            {t("sign_in")}
           </a>
         </div>
       </div>
@@ -190,100 +191,92 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
       <div className="min-h-screen bg-stone-50">
         <div className="bg-gradient-to-br from-stone-900 to-stone-800 text-white px-6 py-14 text-center">
           <span className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-3 block">
-            B2B Dashboard
+            {t("portal_label")}
           </span>
-          <h1 className="font-serif text-4xl font-bold mb-3">Clinic Portal</h1>
-          <p className="text-stone-300 text-lg max-w-lg mx-auto">
-            Manage your studio team, AI simulations, and subscription — all in one place.
-          </p>
+          <h1 className="font-serif text-4xl font-bold mb-3">{t("portal_title")}</h1>
+          <p className="text-stone-300 text-lg max-w-lg mx-auto">{t("portal_subtitle")}</p>
         </div>
 
         <div className="max-w-lg mx-auto px-6 py-14">
           {!creating ? (
             <div className="text-center">
-              <p className="text-stone-500 mb-6">You have not registered a clinic yet.</p>
+              <p className="text-stone-500 mb-6">{t("no_clinic")}</p>
               <button
                 onClick={() => setCreating(true)}
                 className="bg-stone-900 hover:bg-stone-700 text-white font-bold py-3 px-8 rounded-xl transition-colors"
               >
-                Register Your Clinic
+                {t("register_button")}
               </button>
               <p className="text-xs text-stone-400 mt-4">
-                Already on the Pro plan?{" "}
-                <a href={`/${locale}/pricing`} className="underline">
-                  View pricing
-                </a>
+                {t("already_pro")}{" "}
+                <a href={`/${locale}/pricing`} className="underline">{t("view_pricing")}</a>
               </p>
             </div>
           ) : (
             <form onSubmit={handleCreate} className="bg-white rounded-2xl shadow-sm border border-stone-200 p-8 space-y-4">
-              <h2 className="text-xl font-bold text-stone-900 mb-2">Register Clinic</h2>
+              <h2 className="text-xl font-bold text-stone-900 mb-2">{t("form_title")}</h2>
               <div>
-                <label className="text-sm font-medium text-stone-700 block mb-1">
-                  Clinic Name *
-                </label>
+                <label className="text-sm font-medium text-stone-700 block mb-1">{t("field_name")} *</label>
                 <input
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="e.g. Seoul Beauty Studio"
+                  placeholder={t("field_name_placeholder")}
                   className="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400"
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-sm font-medium text-stone-700 block mb-1">City</label>
+                  <label className="text-sm font-medium text-stone-700 block mb-1">{t("field_city")}</label>
                   <input
                     value={form.city}
                     onChange={(e) => setForm({ ...form, city: e.target.value })}
-                    placeholder="Seoul"
+                    placeholder={t("field_city_placeholder")}
                     className="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400"
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-stone-700 block mb-1">Country</label>
+                  <label className="text-sm font-medium text-stone-700 block mb-1">{t("field_country")}</label>
                   <input
                     value={form.country}
                     onChange={(e) => setForm({ ...form, country: e.target.value })}
-                    placeholder="Korea"
+                    placeholder={t("field_country_placeholder")}
                     className="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400"
                   />
                 </div>
               </div>
               <div>
-                <label className="text-sm font-medium text-stone-700 block mb-1">Phone</label>
+                <label className="text-sm font-medium text-stone-700 block mb-1">{t("field_phone")}</label>
                 <input
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  placeholder="+82 10-0000-0000"
+                  placeholder={t("field_phone_placeholder")}
                   className="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400"
                 />
               </div>
               <div>
-                <label className="text-sm font-medium text-stone-700 block mb-1">Website</label>
+                <label className="text-sm font-medium text-stone-700 block mb-1">{t("field_website")}</label>
                 <input
                   value={form.website_url}
                   onChange={(e) => setForm({ ...form, website_url: e.target.value })}
-                  placeholder="https://yourstudio.com"
+                  placeholder={t("field_website_placeholder")}
                   className="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400"
                 />
               </div>
-              {createError && (
-                <p className="text-red-600 text-sm">{createError}</p>
-              )}
+              {createError && <p className="text-red-600 text-sm">{createError}</p>}
               <div className="flex gap-3 pt-2">
                 <button
                   type="submit"
                   disabled={createLoading}
                   className="flex-1 bg-stone-900 hover:bg-stone-700 text-white font-bold py-2.5 rounded-xl transition-colors disabled:opacity-60"
                 >
-                  {createLoading ? "Creating…" : "Create Clinic"}
+                  {createLoading ? t("creating") : t("create_button")}
                 </button>
                 <button
                   type="button"
                   onClick={() => setCreating(false)}
                   className="px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium rounded-xl transition-colors"
                 >
-                  Cancel
+                  {tCommon("cancel")}
                 </button>
               </div>
             </form>
@@ -295,17 +288,24 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
 
   // ── Clinic Dashboard ───────────────────────────────────────────────────────
   const clinic = mine.clinic;
-  const planInfo = PLAN_LABELS[clinic.plan] ?? PLAN_LABELS.basic;
+  const planColor = PLAN_COLORS[clinic.plan] ?? PLAN_COLORS.basic;
+  const planLabel = clinic.plan === "pro" ? t("plan_pro_label") : t("plan_basic_label");
+  const planPrice = PLAN_PRICE[clinic.plan] ?? PLAN_PRICE.basic;
   const statusColor = STATUS_COLOR[clinic.plan_status] ?? "text-stone-500";
+  const statusLabels: Record<string, string> = {
+    trialing: t("status_trialing"),
+    active: t("status_active"),
+    past_due: t("status_past_due"),
+    cancelled: t("status_cancelled"),
+  };
   const isOwner = mine.my_role === "owner";
 
   return (
     <div className="min-h-screen bg-stone-50">
-      {/* Header */}
       <div className="bg-gradient-to-br from-stone-900 to-stone-800 text-white px-6 py-12">
         <div className="max-w-4xl mx-auto">
           <span className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-2 block">
-            Clinic Dashboard
+            {t("dashboard_label")}
           </span>
           <h1 className="font-serif text-3xl font-bold">{clinic.name}</h1>
           <p className="text-stone-400 text-sm mt-1">
@@ -319,20 +319,18 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
         <div className="md:col-span-1">
           <div className="bg-white rounded-2xl shadow-sm border border-stone-200 p-6">
             <h2 className="text-sm font-semibold text-stone-500 uppercase tracking-wider mb-4">
-              Subscription
+              {t("section_subscription")}
             </h2>
             <div className="flex items-center gap-2 mb-1">
-              <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${planInfo.color}`}>
-                {planInfo.label}
-              </span>
+              <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${planColor}`}>{planLabel}</span>
             </div>
-            <p className="text-2xl font-bold text-stone-900 mt-1">{planInfo.price}</p>
+            <p className="text-2xl font-bold text-stone-900 mt-1">{planPrice}</p>
             <p className={`text-sm font-medium mt-1 ${statusColor}`}>
-              {clinic.plan_status.charAt(0).toUpperCase() + clinic.plan_status.slice(1)}
+              {statusLabels[clinic.plan_status] ?? clinic.plan_status}
             </p>
             {clinic.current_period_end && (
               <p className="text-xs text-stone-400 mt-1">
-                Renews {new Date(clinic.current_period_end).toLocaleDateString()}
+                {t("renews")} {new Date(clinic.current_period_end).toLocaleDateString()}
               </p>
             )}
 
@@ -343,7 +341,7 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
                   disabled={checkoutLoading}
                   className="w-full bg-yellow-400 hover:bg-yellow-500 text-stone-900 font-bold py-2.5 rounded-xl text-sm transition-colors disabled:opacity-60"
                 >
-                  {checkoutLoading ? "Redirecting…" : "Upgrade to Pro — $99/mo"}
+                  {checkoutLoading ? t("redirecting") : t("upgrade_to_pro")}
                 </button>
               </div>
             )}
@@ -354,25 +352,23 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
                   disabled={checkoutLoading}
                   className="w-full bg-stone-900 hover:bg-stone-700 text-white font-bold py-2.5 rounded-xl text-sm transition-colors disabled:opacity-60"
                 >
-                  {checkoutLoading ? "Redirecting…" : "Subscribe — $49/mo"}
+                  {checkoutLoading ? t("redirecting") : t("subscribe")}
                 </button>
               </div>
             )}
-            {checkoutError && (
-              <p className="text-red-600 text-xs mt-2">{checkoutError}</p>
-            )}
+            {checkoutError && <p className="text-red-600 text-xs mt-2">{checkoutError}</p>}
 
             <div className="mt-4 pt-4 border-t border-stone-100 text-xs text-stone-400 space-y-1">
               <div className="flex justify-between">
-                <span>Staff limit</span>
+                <span>{t("staff_limit")}</span>
                 <span className="font-medium text-stone-600">
-                  {clinic.plan === "pro" ? "Unlimited" : "3"}
+                  {clinic.plan === "pro" ? t("unlimited") : "3"}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span>Simulations</span>
+                <span>{t("simulations")}</span>
                 <span className="font-medium text-stone-600">
-                  {clinic.plan === "pro" ? "Unlimited" : "300/mo"}
+                  {clinic.plan === "pro" ? t("unlimited") : "300/mo"}
                 </span>
               </div>
             </div>
@@ -384,17 +380,14 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
           <div className="bg-white rounded-2xl shadow-sm border border-stone-200 p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-semibold text-stone-500 uppercase tracking-wider">
-                Team ({mine.member_count ?? members.length})
+                {t("section_team")} ({mine.member_count ?? members.length})
               </h2>
             </div>
-
             <div className="divide-y divide-stone-100">
               {members.map((m) => (
                 <div key={m.user_id} className="flex items-center justify-between py-3">
                   <div>
-                    <p className="text-sm font-medium text-stone-900">
-                      {m.full_name || m.email}
-                    </p>
+                    <p className="text-sm font-medium text-stone-900">{m.full_name || m.email}</p>
                     <p className="text-xs text-stone-400">{m.email}</p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -406,7 +399,7 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
                         onClick={() => handleRemoveMember(m.user_id)}
                         className="text-xs text-red-500 hover:text-red-700 font-medium"
                       >
-                        Remove
+                        {t("remove")}
                       </button>
                     )}
                   </div>
@@ -414,16 +407,15 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
               ))}
             </div>
 
-            {/* Invite form */}
             {isOwner && (
               <form onSubmit={handleInvite} className="mt-5 pt-4 border-t border-stone-100">
-                <p className="text-sm font-medium text-stone-700 mb-3">Invite Staff Member</p>
+                <p className="text-sm font-medium text-stone-700 mb-3">{t("invite_title")}</p>
                 <div className="flex gap-2">
                   <input
                     type="email"
                     value={inviteEmail}
                     onChange={(e) => setInviteEmail(e.target.value)}
-                    placeholder="staff@example.com"
+                    placeholder={t("invite_placeholder")}
                     className="flex-1 border border-stone-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400"
                   />
                   <select
@@ -431,15 +423,15 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
                     onChange={(e) => setInviteRole(e.target.value)}
                     className="border border-stone-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400 bg-white"
                   >
-                    <option value="staff">Staff</option>
-                    <option value="manager">Manager</option>
+                    <option value="staff">{t("role_staff")}</option>
+                    <option value="manager">{t("role_manager")}</option>
                   </select>
                   <button
                     type="submit"
                     disabled={inviteLoading}
                     className="bg-stone-900 hover:bg-stone-700 text-white font-bold px-4 py-2 rounded-lg text-sm transition-colors disabled:opacity-60"
                   >
-                    {inviteLoading ? "…" : "Invite"}
+                    {inviteLoading ? "…" : t("invite_button")}
                   </button>
                 </div>
                 {inviteMsg && (
@@ -448,9 +440,7 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
                   </p>
                 )}
                 {clinic.plan === "basic" && (
-                  <p className="text-xs text-stone-400 mt-1">
-                    Basic plan: max 3 staff. Upgrade to Pro for unlimited.
-                  </p>
+                  <p className="text-xs text-stone-400 mt-1">{t("invite_basic_limit")}</p>
                 )}
               </form>
             )}
@@ -459,29 +449,25 @@ export default function ClinicPage({ params }: { params: { locale: string } }) {
           {/* Clinic Info */}
           <div className="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 mt-6">
             <h2 className="text-sm font-semibold text-stone-500 uppercase tracking-wider mb-4">
-              Clinic Info
+              {t("section_info")}
             </h2>
             <div className="grid grid-cols-2 gap-y-3 text-sm">
               {clinic.phone && (
                 <>
-                  <span className="text-stone-400">Phone</span>
+                  <span className="text-stone-400">{t("info_phone")}</span>
                   <span className="text-stone-700 font-medium">{clinic.phone}</span>
                 </>
               )}
               {clinic.website_url && (
                 <>
-                  <span className="text-stone-400">Website</span>
-                  <a
-                    href={clinic.website_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 underline font-medium truncate"
-                  >
+                  <span className="text-stone-400">{t("info_website")}</span>
+                  <a href={clinic.website_url} target="_blank" rel="noopener noreferrer"
+                    className="text-blue-600 underline font-medium truncate">
                     {clinic.website_url}
                   </a>
                 </>
               )}
-              <span className="text-stone-400">Slug</span>
+              <span className="text-stone-400">{t("info_slug")}</span>
               <span className="text-stone-700 font-mono text-xs">{clinic.slug}</span>
             </div>
           </div>
