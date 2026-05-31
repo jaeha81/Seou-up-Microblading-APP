@@ -18,7 +18,11 @@
     "login": "Se connecter",
     "register": "Créer un compte",
     "profile": "Profil",
-    "admin": "Admin"
+    "admin": "Admin",
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "get_started": "Commencer gratuitement",
+    "sign_out": "Déconnexion"
   },
   "landing": {
     "hero_title": "Seou-up Microblading",

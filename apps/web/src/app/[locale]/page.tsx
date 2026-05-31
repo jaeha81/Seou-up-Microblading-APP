@@ -309,7 +309,11 @@ export default async function LandingPage({
                   "Share results via link or PDF",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm text-stone-600">
-                    <span className="w-5 h-5 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                    <span className="w-5 h-5 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                    </span>
                     {item}
                   </li>
                 ))}
@@ -407,7 +411,7 @@ export default async function LandingPage({
                   "Community access",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-stone-400">
-                    <span className="text-stone-500 mt-0.5 shrink-0">✓</span>
+                    <svg className="w-4 h-4 text-stone-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                     {item}
                   </li>
                 ))}
@@ -434,7 +438,7 @@ export default async function LandingPage({
                   "Analytics dashboard",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-stone-300">
-                    <span className="text-brand-400 mt-0.5 shrink-0">✓</span>
+                    <svg className="w-4 h-4 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                     {item}
                   </li>
                 ))}
@@ -461,7 +465,7 @@ export default async function LandingPage({
                   "Priority support & API",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-stone-300">
-                    <span className="text-yellow-400 mt-0.5 shrink-0">✓</span>
+                    <svg className="w-4 h-4 text-yellow-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                     {item}
                   </li>
                 ))}

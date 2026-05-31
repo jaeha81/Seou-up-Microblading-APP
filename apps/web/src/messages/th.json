@@ -18,7 +18,11 @@
     "login": "เข้าสู่ระบบ",
     "register": "สร้างบัญชี",
     "profile": "โปรไฟล์",
-    "admin": "ผู้ดูแลระบบ"
+    "admin": "ผู้ดูแลระบบ",
+    "features": "ฟีเจอร์",
+    "pricing": "ราคา",
+    "get_started": "เริ่มต้นฟรี",
+    "sign_out": "ออกจากระบบ"
   },
   "landing": {
     "hero_title": "Seou-up Microblading",

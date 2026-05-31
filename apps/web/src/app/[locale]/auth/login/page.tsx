@@ -3,12 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import api from "@/lib/api";
 
 export default function LoginPage() {
   const params = useParams();
   const locale = params.locale as string;
   const router = useRouter();
+  const t = useTranslations("auth");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -88,7 +90,7 @@ export default function LoginPage() {
           </div>
 
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-stone-900 mb-1">Sign In</h1>
+            <h1 className="text-2xl font-bold text-stone-900 mb-1">{t("login_title")}</h1>
             <p className="text-stone-500 text-sm">Welcome back to Seou-up Microblading</p>
           </div>
 
@@ -101,7 +103,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-stone-700 mb-1.5">Email</label>
+              <label className="block text-sm font-medium text-stone-700 mb-1.5">{t("email")}</label>
               <input
                 type="email"
                 value={email}
@@ -113,7 +115,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-stone-700 mb-1.5">Password</label>
+              <label className="block text-sm font-medium text-stone-700 mb-1.5">{t("password")}</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -145,7 +147,7 @@ export default function LoginPage() {
                   Signing in...
                 </>
               ) : (
-                "Sign In →"
+                `${t("sign_in")} →`
               )}
             </button>
           </form>
@@ -197,9 +199,9 @@ export default function LoginPage() {
 
           <div className="mt-6 text-center">
             <p className="text-sm text-stone-500">
-              Don&apos;t have an account?{" "}
+              {t("no_account")}{" "}
               <Link href={`/${locale}/auth/register`} className="text-brand-500 font-semibold hover:text-brand-600 transition-colors">
-                Create account
+                {t("create_account")}
               </Link>
             </p>
           </div>

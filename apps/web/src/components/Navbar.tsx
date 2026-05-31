@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 interface AuthUser {
@@ -12,17 +13,18 @@ interface AuthUser {
   role: string;
 }
 
-const NAV_LINKS = [
-  { key: "simulate", href: "/simulate", label: "Brow Simulator", highlight: false },
-  { key: "features", href: "/features", label: "Features", highlight: false },
-  { key: "providers", href: "/providers", label: "Find Providers", highlight: false },
-  { key: "pricing", href: "/pricing", label: "Pricing", highlight: true },
-];
-
 export default function Navbar() {
   const params = useParams();
   const pathname = usePathname();
   const locale = (params?.locale as string) || "en";
+  const t = useTranslations("nav");
+
+  const NAV_LINKS = [
+    { key: "simulate", href: "/simulate", label: t("simulate"), highlight: false },
+    { key: "features", href: "/features", label: t("features"), highlight: false },
+    { key: "providers", href: "/providers", label: t("providers"), highlight: false },
+    { key: "pricing", href: "/pricing", label: t("pricing"), highlight: true },
+  ];
 
   const [user, setUser] = useState<AuthUser | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -144,7 +146,7 @@ export default function Navbar() {
                 onClick={handleLogout}
                 className="text-xs text-stone-400 hover:text-stone-600 transition-colors px-2 py-1"
               >
-                Sign out
+                {t("sign_out")}
               </button>
             </div>
           ) : (
@@ -153,13 +155,13 @@ export default function Navbar() {
                 href={`/${locale}/auth/login`}
                 className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-1.5 rounded-lg hover:bg-stone-50 transition-colors"
               >
-                Sign In
+                {t("login")}
               </Link>
               <Link
                 href={`/${locale}/auth/register`}
                 className="text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 px-4 py-1.5 rounded-lg transition-colors"
               >
-                Get Started
+                {t("get_started")}
               </Link>
             </div>
           )}
@@ -257,7 +259,7 @@ export default function Navbar() {
                   className="w-full text-left flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
                 >
                   <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" /></svg>
-                  <span>Sign Out</span>
+                  <span>{t("sign_out")}</span>
                 </button>
               </div>
             ) : (
@@ -267,14 +269,14 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="block px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-stone-50 text-center transition-colors"
                 >
-                  Sign In
+                  {t("login")}
                 </Link>
                 <Link
                   href={`/${locale}/auth/register`}
                   onClick={() => setMenuOpen(false)}
                   className="block px-3 py-2.5 rounded-xl text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 text-center transition-colors"
                 >
-                  Get Started
+                  {t("get_started")}
                 </Link>
               </div>
             )}

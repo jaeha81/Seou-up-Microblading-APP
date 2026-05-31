@@ -18,7 +18,11 @@
     "login": "Đăng nhập",
     "register": "Tạo tài khoản",
     "profile": "Hồ sơ",
-    "admin": "Quản trị viên"
+    "admin": "Quản trị viên",
+    "features": "Tính năng",
+    "pricing": "Bảng giá",
+    "get_started": "Bắt đầu miễn phí",
+    "sign_out": "Đăng xuất"
   },
   "landing": {
     "hero_title": "Seou-up Microblading",
