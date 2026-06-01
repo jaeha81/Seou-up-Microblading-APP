@@ -55,19 +55,75 @@ class BaseSimulationAdapter:
 
 
 class MockAdapter(BaseSimulationAdapter):
-    """Returns a deterministic mock result immediately — no AI dependencies."""
+    """Draws proportional eyebrow overlays without AI dependencies."""
+
+    # (r,g,b,alpha) per style_id; default used for unknown ids
+    STYLE_COLORS = {
+        1:  (70,  50, 25, 140),
+        2:  (40,  25, 12, 175),
+        3:  (55,  38, 18, 155),
+        4:  (25,  15,  5, 220),
+        5:  (75,  55, 30, 130),
+        6:  (45,  30, 15, 165),
+        7:  (35,  22, 10, 190),
+        8:  (80,  60, 35, 120),
+        9:  (50,  35, 18, 150),
+        10: (65,  45, 22, 145),
+        11: (30,  18,  8, 200),
+        12: (85,  65, 40, 110),
+    }
+    DEFAULT_COLOR = (55, 38, 20, 155)
 
     async def process(
         self, input_image_path: str, eyebrow_style_id: Optional[int]
     ) -> dict:
-        # Copy input image as output so the result URL resolves to a real file
         output_filename = f"mock_result_{uuid.uuid4().hex}.jpg"
         output_dir = os.path.dirname(input_image_path)
         output_path = os.path.join(output_dir, output_filename)
+
         try:
-            shutil.copy2(input_image_path, output_path)
+            from PIL import Image, ImageDraw, ImageFilter
+
+            img = Image.open(input_image_path).convert("RGBA")
+            w, h = img.size
+            color = self.STYLE_COLORS.get(eyebrow_style_id, self.DEFAULT_COLOR)
+
+            overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+            draw = ImageDraw.Draw(overlay, "RGBA")
+
+            # Eyebrows sit at ~28-32% height; each spans ~18% width
+            # Left: 18-36% x   Right: 64-82% x
+            brow_y = int(h * 0.30)
+            arch  = int(h * 0.032)
+            thick = max(int(h * 0.012), 3)
+
+            for x1_frac, x2_frac in [(0.18, 0.36), (0.64, 0.82)]:
+                x1, x2 = int(w * x1_frac), int(w * x2_frac)
+                mid_x  = (x1 + x2) // 2
+                pts = [
+                    (x1,     brow_y + thick // 2),
+                    (mid_x,  brow_y - arch),
+                    (x2,     brow_y + thick // 2),
+                    (mid_x,  brow_y + thick),
+                ]
+                draw.polygon(pts, fill=color)
+                draw.line(
+                    [(x1, brow_y + thick // 2), (mid_x, brow_y - arch), (x2, brow_y + thick // 2)],
+                    fill=(color[0], color[1], color[2], min(color[3] + 40, 255)),
+                    width=thick,
+                )
+
+            blurred = overlay.filter(ImageFilter.GaussianBlur(radius=2))
+            result  = Image.alpha_composite(img, blurred).convert("RGB")
+            result.save(output_path, "JPEG", quality=92)
+
         except Exception:
-            output_filename = os.path.basename(input_image_path)
+            # PIL not available — fall back to plain copy
+            try:
+                shutil.copy2(input_image_path, output_path)
+            except Exception:
+                output_filename = os.path.basename(input_image_path)
+
         return {
             "status": "completed",
             "output_image_url": f"/uploads/{output_filename}",
@@ -79,22 +135,6 @@ class MockAdapter(BaseSimulationAdapter):
                     "This platform is for visualization purposes only. "
                     "Not a licensed medical or procedure provider."
                 ),
-                "landmarks": {
-                    "left_eyebrow": [
-                        [100, 200],
-                        [110, 195],
-                        [120, 192],
-                        [130, 195],
-                        [140, 200],
-                    ],
-                    "right_eyebrow": [
-                        [160, 200],
-                        [170, 195],
-                        [180, 192],
-                        [190, 195],
-                        [200, 200],
-                    ],
-                },
             },
         }
 

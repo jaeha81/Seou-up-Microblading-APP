@@ -17,13 +17,7 @@ const nextConfig = {
     domains: ["localhost", "127.0.0.1", "railway.app", "up.railway.app", "seou-up-microblading-app.onrender.com"],
   },
   async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/en",
-        permanent: false,
-      },
-    ];
+    return [];
   },
   async rewrites() {
     const apiPort = process.env.API_PORT || "8000";
