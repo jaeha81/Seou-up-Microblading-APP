@@ -75,6 +75,7 @@ export default function SimulatePage() {
   const [clientName, setClientName] = useState("");
   const [showCrmPanel, setShowCrmPanel] = useState(false);
   const [agreeConsent, setAgreeConsent] = useState(false);
+  const [showUploadSheet, setShowUploadSheet] = useState(false);
 
   useEffect(() => {
     api.get("/api/eyebrow-styles")
@@ -293,7 +294,7 @@ export default function SimulatePage() {
                 <div
                   className={`relative w-full mb-3 ${agreeConsent ? "cursor-pointer" : "cursor-not-allowed opacity-60"}`}
                   style={{ paddingBottom: "177.78%" }}
-                  onClick={() => agreeConsent && fileRef.current?.click()}
+                  onClick={() => agreeConsent && setShowUploadSheet(true)}
                 >
                   <div className={`absolute inset-0 border-2 border-dashed rounded-xl overflow-hidden flex items-center justify-center transition-colors ${
                     preview ? "border-brand-300" : "border-stone-200 hover:border-brand-300"
@@ -327,41 +328,66 @@ export default function SimulatePage() {
                 />
                 {/* Camera / Gallery buttons */}
                 {!preview && (
-                  <div className="flex gap-2 mt-1">
-                    <button
-                      onClick={() => agreeConsent && cameraRef.current?.click()}
-                      disabled={!agreeConsent}
-                      className="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium text-stone-600 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-xl py-2.5 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-                    >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" /></svg>
-                      {t("take_photo")}
-                    </button>
-                    <button
-                      onClick={() => agreeConsent && fileRef.current?.click()}
-                      disabled={!agreeConsent}
-                      className="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium text-stone-600 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-xl py-2.5 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-                    >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg>
-                      {t("choose_from_gallery")}
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => agreeConsent && setShowUploadSheet(true)}
+                    disabled={!agreeConsent}
+                    className="w-full flex items-center justify-center gap-2 text-xs font-medium text-stone-600 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-xl py-3 transition-colors disabled:opacity-40 disabled:cursor-not-allowed mt-1"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" /></svg>
+                    {t("click_to_upload")}
+                  </button>
                 )}
                 {preview && (
                   <div className="flex gap-2 mt-1">
                     <button
-                      onClick={() => agreeConsent && cameraRef.current?.click()}
+                      onClick={() => agreeConsent && setShowUploadSheet(true)}
                       disabled={!agreeConsent}
                       className="flex-1 text-xs text-stone-400 hover:text-stone-600 transition-colors py-1 disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                       📷 {t("retake")}
                     </button>
                     <button
-                      onClick={() => agreeConsent && fileRef.current?.click()}
+                      onClick={() => agreeConsent && setShowUploadSheet(true)}
                       disabled={!agreeConsent}
                       className="flex-1 text-xs text-stone-400 hover:text-stone-600 transition-colors py-1 disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                       🖼 {t("change_photo")}
                     </button>
+                  </div>
+                )}
+
+                {/* Upload action sheet */}
+                {showUploadSheet && (
+                  <div
+                    className="fixed inset-0 z-50 flex items-end justify-center bg-black/40"
+                    onClick={() => setShowUploadSheet(false)}
+                  >
+                    <div
+                      className="w-full max-w-sm bg-white rounded-t-2xl pb-8 pt-3 px-4 safe-area-bottom"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="w-10 h-1 bg-stone-200 rounded-full mx-auto mb-5" />
+                      <button
+                        className="w-full flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-stone-50 active:bg-stone-100 transition-colors text-left"
+                        onClick={() => { setShowUploadSheet(false); setTimeout(() => cameraRef.current?.click(), 50); }}
+                      >
+                        <span className="text-2xl">📷</span>
+                        <span className="text-sm font-medium text-stone-800">{t("take_photo")}</span>
+                      </button>
+                      <button
+                        className="w-full flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-stone-50 active:bg-stone-100 transition-colors text-left"
+                        onClick={() => { setShowUploadSheet(false); setTimeout(() => fileRef.current?.click(), 50); }}
+                      >
+                        <span className="text-2xl">🖼️</span>
+                        <span className="text-sm font-medium text-stone-800">{t("choose_from_gallery")}</span>
+                      </button>
+                      <button
+                        className="w-full mt-2 py-3 text-sm text-stone-400 hover:text-stone-600 transition-colors"
+                        onClick={() => setShowUploadSheet(false)}
+                      >
+                        취소
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
