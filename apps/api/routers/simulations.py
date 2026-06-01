@@ -32,6 +32,15 @@ async def create_simulation(
     )
 
 
+_MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10 MB
+
+_MAGIC_BYTES = {
+    b"\xff\xd8\xff": "image/jpeg",
+    b"\x89PNG\r\n\x1a\n": "image/png",
+    b"RIFF": "image/webp",
+}
+
+
 @router.post("/{simulation_id}/upload", response_model=SimulationResponse)
 async def upload_image(
     simulation_id: int,
@@ -42,6 +51,18 @@ async def upload_image(
     ext = os.path.splitext(file.filename or "")[1].lower()
     if ext not in _ALLOWED_EXTENSIONS or (file.content_type and file.content_type not in _ALLOWED_CONTENT_TYPES):
         raise HTTPException(status_code=400, detail="Only JPG, PNG, or WebP images are allowed.")
+
+    contents = await file.read(_MAX_UPLOAD_BYTES + 1)
+    if len(contents) > _MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="File too large. Maximum size is 10 MB.")
+
+    # magic-byte validation
+    valid_magic = any(contents.startswith(sig) for sig in _MAGIC_BYTES)
+    if not valid_magic:
+        raise HTTPException(status_code=400, detail="File content does not match an allowed image format.")
+
+    await file.seek(0)
+
     sim = (
         db.query(Simulation)
         .filter(Simulation.id == simulation_id, Simulation.user_id == current_user.id)

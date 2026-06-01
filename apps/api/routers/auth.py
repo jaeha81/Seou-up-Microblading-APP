@@ -39,7 +39,7 @@ def register(body: UserRegisterRequest, db: Session = Depends(get_db)):
         email=body.email,
         hashed_password=hash_password(body.password),
         full_name=body.full_name,
-        role=body.role,
+        role="consumer",
         language=body.language,
     )
     db.add(user)
@@ -144,7 +144,7 @@ async def google_callback(body: OAuthCodeRequest, db: Session = Depends(get_db))
 def get_kakao_auth_url():
     params = {
         "client_id": settings.KAKAO_CLIENT_ID,
-        "redirect_uri": settings.KAKAO_REDIRECT_URI_KAKAO,
+        "redirect_uri": settings.KAKAO_REDIRECT_URI,
         "response_type": "code",
     }
     auth_url = f"https://kauth.kakao.com/oauth/authorize?{urlencode(params)}"
@@ -162,7 +162,7 @@ async def kakao_callback(body: OAuthCodeRequest, db: Session = Depends(get_db)):
             data={
                 "grant_type": "authorization_code",
                 "client_id": settings.KAKAO_CLIENT_ID,
-                "redirect_uri": settings.KAKAO_REDIRECT_URI_KAKAO,
+                "redirect_uri": settings.KAKAO_REDIRECT_URI,
                 "code": body.code,
             },
         )
