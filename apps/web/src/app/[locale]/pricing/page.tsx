@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import api from "@/lib/api";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -13,7 +14,6 @@ interface Plan {
   name: string;
   monthlyPrice: number | null;
   annualMonthlyPrice: number | null;
-  period: string;
   borderClass: string;
   ringClass: string;
   badge: string | null;
@@ -25,145 +25,6 @@ interface Plan {
   highlight: boolean;
 }
 
-// ─── Plan Definitions ────────────────────────────────────────────────────────
-
-const PLANS: Plan[] = [
-  {
-    id: "free",
-    name: "Free",
-    monthlyPrice: 0,
-    annualMonthlyPrice: 0,
-    period: "forever",
-    borderClass: "border-stone-200",
-    ringClass: "",
-    badge: null,
-    badgeClass: "",
-    features: [
-      "Basic provider listing (city, country, phone, website)",
-      "AI Brow Simulator access",
-      "Standard search placement",
-      "Up to 3 AI simulations/month",
-      "Email support",
-    ],
-    cta: "Get Started Free",
-    ctaClass:
-      "w-full py-3 px-6 bg-stone-100 hover:bg-stone-200 text-stone-900 font-bold rounded-xl transition-colors",
-    ctaAction: "register",
-    highlight: false,
-  },
-  {
-    id: "paid_plan",
-    name: "Pro",
-    monthlyPrice: 29,
-    annualMonthlyPrice: 23,
-    period: "per month",
-    borderClass: "border-brand-500",
-    ringClass: "ring-2 ring-brand-100",
-    badge: "Most Popular",
-    badgeClass: "bg-yellow-400 text-stone-900",
-    features: [
-      "Everything in Free",
-      "Featured badge on profile",
-      "Top of search results placement",
-      "Unlimited consultations",
-      "Client history & session notes (CRM)",
-      "Analytics dashboard",
-      "Map pin highlight",
-      "Priority support",
-    ],
-    cta: "Upgrade to Pro",
-    ctaClass:
-      "w-full py-3 px-6 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl transition-colors disabled:opacity-60",
-    ctaAction: "checkout",
-    highlight: true,
-  },
-  {
-    id: "agency",
-    name: "Agency",
-    monthlyPrice: 79,
-    annualMonthlyPrice: 63,
-    period: "per month",
-    borderClass: "border-stone-300",
-    ringClass: "",
-    badge: null,
-    badgeClass: "",
-    features: [
-      "Everything in Pro",
-      "Up to 5 clinic locations",
-      "Team member accounts (3 seats)",
-      "White-label consultation reports",
-      "Dedicated account manager",
-      "Custom integrations (API access)",
-      "SLA: 99.9% uptime guarantee",
-    ],
-    cta: "Contact Sales",
-    ctaClass:
-      "w-full py-3 px-6 bg-stone-900 hover:bg-stone-800 text-white font-bold rounded-xl transition-colors",
-    ctaAction: "contact",
-    highlight: false,
-  },
-];
-
-// ─── Clinic B2B Plans ────────────────────────────────────────────────────────
-
-const CLINIC_PLANS = [
-  {
-    id: "basic",
-    name: "Basic Clinic",
-    price: "$49",
-    period: "per month",
-    borderClass: "border-blue-200",
-    ringClass: "",
-    badge: null,
-    features: [
-      "Up to 3 staff members",
-      "300 AI simulations / month",
-      "Team dashboard",
-      "Client & booking management",
-      "Email support",
-    ],
-  },
-  {
-    id: "pro",
-    name: "Pro Clinic",
-    price: "$99",
-    period: "per month",
-    borderClass: "border-purple-300",
-    ringClass: "ring-2 ring-purple-100",
-    badge: "Best for Studios",
-    features: [
-      "Unlimited staff members",
-      "Unlimited AI simulations",
-      "Everything in Basic",
-      "Advanced analytics",
-      "Priority support",
-      "Custom branding (coming soon)",
-      "API access (coming soon)",
-    ],
-  },
-];
-
-// ─── FAQ ─────────────────────────────────────────────────────────────────────
-
-const FAQS = [
-  {
-    q: "Can I cancel anytime?",
-    a: "Yes, cancel any time. You keep access until the end of the billing period.",
-  },
-  {
-    q: "Do I need a credit card for the free plan?",
-    a: "No, the free plan never requires a card.",
-  },
-  {
-    q: "What happens to my data if I cancel?",
-    a: "Your clinic data is retained for 30 days after cancellation, then deleted.",
-  },
-  {
-    q: "Is there a setup fee?",
-    a: "No setup fees, ever.",
-  },
-];
-
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function BillingToggle({
@@ -173,6 +34,7 @@ function BillingToggle({
   billing: BillingCycle;
   onChange: (b: BillingCycle) => void;
 }) {
+  const t = useTranslations("pricing");
   return (
     <div className="flex items-center justify-center gap-3 mt-8">
       <button
@@ -181,7 +43,7 @@ function BillingToggle({
           billing === "monthly" ? "text-white" : "text-stone-400 hover:text-stone-200"
         }`}
       >
-        Monthly
+        {t("billing_monthly")}
       </button>
       <button
         onClick={() => onChange(billing === "monthly" ? "annual" : "monthly")}
@@ -202,9 +64,9 @@ function BillingToggle({
           billing === "annual" ? "text-white" : "text-stone-400 hover:text-stone-200"
         }`}
       >
-        Annual
+        {t("billing_annual")}
         <span className="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-          Save 20%
+          {t("billing_save")}
         </span>
       </button>
     </div>
@@ -218,11 +80,12 @@ function PriceDisplay({
   plan: Plan;
   billing: BillingCycle;
 }) {
+  const t = useTranslations("pricing");
   if (plan.monthlyPrice === 0) {
     return (
       <div className="flex items-baseline gap-1">
         <span className="text-4xl font-bold text-stone-900">$0</span>
-        <span className="text-stone-400 text-sm">/ forever</span>
+        <span className="text-stone-400 text-sm">/ {t("forever")}</span>
       </div>
     );
   }
@@ -234,10 +97,10 @@ function PriceDisplay({
     <div>
       <div className="flex items-baseline gap-1">
         <span className="text-4xl font-bold text-stone-900">${displayPrice}</span>
-        <span className="text-stone-400 text-sm">/ mo</span>
+        <span className="text-stone-400 text-sm">/ {t("per_mo")}</span>
       </div>
       {billing === "annual" && (
-        <p className="text-xs text-stone-400 mt-0.5">billed annually</p>
+        <p className="text-xs text-stone-400 mt-0.5">{t("billed_annually")}</p>
       )}
     </div>
   );
@@ -282,12 +145,132 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export default function PricingPage({ params }: { params: { locale: string } }) {
   const locale = params.locale;
+  const t = useTranslations("pricing");
   const [billing, setBilling] = useState<BillingCycle>("monthly");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [providerId, setProviderId] = useState("");
   const [clinicCheckoutLoading, setClinicCheckoutLoading] = useState<string | null>(null);
   const [clinicError, setClinicError] = useState("");
+
+  // ─── Plan Definitions ──────────────────────────────────────────────────────
+  const PLANS: Plan[] = [
+    {
+      id: "free",
+      name: t("plan_free_name"),
+      monthlyPrice: 0,
+      annualMonthlyPrice: 0,
+      borderClass: "border-stone-200",
+      ringClass: "",
+      badge: null,
+      badgeClass: "",
+      features: [
+        t("plan_free_f1"),
+        t("plan_free_f2"),
+        t("plan_free_f3"),
+        t("plan_free_f4"),
+        t("plan_free_f5"),
+      ],
+      cta: t("plan_free_cta"),
+      ctaClass:
+        "w-full py-3 px-6 bg-stone-100 hover:bg-stone-200 text-stone-900 font-bold rounded-xl transition-colors",
+      ctaAction: "register",
+      highlight: false,
+    },
+    {
+      id: "paid_plan",
+      name: t("plan_pro_name"),
+      monthlyPrice: 29,
+      annualMonthlyPrice: 23,
+      borderClass: "border-brand-500",
+      ringClass: "ring-2 ring-brand-100",
+      badge: t("plan_pro_badge"),
+      badgeClass: "bg-yellow-400 text-stone-900",
+      features: [
+        t("plan_pro_f1"),
+        t("plan_pro_f2"),
+        t("plan_pro_f3"),
+        t("plan_pro_f4"),
+        t("plan_pro_f5"),
+        t("plan_pro_f6"),
+        t("plan_pro_f7"),
+        t("plan_pro_f8"),
+      ],
+      cta: t("plan_pro_cta"),
+      ctaClass:
+        "w-full py-3 px-6 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl transition-colors disabled:opacity-60",
+      ctaAction: "checkout",
+      highlight: true,
+    },
+    {
+      id: "agency",
+      name: t("plan_agency_name"),
+      monthlyPrice: 79,
+      annualMonthlyPrice: 63,
+      borderClass: "border-stone-300",
+      ringClass: "",
+      badge: null,
+      badgeClass: "",
+      features: [
+        t("plan_agency_f1"),
+        t("plan_agency_f2"),
+        t("plan_agency_f3"),
+        t("plan_agency_f4"),
+        t("plan_agency_f5"),
+        t("plan_agency_f6"),
+        t("plan_agency_f7"),
+      ],
+      cta: t("plan_agency_cta"),
+      ctaClass:
+        "w-full py-3 px-6 bg-stone-900 hover:bg-stone-800 text-white font-bold rounded-xl transition-colors",
+      ctaAction: "contact",
+      highlight: false,
+    },
+  ];
+
+  // ─── Clinic B2B Plans ────────────────────────────────────────────────────────
+  const CLINIC_PLANS = [
+    {
+      id: "basic",
+      name: t("clinic_basic_name"),
+      price: "$49",
+      borderClass: "border-blue-200",
+      ringClass: "",
+      badge: null,
+      features: [
+        t("clinic_basic_f1"),
+        t("clinic_basic_f2"),
+        t("clinic_basic_f3"),
+        t("clinic_basic_f4"),
+        t("clinic_basic_f5"),
+      ],
+    },
+    {
+      id: "pro",
+      name: t("clinic_pro_name"),
+      price: "$99",
+      borderClass: "border-purple-300",
+      ringClass: "ring-2 ring-purple-100",
+      badge: t("clinic_pro_badge"),
+      features: [
+        t("clinic_pro_f1"),
+        t("clinic_pro_f2"),
+        t("clinic_pro_f3"),
+        t("clinic_pro_f4"),
+        t("clinic_pro_f5"),
+        t("clinic_pro_f6"),
+        t("clinic_pro_f7"),
+      ],
+    },
+  ];
+
+  // ─── FAQ ─────────────────────────────────────────────────────────────────────
+  const FAQS = [
+    { q: t("faq_q1"), a: t("faq_a1") },
+    { q: t("faq_q2"), a: t("faq_a2") },
+    { q: t("faq_q3"), a: t("faq_a3") },
+    { q: t("faq_q4"), a: t("faq_a4") },
+  ];
 
   const handleClinicCheckout = async (plan: string) => {
     setClinicCheckoutLoading(plan);
@@ -307,7 +290,7 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
         err && typeof err === "object" && "response" in err
           ? (err as { response?: { data?: { detail?: string } } }).response?.data?.detail
           : undefined;
-      setClinicError(detail ?? "Please register your clinic first or sign in.");
+      setClinicError(detail ?? t("err_clinic"));
     } finally {
       setClinicCheckoutLoading(null);
     }
@@ -315,9 +298,7 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
 
   const handleCheckout = async () => {
     if (!providerId.trim()) {
-      setError(
-        "Please enter your Provider ID. Find it in the URL of your listing: /providers/[ID]"
-      );
+      setError(t("err_provider_id"));
       return;
     }
     setLoading(true);
@@ -335,10 +316,7 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
           ? (err as { response?: { data?: { detail?: string } } }).response?.data
               ?.detail
           : undefined;
-      setError(
-        detail ??
-          "Checkout unavailable. Ensure Stripe is configured and you own this listing."
-      );
+      setError(detail ?? t("err_checkout"));
     } finally {
       setLoading(false);
     }
@@ -349,13 +327,13 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
       {/* ── Hero ── */}
       <div className="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white px-6 py-20 text-center">
         <span className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-4 block">
-          Plans &amp; Pricing
+          {t("hero_label")}
         </span>
         <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
-          Grow Your Clinic
+          {t("hero_title")}
         </h1>
         <p className="text-stone-300 text-lg max-w-xl mx-auto">
-          Start for free and upgrade when you are ready to reach more clients.
+          {t("hero_subtitle")}
         </p>
 
         <BillingToggle billing={billing} onChange={setBilling} />
@@ -403,17 +381,17 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
                     disabled={loading}
                     className={plan.ctaClass}
                   >
-                    {loading ? "Redirecting…" : plan.cta}
+                    {loading ? t("redirecting") : plan.cta}
                   </button>
                   <input
                     type="text"
                     value={providerId}
                     onChange={(e) => setProviderId(e.target.value)}
-                    placeholder="Your Provider ID"
+                    placeholder={t("plan_pro_id_placeholder")}
                     className="mt-3 w-full px-3 py-2 text-xs border border-stone-200 rounded-lg text-stone-700 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
                   />
                   <p className="mt-1.5 text-xs text-stone-400 text-center">
-                    Find your ID in the URL: /providers/<em>[ID]</em>
+                    {t("plan_pro_id_hint")}
                   </p>
                 </>
               ) : plan.ctaAction === "contact" ? (
@@ -445,11 +423,11 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
         {/* Trust bar */}
         <div className="mt-12 bg-stone-100 rounded-2xl p-6 text-center text-sm text-stone-600">
           <p className="font-semibold text-stone-900 mb-1">
-            Secure Payments via Stripe
+            {t("trust_title")}
           </p>
-          <p>Cancel anytime. No contracts. No setup fees.</p>
+          <p>{t("trust_line")}</p>
           <p className="mt-3 text-xs text-stone-400">
-            Questions? Contact us at{" "}
+            {t("trust_questions")}{" "}
             <a
               href="mailto:support@seouup.dev"
               className="underline hover:text-stone-600"
@@ -463,15 +441,15 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
         <div className="mt-20">
           <div className="text-center mb-10">
             <span className="text-xs font-semibold uppercase tracking-widest text-purple-500 mb-3 block">
-              For Clinics & Studios
+              {t("b2b_label")}
             </span>
             <h2 className="text-3xl font-bold text-stone-900 mb-3">
-              B2B Clinic Plans
+              {t("b2b_title")}
             </h2>
             <p className="text-stone-500 max-w-lg mx-auto">
-              Manage your entire team, client base, and AI simulations under one subscription.{" "}
+              {t("b2b_desc")}{" "}
               <Link href={`/${locale}/clinic`} className="underline text-stone-700 font-medium">
-                Open Clinic Dashboard →
+                {t("b2b_open_dashboard")}
               </Link>
             </p>
           </div>
@@ -498,7 +476,7 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
                   <h3 className="text-xl font-bold text-stone-900 mb-1">{plan.name}</h3>
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-bold text-stone-900">{plan.price}</span>
-                    <span className="text-stone-400 text-sm">/ {plan.period}</span>
+                    <span className="text-stone-400 text-sm">/ {t("per_mo")}</span>
                   </div>
                 </div>
                 <FeatureList features={plan.features} />
@@ -513,8 +491,8 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
                   }
                 >
                   {clinicCheckoutLoading === plan.id
-                    ? "Redirecting…"
-                    : `Start ${plan.name}`}
+                    ? t("redirecting")
+                    : t("clinic_start", { name: plan.name })}
                 </button>
               </div>
             ))}
@@ -523,7 +501,7 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
             <div className="mt-6 max-w-3xl mx-auto bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-700 text-center">
               {clinicError}{" "}
               <Link href={`/${locale}/clinic`} className="underline">
-                Go to clinic dashboard
+                {t("go_to_clinic")}
               </Link>
             </div>
           )}
@@ -532,7 +510,7 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
         {/* ── FAQ ── */}
         <div className="mt-16 max-w-2xl mx-auto">
           <h2 className="text-2xl font-bold text-stone-900 text-center mb-8">
-            Frequently Asked Questions
+            {t("faq_title")}
           </h2>
           <div className="bg-white rounded-2xl shadow-sm border border-stone-200 px-6 py-2">
             {FAQS.map((item) => (

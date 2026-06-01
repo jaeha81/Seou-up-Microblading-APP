@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import api from "@/lib/api";
 
-export default function KakaoCallbackPage() {
+function KakaoCallbackInner() {
   const params = useParams();
   const locale = params.locale as string;
   const router = useRouter();
@@ -50,5 +50,22 @@ export default function KakaoCallbackPage() {
         <p className="text-stone-500 text-sm">Completing Kakao sign-in...</p>
       </div>
     </div>
+  );
+}
+
+export default function KakaoCallbackPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-stone-50">
+          <div className="text-center">
+            <div className="w-10 h-10 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-stone-500 text-sm">Completing Kakao sign-in...</p>
+          </div>
+        </div>
+      }
+    >
+      <KakaoCallbackInner />
+    </Suspense>
   );
 }
