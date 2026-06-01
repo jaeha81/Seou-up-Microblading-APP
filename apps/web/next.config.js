@@ -14,7 +14,7 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["localhost", "127.0.0.1"],
+    domains: ["localhost", "127.0.0.1", "railway.app", "up.railway.app"],
   },
   async redirects() {
     return [
@@ -27,14 +27,15 @@ const nextConfig = {
   },
   async rewrites() {
     const apiPort = process.env.API_PORT || "8000";
+    const apiBase = process.env.NEXT_PUBLIC_API_URL || `http://127.0.0.1:${apiPort}`;
     return [
       {
         source: "/api/:path*",
-        destination: `http://127.0.0.1:${apiPort}/api/:path*`,
+        destination: `${apiBase}/api/:path*`,
       },
       {
         source: "/uploads/:path*",
-        destination: `http://127.0.0.1:${apiPort}/uploads/:path*`,
+        destination: `${apiBase}/uploads/:path*`,
       },
     ];
   },
