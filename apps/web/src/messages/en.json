@@ -207,7 +207,14 @@
     "hide_password": "Hide",
     "registration_failed": "Registration failed. Please try again.",
     "sign_in_link": "Sign in",
-    "viz_only_short": "Visualization platform only. Not a licensed medical or procedure provider."
+    "viz_only_short": "Visualization platform only. Not a licensed medical or procedure provider.",
+    "invalid_credentials": "Invalid email or password. Please try again.",
+    "login_subtitle": "Welcome back to Seou-up Microblading",
+    "signing_in": "Signing in...",
+    "or_continue_with": "or continue with",
+    "terms_of_service": "Terms of Service",
+    "login_terms_prefix": "By signing in you agree to our",
+    "login_terms_suffix": "Seou-up is for visualization purposes only."
   },
   "compliance": {
     "banner": "⚠️ Seou-up is an information and visualization support platform only. Not a licensed medical or procedure provider.",

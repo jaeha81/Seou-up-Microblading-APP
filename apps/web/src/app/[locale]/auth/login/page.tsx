@@ -32,7 +32,7 @@ export default function LoginPage() {
       localStorage.setItem("user", JSON.stringify(data.user));
       router.push(`/${locale}`);
     } catch {
-      setError("Invalid email or password. Please try again.");
+      setError(t("invalid_credentials"));
     } finally {
       setLoading(false);
     }
@@ -95,7 +95,7 @@ export default function LoginPage() {
 
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-stone-900 mb-1">{t("login_title")}</h1>
-            <p className="text-stone-500 text-sm">Welcome back to Seou-up Microblading</p>
+            <p className="text-stone-500 text-sm">{t("login_subtitle")}</p>
           </div>
 
           {error && (
@@ -135,7 +135,7 @@ export default function LoginPage() {
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 text-xs px-1 py-1"
                   tabIndex={-1}
                 >
-                  {showPassword ? "Hide" : "Show"}
+                  {showPassword ? t("hide_password") : t("show_password")}
                 </button>
               </div>
             </div>
@@ -148,7 +148,7 @@ export default function LoginPage() {
               {loading ? (
                 <>
                   <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                  Signing in...
+                  {t("signing_in")}
                 </>
               ) : (
                 `${t("sign_in")} →`
@@ -163,7 +163,7 @@ export default function LoginPage() {
                 <div className="w-full border-t border-stone-200" />
               </div>
               <div className="relative flex justify-center text-xs">
-                <span className="bg-white px-3 text-stone-400">or continue with</span>
+                <span className="bg-white px-3 text-stone-400">{t("or_continue_with")}</span>
               </div>
             </div>
             <div className="mt-4 grid grid-cols-2 gap-3">
@@ -211,11 +211,11 @@ export default function LoginPage() {
           </div>
 
           <p className="text-xs text-stone-400 text-center mt-8 px-4 leading-relaxed">
-            By signing in you agree to our{" "}
+            {t("login_terms_prefix")}{" "}
             <Link href={`/${locale}/legal`} className="hover:text-brand-500 transition-colors underline">
-              Terms of Service
+              {t("terms_of_service")}
             </Link>
-            . Seou-up is for visualization purposes only.
+            {t("login_terms_suffix")}
           </p>
         </div>
       </div>

@@ -206,7 +206,14 @@
     "hide_password": "숨기기",
     "registration_failed": "회원가입에 실패했습니다. 다시 시도해주세요.",
     "sign_in_link": "로그인",
-    "viz_only_short": "시각화 플랫폼 전용. 면허가 있는 의료 또는 시술 서비스 제공자가 아닙니다."
+    "viz_only_short": "시각화 플랫폼 전용. 면허가 있는 의료 또는 시술 서비스 제공자가 아닙니다.",
+    "invalid_credentials": "이메일 또는 비밀번호가 잘못되었습니다. 다시 시도해주세요.",
+    "login_subtitle": "Seou-up 마이크로블레이딩에 오신 것을 환영합니다",
+    "signing_in": "로그인 중...",
+    "or_continue_with": "또는 소셜 계정으로 계속",
+    "terms_of_service": "서비스 이용약관",
+    "login_terms_prefix": "로그인하면 저희",
+    "login_terms_suffix": "에 동의하게 됩니다. Seou-up은 시각화 목적으로만 제공됩니다."
   },
   "compliance": {
     "banner": "⚠️ Seou-up은 정보 및 시각화 지원 플랫폼입니다. 면허가 있는 의료 또는 시술 서비스 제공자가 아닙니다.",
