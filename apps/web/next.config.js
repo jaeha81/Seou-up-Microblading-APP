@@ -14,7 +14,7 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["localhost", "127.0.0.1", "railway.app", "up.railway.app"],
+    domains: ["localhost", "127.0.0.1", "railway.app", "up.railway.app", "seou-up-microblading-app.onrender.com"],
   },
   async redirects() {
     return [
