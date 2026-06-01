@@ -154,7 +154,21 @@
     "error_sign_in": "模拟失败，请重试。",
     "tip1": "使用光线充足的正面照片以获得最佳效果",
     "tip2": "竖向照片（9:16）最适合精准模拟",
-    "tip3": "您的照片为私密状态，30 天后自动删除"
+    "tip3": "您的照片为私密状态，30 天后自动删除",
+    "styles": {
+      "natural-feather": "柔软的发丝感线条",
+      "ombre-powder": "渐变粉雾填充",
+      "combination-brow": "线条+粉雾结合",
+      "bold-arch": "戏剧化清晰拱形",
+      "straight-korean": "平直年轻的形状",
+      "micro-shading": "细点雾化",
+      "3d-hair-stroke": "超逼真立体感",
+      "soft-classic": "经典柔和线条",
+      "nano-brow": "超精细精准",
+      "fluffy-brow": "浓密质感造型",
+      "angular-power-brow": "强烈几何拱形",
+      "feather-touch": "轻盈纤细线条"
+    }
   },
   "auth": {
     "login_title": "登录",

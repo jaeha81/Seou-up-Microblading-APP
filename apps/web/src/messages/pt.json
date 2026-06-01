@@ -154,7 +154,21 @@
     "error_sign_in": "Simulação falhou. Tente novamente.",
     "tip1": "Use uma foto de frente com boa iluminação para melhores resultados",
     "tip2": "Orientação retrato (9:16) é ideal para uma simulação precisa",
-    "tip3": "Suas fotos são privadas e excluídas automaticamente após 30 dias"
+    "tip3": "Suas fotos são privadas e excluídas automaticamente após 30 dias",
+    "styles": {
+      "natural-feather": "Traços suaves como fios",
+      "ombre-powder": "Preenchimento esfumado",
+      "combination-brow": "Traços + esfumado",
+      "bold-arch": "Arco marcante e definido",
+      "straight-korean": "Formato reto e jovem",
+      "micro-shading": "Sombreado de micropontos",
+      "3d-hair-stroke": "Profundidade hiper-realista",
+      "soft-classic": "Linhas suaves atemporais",
+      "nano-brow": "Precisão ultrafina",
+      "fluffy-brow": "Visual cheio e texturizado",
+      "angular-power-brow": "Arco geométrico forte",
+      "feather-touch": "Traços leves e delicados"
+    }
   },
   "auth": {
     "login_title": "Entrar",

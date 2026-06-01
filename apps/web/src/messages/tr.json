@@ -154,7 +154,21 @@
     "error_sign_in": "Simülasyon başarısız. Lütfen tekrar deneyin.",
     "tip1": "En iyi sonuçlar için iyi ışıklı öne bakan bir fotoğraf kullanın",
     "tip2": "Doğru simülasyon için dikey yönlendirme (9:16) en iyi sonucu verir",
-    "tip3": "Fotoğraflarınız gizlidir ve 30 gün sonra otomatik olarak silinir"
+    "tip3": "Fotoğraflarınız gizlidir ve 30 gün sonra otomatik olarak silinir",
+    "styles": {
+      "natural-feather": "Yumuşak kıl benzeri çizgiler",
+      "ombre-powder": "Degrade pudra dolgusu",
+      "combination-brow": "Çizgi + pudra karışımı",
+      "bold-arch": "Dramatik belirgin kemer",
+      "straight-korean": "Düz genç şekil",
+      "micro-shading": "İnce nokta gölgeleme",
+      "3d-hair-stroke": "Hiper gerçekçi derinlik",
+      "soft-classic": "Zamansız yumuşak çizgiler",
+      "nano-brow": "Ultra ince hassasiyet",
+      "fluffy-brow": "Dolgun dokulu görünüm",
+      "angular-power-brow": "Güçlü geometrik kemer",
+      "feather-touch": "Hafif ince çizgiler"
+    }
   },
   "auth": {
     "login_title": "Giriş Yap",

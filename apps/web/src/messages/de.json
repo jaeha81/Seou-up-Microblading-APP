@@ -154,7 +154,21 @@
     "error_sign_in": "Simulation fehlgeschlagen. Bitte erneut versuchen.",
     "tip1": "Verwenden Sie ein Frontalbild mit guter Beleuchtung für beste Ergebnisse",
     "tip2": "Hochformat (9:16) eignet sich am besten für eine genaue Simulation",
-    "tip3": "Ihre Fotos sind privat und werden nach 30 Tagen automatisch gelöscht"
+    "tip3": "Ihre Fotos sind privat und werden nach 30 Tagen automatisch gelöscht",
+    "styles": {
+      "natural-feather": "Weiche, haarähnliche Striche",
+      "ombre-powder": "Verlaufende Puderfüllung",
+      "combination-brow": "Striche + Puder-Mix",
+      "bold-arch": "Markanter, definierter Bogen",
+      "straight-korean": "Flache, jugendliche Form",
+      "micro-shading": "Fein gepunktetes Shading",
+      "3d-hair-stroke": "Hyperrealistische Tiefe",
+      "soft-classic": "Zeitlose weiche Linien",
+      "nano-brow": "Ultrafeine Präzision",
+      "fluffy-brow": "Voller, strukturierter Look",
+      "angular-power-brow": "Starker geometrischer Bogen",
+      "feather-touch": "Leichte, zarte Striche"
+    }
   },
   "auth": {
     "login_title": "Anmelden",

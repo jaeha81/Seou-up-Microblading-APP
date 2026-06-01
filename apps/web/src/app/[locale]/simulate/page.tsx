@@ -88,6 +88,13 @@ export default function SimulatePage() {
     return style.name_en;
   };
 
+  // Localized one-line description per style slug, with English fallback.
+  const getStyleDesc = (style: EyebrowStyle) => {
+    const key = `styles.${style.slug}`;
+    if (t.has(key)) return t(key);
+    return STYLE_META[style.slug]?.desc ?? "";
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -246,7 +253,7 @@ export default function SimulatePage() {
                 >
                   <div className="text-xs font-semibold text-stone-800 leading-tight mb-0.5">{getStyleName(s)}</div>
                   <div className="text-xs text-stone-400 mt-0.5 leading-tight">
-                    {STYLE_META[s.slug]?.desc}
+                    {getStyleDesc(s)}
                   </div>
                 </button>
               ))}

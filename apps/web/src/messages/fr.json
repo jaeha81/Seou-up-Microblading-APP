@@ -154,7 +154,21 @@
     "error_sign_in": "Simulation échouée. Veuillez réessayer.",
     "tip1": "Utilisez une photo de face avec un bon éclairage pour de meilleurs résultats",
     "tip2": "L'orientation portrait (9:16) est idéale pour une simulation précise",
-    "tip3": "Vos photos sont privées et automatiquement supprimées après 30 jours"
+    "tip3": "Vos photos sont privées et automatiquement supprimées après 30 jours",
+    "styles": {
+      "natural-feather": "Traits doux façon poils",
+      "ombre-powder": "Remplissage poudré dégradé",
+      "combination-brow": "Traits + effet poudré",
+      "bold-arch": "Arche marquée et spectaculaire",
+      "straight-korean": "Forme plate et jeune",
+      "micro-shading": "Ombrage micro-points",
+      "3d-hair-stroke": "Profondeur hyperréaliste",
+      "soft-classic": "Lignes douces intemporelles",
+      "nano-brow": "Précision ultra-fine",
+      "fluffy-brow": "Aspect dense et texturé",
+      "angular-power-brow": "Arche géométrique forte",
+      "feather-touch": "Traits légers et fins"
+    }
   },
   "auth": {
     "login_title": "Se connecter",

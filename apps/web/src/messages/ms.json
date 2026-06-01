@@ -154,7 +154,21 @@
     "error_sign_in": "Simulasi gagal. Sila cuba lagi.",
     "tip1": "Gunakan foto menghadap ke hadapan dengan pencahayaan baik untuk hasil terbaik",
     "tip2": "Orientasi potret (9:16) paling sesuai untuk simulasi yang tepat",
-    "tip3": "Foto anda adalah peribadi dan dipadamkan secara automatik selepas 30 hari"
+    "tip3": "Foto anda adalah peribadi dan dipadamkan secara automatik selepas 30 hari",
+    "styles": {
+      "natural-feather": "Coretan halus seperti rambut",
+      "ombre-powder": "Isian serbuk gradasi",
+      "combination-brow": "Coretan + serbuk",
+      "bold-arch": "Lengkung tegas dramatik",
+      "straight-korean": "Bentuk rata muda",
+      "micro-shading": "Bayangan titik halus",
+      "3d-hair-stroke": "Kedalaman sangat realistik",
+      "soft-classic": "Garisan lembut klasik",
+      "nano-brow": "Ketepatan sangat halus",
+      "fluffy-brow": "Penampilan penuh bertekstur",
+      "angular-power-brow": "Lengkung geometri kuat",
+      "feather-touch": "Coretan ringan halus"
+    }
   },
   "auth": {
     "login_title": "Log Masuk",

@@ -154,7 +154,21 @@
     "error_sign_in": "Simulazione non riuscita. Riprova.",
     "tip1": "Usa una foto frontale con buona illuminazione per i migliori risultati",
     "tip2": "L'orientamento verticale (9:16) funziona meglio per una simulazione accurata",
-    "tip3": "Le tue foto sono private e vengono eliminate automaticamente dopo 30 giorni"
+    "tip3": "Le tue foto sono private e vengono eliminate automaticamente dopo 30 giorni",
+    "styles": {
+      "natural-feather": "Tratti morbidi simil-pelo",
+      "ombre-powder": "Riempimento sfumato a polvere",
+      "combination-brow": "Tratti + effetto polvere",
+      "bold-arch": "Arco deciso e marcato",
+      "straight-korean": "Forma dritta e giovane",
+      "micro-shading": "Ombreggiatura micro-punti",
+      "3d-hair-stroke": "Profondità iperrealistica",
+      "soft-classic": "Linee morbide senza tempo",
+      "nano-brow": "Precisione ultrafine",
+      "fluffy-brow": "Aspetto pieno e texturizzato",
+      "angular-power-brow": "Arco geometrico forte",
+      "feather-touch": "Tratti leggeri e sottili"
+    }
   },
   "auth": {
     "login_title": "Accedi",

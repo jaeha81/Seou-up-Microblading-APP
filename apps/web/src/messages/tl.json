@@ -154,7 +154,21 @@
     "error_sign_in": "Nabigo ang simulation. Mangyaring subukang muli.",
     "tip1": "Gumamit ng larawang nakaharap sa harap na may magandang liwanag para sa pinakamahusay na resulta",
     "tip2": "Ang portrait na oryentasyon (9:16) ay pinakamainam para sa tumpak na simulation",
-    "tip3": "Ang iyong mga larawan ay pribado at awtomatikong tinatanggal pagkatapos ng 30 araw"
+    "tip3": "Ang iyong mga larawan ay pribado at awtomatikong tinatanggal pagkatapos ng 30 araw",
+    "styles": {
+      "natural-feather": "Malambot na parang buhok na guhit",
+      "ombre-powder": "Gradient powder fill",
+      "combination-brow": "Guhit + powder",
+      "bold-arch": "Dramatiko at malinaw na arko",
+      "straight-korean": "Patag at bata ang hugis",
+      "micro-shading": "Pinong-tuldok na shading",
+      "3d-hair-stroke": "Hyper-realistic na lalim",
+      "soft-classic": "Klasikong malambot na linya",
+      "nano-brow": "Ultra-pinong precision",
+      "fluffy-brow": "Makapal at may texture",
+      "angular-power-brow": "Malakas na geometric arch",
+      "feather-touch": "Magaan at manipis na guhit"
+    }
   },
   "auth": {
     "login_title": "Mag-sign In",

@@ -154,7 +154,21 @@
     "error_sign_in": "Simulation failed. Please try again.",
     "tip1": "Use a front-facing photo with good lighting for best results",
     "tip2": "Portrait orientation (9:16) works best for accurate simulation",
-    "tip3": "Your photos are private and automatically deleted after 30 days"
+    "tip3": "Your photos are private and automatically deleted after 30 days",
+    "styles": {
+      "natural-feather": "Soft, hair-like strokes",
+      "ombre-powder": "Gradient powder fill",
+      "combination-brow": "Strokes + powder blend",
+      "bold-arch": "Dramatic, defined arch",
+      "straight-korean": "Flat, youthful shape",
+      "micro-shading": "Fine-dot shading",
+      "3d-hair-stroke": "Hyper-realistic depth",
+      "soft-classic": "Timeless soft lines",
+      "nano-brow": "Ultra-fine precision",
+      "fluffy-brow": "Full, textured look",
+      "angular-power-brow": "Strong geometric arch",
+      "feather-touch": "Light, wispy strokes"
+    }
   },
   "auth": {
     "login_title": "Sign In",

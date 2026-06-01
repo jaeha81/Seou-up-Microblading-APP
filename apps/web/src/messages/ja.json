@@ -154,7 +154,21 @@
     "error_sign_in": "シミュレーションに失敗しました。再試行してください。",
     "tip1": "正面向きで明るい写真を使用すると最良の結果が得られます",
     "tip2": "縦位置（9:16）の写真が正確なシミュレーションに最適です",
-    "tip3": "写真は非公開で、30 日後に自動削除されます"
+    "tip3": "写真は非公開で、30 日後に自動削除されます",
+    "styles": {
+      "natural-feather": "柔らかな毛流れ",
+      "ombre-powder": "グラデーションパウダー",
+      "combination-brow": "ストローク＋パウダー",
+      "bold-arch": "くっきりアーチ",
+      "straight-korean": "フラットで若々しい形",
+      "micro-shading": "繊細なドットシェーディング",
+      "3d-hair-stroke": "超リアルな立体感",
+      "soft-classic": "普遍的な柔らかライン",
+      "nano-brow": "極細の精密さ",
+      "fluffy-brow": "ふんわり質感",
+      "angular-power-brow": "力強い幾何学アーチ",
+      "feather-touch": "軽く繊細なストローク"
+    }
   },
   "auth": {
     "login_title": "ログイン",

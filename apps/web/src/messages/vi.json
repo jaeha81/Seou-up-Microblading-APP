@@ -154,7 +154,21 @@
     "error_sign_in": "Mô phỏng thất bại. Vui lòng thử lại.",
     "tip1": "Dùng ảnh nhìn thẳng có ánh sáng tốt để có kết quả tốt nhất",
     "tip2": "Ảnh dọc (9:16) phù hợp nhất để mô phỏng chính xác",
-    "tip3": "Ảnh của bạn được bảo mật và tự động xóa sau 30 ngày"
+    "tip3": "Ảnh của bạn được bảo mật và tự động xóa sau 30 ngày",
+    "styles": {
+      "natural-feather": "Nét mảnh như sợi lông",
+      "ombre-powder": "Phủ bột chuyển sắc",
+      "combination-brow": "Nét + phủ bột",
+      "bold-arch": "Dáng vòm rõ nét",
+      "straight-korean": "Dáng thẳng trẻ trung",
+      "micro-shading": "Tạo bóng chấm li ti",
+      "3d-hair-stroke": "Chiều sâu siêu thực",
+      "soft-classic": "Nét mềm cổ điển",
+      "nano-brow": "Độ chính xác siêu mảnh",
+      "fluffy-brow": "Vẻ dày, có kết cấu",
+      "angular-power-brow": "Dáng vòm hình học mạnh",
+      "feather-touch": "Nét nhẹ, mảnh"
+    }
   },
   "auth": {
     "login_title": "Đăng nhập",

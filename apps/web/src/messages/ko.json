@@ -153,7 +153,21 @@
     "error_sign_in": "시뮬레이션에 실패했습니다. 다시 시도해주세요.",
     "tip1": "최상의 결과를 위해 조명이 좋은 정면 사진을 사용하세요",
     "tip2": "정확한 시뮬레이션을 위해 세로형(9:16)이 가장 좋습니다",
-    "tip3": "사진은 비공개이며 30일 후 자동으로 삭제됩니다"
+    "tip3": "사진은 비공개이며 30일 후 자동으로 삭제됩니다",
+    "styles": {
+      "natural-feather": "부드러운 머리카락 결",
+      "ombre-powder": "그라데이션 파우더 채움",
+      "combination-brow": "스트로크 + 파우더 혼합",
+      "bold-arch": "드라마틱한 또렷한 아치",
+      "straight-korean": "플랫한 어려보이는 형태",
+      "micro-shading": "미세 도트 쉐이딩",
+      "3d-hair-stroke": "초사실적 입체감",
+      "soft-classic": "변함없는 부드러운 라인",
+      "nano-brow": "초미세 정교함",
+      "fluffy-brow": "풍성한 질감 표현",
+      "angular-power-brow": "강한 기하학적 아치",
+      "feather-touch": "가볍고 섬세한 스트로크"
+    }
   },
   "auth": {
     "login_title": "로그인",
