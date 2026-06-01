@@ -14,8 +14,11 @@ class Settings(BaseSettings):
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 30
 
-    # AI Simulation adapter: "mock" | "mediapipe"
+    # AI Simulation adapter: "mock" | "mediapipe" | "huggingface"
     SIMULATION_ADAPTER: str = "mock"
+
+    # Hugging Face Inference API — free at huggingface.co/join
+    HF_TOKEN: str = ""
 
     # Queue
     REDIS_URL: str = "redis://localhost:6379/0"

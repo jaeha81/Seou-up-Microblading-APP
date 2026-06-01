@@ -10,6 +10,8 @@ Supports two adapters:
 Set SIMULATION_ADAPTER=mock in .env to stay on MockAdapter.
 """
 
+import base64
+import io
 import os
 import re
 import uuid
@@ -17,6 +19,7 @@ import shutil
 from datetime import datetime, timezone
 from typing import Optional
 
+import httpx
 from fastapi import UploadFile, HTTPException, status
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -310,10 +313,148 @@ class MediaPipeAdapter(BaseSimulationAdapter):
             return await _mock_fallback(str(exc))
 
 
+# ── HuggingFace Adapter ──────────────────────────────────────────────────────
+
+
+class HuggingFaceAdapter(BaseSimulationAdapter):
+    """
+    Free eyebrow overlay via Hugging Face Inference API.
+    Model: jonathandinu/face-parsing (face segmentation — identifies eyebrow regions)
+    Requires: HF_TOKEN in .env  (free account at huggingface.co/join, no credit card)
+    Falls back to MediaPipeAdapter → MockAdapter on failure.
+    """
+
+    HF_API_URL = "https://api-inference.huggingface.co/models/jonathandinu/face-parsing"
+
+    STYLE_MAP = {
+        1: {"color": (60, 40, 20), "opacity": 0.55, "blur": 1},
+        2: {"color": (40, 25, 15), "opacity": 0.70, "blur": 2},
+        4: {"color": (30, 20, 10), "opacity": 0.88, "blur": 0},
+        5: {"color": (50, 35, 20), "opacity": 0.60, "blur": 1},
+    }
+    DEFAULT_STYLE = {"color": (45, 30, 18), "opacity": 0.70, "blur": 1}
+
+    async def process(
+        self, input_image_path: str, eyebrow_style_id: Optional[int]
+    ) -> dict:
+        token = settings.HF_TOKEN
+        if not token:
+            result = await MediaPipeAdapter().process(input_image_path, eyebrow_style_id)
+            if isinstance(result.get("landmarks_data"), dict):
+                result["landmarks_data"]["hf_skip_reason"] = "HF_TOKEN not set"
+            return result
+
+        try:
+            from PIL import Image, ImageFilter
+            import numpy as np
+
+            with open(input_image_path, "rb") as f:
+                image_bytes = f.read()
+
+            async with httpx.AsyncClient(timeout=45.0) as client:
+                resp = await client.post(
+                    self.HF_API_URL,
+                    headers={
+                        "Authorization": f"Bearer {token}",
+                        "Content-Type": "image/jpeg",
+                    },
+                    content=image_bytes,
+                )
+
+            if resp.status_code == 503:
+                raise RuntimeError("HF model loading (cold start), retry in ~20s")
+            if resp.status_code != 200:
+                raise RuntimeError(f"HF API {resp.status_code}: {resp.text[:200]}")
+
+            segments = resp.json()
+            if not isinstance(segments, list):
+                raise ValueError(f"Unexpected HF response: {str(segments)[:200]}")
+
+            # Identify eyebrow segments (label varies by model version)
+            brow_segments = [
+                s for s in segments
+                if "brow" in s.get("label", "").lower()
+            ]
+            if not brow_segments:
+                raise ValueError(
+                    f"No eyebrow segments found. Labels: "
+                    f"{[s.get('label') for s in segments]}"
+                )
+
+            orig = Image.open(input_image_path).convert("RGBA")
+            width, height = orig.size
+            style = self.STYLE_MAP.get(eyebrow_style_id, self.DEFAULT_STYLE)
+            color = style["color"]
+            alpha_val = int(255 * style["opacity"])
+            blur_r = style["blur"]
+
+            overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+
+            for seg in brow_segments:
+                mask_data = seg.get("mask")
+                mask_img: Optional[Image.Image] = None
+
+                if isinstance(mask_data, str):
+                    # base64-encoded PNG mask
+                    mask_img = (
+                        Image.open(io.BytesIO(base64.b64decode(mask_data)))
+                        .convert("L")
+                        .resize((width, height), Image.LANCZOS)
+                    )
+                elif isinstance(mask_data, dict) and "data" in mask_data:
+                    arr = np.array(mask_data["data"], dtype=np.uint8).reshape(
+                        mask_data.get("height", height),
+                        mask_data.get("width", width),
+                    )
+                    mask_img = Image.fromarray(arr).convert("L").resize(
+                        (width, height), Image.LANCZOS
+                    )
+
+                if mask_img is None:
+                    continue
+
+                if blur_r > 0:
+                    mask_img = mask_img.filter(ImageFilter.GaussianBlur(blur_r))
+
+                brow_color = Image.new(
+                    "RGBA", (width, height), (color[0], color[1], color[2], alpha_val)
+                )
+                overlay.paste(brow_color, mask=mask_img)
+
+            result_img = Image.alpha_composite(orig, overlay).convert("RGB")
+
+            sim_match = re.search(r"sim_(\d+)", os.path.basename(input_image_path))
+            sim_fragment = sim_match.group(1) if sim_match else uuid.uuid4().hex
+            output_filename = f"sim_{sim_fragment}_hf_result.jpg"
+            os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
+            output_path = os.path.join(settings.UPLOAD_DIR, output_filename)
+            result_img.save(output_path, "JPEG", quality=92)
+
+            return {
+                "status": "completed",
+                "output_image_url": f"/uploads/{output_filename}",
+                "landmarks_data": {
+                    "adapter": "huggingface",
+                    "model": "jonathandinu/face-parsing",
+                    "eyebrow_style_id": eyebrow_style_id,
+                    "brow_segments_found": len(brow_segments),
+                },
+            }
+
+        except Exception as exc:
+            fallback = await MediaPipeAdapter().process(input_image_path, eyebrow_style_id)
+            if isinstance(fallback.get("landmarks_data"), dict):
+                fallback["landmarks_data"]["hf_fallback_reason"] = str(exc)
+                fallback["landmarks_data"]["adapter_requested"] = "huggingface"
+            return fallback
+
+
 # ── Factory ──────────────────────────────────────────────────────────────────
 
 
 def get_adapter() -> BaseSimulationAdapter:
+    if settings.SIMULATION_ADAPTER == "huggingface":
+        return HuggingFaceAdapter()
     if settings.SIMULATION_ADAPTER == "mediapipe":
         return MediaPipeAdapter()
     return MockAdapter()
