@@ -1,3 +1,4 @@
+import os
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status
 from sqlalchemy.orm import Session
 from typing import List
@@ -14,6 +15,9 @@ from schemas.simulation import (
 from services.simulation_service import SimulationService
 
 router = APIRouter()
+
+_ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
+_ALLOWED_CONTENT_TYPES = {"image/jpeg", "image/png", "image/webp"}
 
 
 @router.post("", response_model=SimulationResponse, status_code=status.HTTP_201_CREATED)
@@ -35,6 +39,9 @@ async def upload_image(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    ext = os.path.splitext(file.filename or "")[1].lower()
+    if ext not in _ALLOWED_EXTENSIONS or (file.content_type and file.content_type not in _ALLOWED_CONTENT_TYPES):
+        raise HTTPException(status_code=400, detail="Only JPG, PNG, or WebP images are allowed.")
     sim = (
         db.query(Simulation)
         .filter(Simulation.id == simulation_id, Simulation.user_id == current_user.id)

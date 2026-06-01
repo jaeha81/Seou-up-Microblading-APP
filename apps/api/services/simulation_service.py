@@ -442,9 +442,10 @@ class HuggingFaceAdapter(BaseSimulationAdapter):
             }
 
         except Exception as exc:
+            import logging as _logging
+            _logging.getLogger(__name__).warning("HuggingFace adapter failed, falling back to MediaPipe: %s", exc)
             fallback = await MediaPipeAdapter().process(input_image_path, eyebrow_style_id)
             if isinstance(fallback.get("landmarks_data"), dict):
-                fallback["landmarks_data"]["hf_fallback_reason"] = str(exc)
                 fallback["landmarks_data"]["adapter_requested"] = "huggingface"
             return fallback
 
@@ -536,8 +537,10 @@ class SimulationService:
             sim.landmarks_data = result.get("landmarks_data")
             sim.completed_at = datetime.now(timezone.utc)
         except Exception as exc:
+            import logging as _logging
+            _logging.getLogger(__name__).error("Simulation processing failed for sim_id=%s: %s", sim.id, exc)
             sim.status = "failed"
-            sim.error_message = str(exc)
+            sim.error_message = "Processing failed. Please try again."
 
         self.db.commit()
         self.db.refresh(sim)
