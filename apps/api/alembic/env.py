@@ -2,16 +2,14 @@ import os
 import sys
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config, pool
+from sqlalchemy import engine_from_config, pool, text
 from alembic import context
 
-# Add apps/api to sys.path so models can be imported
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.config import settings
 from core.database import Base
 
-# Import all models to register them with Base.metadata
 import models  # noqa: F401
 
 config = context.config
@@ -19,10 +17,11 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Override sqlalchemy.url from settings
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
 target_metadata = Base.metadata
+
+_CONNECT_ARGS = {"options": "-c search_path=seouup,public"}
 
 
 def run_migrations_offline() -> None:
@@ -32,6 +31,7 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        version_table_schema="seouup",
     )
     with context.begin_transaction():
         context.run_migrations()
@@ -42,9 +42,16 @@ def run_migrations_online() -> None:
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
+        connect_args=_CONNECT_ARGS,
     )
     with connectable.connect() as connection:
-        context.configure(connection=connection, target_metadata=target_metadata)
+        connection.execute(text("CREATE SCHEMA IF NOT EXISTS seouup"))
+        connection.commit()
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            version_table_schema="seouup",
+        )
         with context.begin_transaction():
             context.run_migrations()
 
