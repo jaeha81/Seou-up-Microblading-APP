@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -52,6 +52,11 @@ export default function RegisterPage() {
       detail: t("role_founder_detail"),
     },
   ];
+
+  // Warm up Render free-tier server as soon as page loads
+  useEffect(() => {
+    api.get("/api/health").catch(() => {});
+  }, []);
 
   const [step, setStep] = useState<1 | 2>(1);
   const [role, setRole] = useState("consumer");

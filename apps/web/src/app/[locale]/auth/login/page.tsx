@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -11,6 +11,10 @@ export default function LoginPage() {
   const locale = params.locale as string;
   const router = useRouter();
   const t = useTranslations("auth");
+
+  useEffect(() => {
+    api.get("/api/health").catch(() => {});
+  }, []);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
