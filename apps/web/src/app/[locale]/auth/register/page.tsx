@@ -58,22 +58,28 @@ export default function RegisterPage() {
   const [form, setForm] = useState({ email: "", password: "", full_name: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [slowWarning, setSlowWarning] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setSlowWarning(false);
     setError("");
+    const slowTimer = setTimeout(() => setSlowWarning(true), 15000);
     try {
       const { data } = await api.post("/api/auth/register", { ...form, role, language: locale });
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("user", JSON.stringify(data.user));
       router.push(`/${locale}/onboarding`);
     } catch (err: unknown) {
+      const isTimeout = (err as { code?: string })?.code === "ECONNABORTED";
       const msg = (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail;
-      setError(msg || t("registration_failed"));
+      setError(isTimeout ? "서버 응답 시간 초과. 잠시 후 다시 시도해주세요." : msg || t("registration_failed"));
     } finally {
+      clearTimeout(slowTimer);
       setLoading(false);
+      setSlowWarning(false);
     }
   };
 
@@ -269,6 +275,11 @@ export default function RegisterPage() {
                   )}
                 </button>
               </div>
+              {slowWarning && (
+                <p className="text-xs text-stone-400 text-center mt-3 animate-pulse">
+                  서버가 처음 시작 중입니다. 최대 1분 소요될 수 있습니다...
+                </p>
+              )}
             </form>
           )}
 

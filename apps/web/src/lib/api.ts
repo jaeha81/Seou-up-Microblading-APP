@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "",
-  timeout: 30000,
+  timeout: 65000,
 });
 
 // Attach JWT token from localStorage if available
