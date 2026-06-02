@@ -76,6 +76,7 @@ export default function SimulatePage() {
   const [showCrmPanel, setShowCrmPanel] = useState(false);
   const [agreeConsent, setAgreeConsent] = useState(false);
   const [showUploadSheet, setShowUploadSheet] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   useEffect(() => {
     api.get("/api/eyebrow-styles")
@@ -100,13 +101,14 @@ export default function SimulatePage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    setSelectedFile(file);
     const url = URL.createObjectURL(file);
     setPreview(url);
     setStatus("selecting");
   };
 
   const handleSimulate = async () => {
-    if (!selectedStyle || !fileRef.current?.files?.[0]) return;
+    if (!selectedStyle || !selectedFile) return;
     setStatus("processing");
     setError(null);
     try {
@@ -115,7 +117,7 @@ export default function SimulatePage() {
       });
       setSimulationId(sim.id);
       const formData = new FormData();
-      formData.append("file", fileRef.current.files[0]);
+      formData.append("file", selectedFile);
       const { data: processed } = await api.post(
         `/api/simulations/${sim.id}/upload`,
         formData,
@@ -155,7 +157,9 @@ export default function SimulatePage() {
     setClientName("");
     setShowCrmPanel(false);
     setAgreeConsent(false);
+    setSelectedFile(null);
     if (fileRef.current) fileRef.current.value = "";
+    if (cameraRef.current) cameraRef.current.value = "";
   };
 
   const currentStep =
